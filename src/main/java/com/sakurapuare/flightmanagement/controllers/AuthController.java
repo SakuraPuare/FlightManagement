@@ -1,7 +1,6 @@
 package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.constant.ResponseCode;
 import com.sakurapuare.flightmanagement.mapper.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
