@@ -1,0 +1,46 @@
+spring.application.name: FlightManagement
+
+server:
+  port: 8080
+
+spring:
+  main:
+    allow-circular-references: true # 允许依赖循环
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/flightmanagement?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+mybatis-plus:
+  type-aliases-package: com.sakurapuare.template.pojo.Entity # 别名扫描包
+  mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml文件地址，默认值
+  configuration:
+    map-underscore-to-camel-case: false # 是否开启下划线和驼峰的映射
+    cache-enabled: false # 是否开启二级缓存
+  global-config:
+    db-config:
+      update-strategy: not_null # 更新策略：只更新非空字段
+
+logging:
+  level:
+    com:
+      yumefusaka:
+        template:
+          mapper: debug
+          service: info
+          controller: info
+
+# jwt令牌信息
+jwt:
+  signKey: sakurapuare
+  expire: 604800000
+
+# knife4j配置信息
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
