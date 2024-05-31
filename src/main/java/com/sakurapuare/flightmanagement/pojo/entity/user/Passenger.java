@@ -17,6 +17,15 @@ public class Passenger {
     @TableField(value = "user_id")
     private Long userId;
 
+    @TableField(value = "passenger_name")
+    private String passengerName;
+
+    @TableField(value = "passenger_phone")
+    private String passengerPhone;
+
+    @TableField(value = "identity_number")
+    private String identityNumber;
+
     @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 

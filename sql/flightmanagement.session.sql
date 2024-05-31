@@ -39,3 +39,34 @@ CREATE TABLE IF NOT EXISTS `airline` (
     PRIMARY KEY (`airline_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `merchant` (
+    `merchant_id` BIGINT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+    `merchant_name` varchar(100) NOT NULL,
+    `merchant_address` varchar(255) NOT NULL,
+    `merchant_description` TEXT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`merchant_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `passenger` (
+    `passenger_id` BIGINT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+    `passenger_name` varchar(100) NOT NULL,
+    `passenger_phone` varchar(20) NOT NULL,
+    `identity_number` varchar(20) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`passenger_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `staff` (
+    `staff_id` BIGINT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+    `staff_name` varchar(100) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`staff_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;

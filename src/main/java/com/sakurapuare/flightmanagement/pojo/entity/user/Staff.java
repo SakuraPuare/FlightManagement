@@ -17,6 +17,9 @@ public class Staff {
     @TableField(value = "user_id")
     private Long userId;
 
+    @TableField(value = "staff_name")
+    private String staffName;
+
     @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 

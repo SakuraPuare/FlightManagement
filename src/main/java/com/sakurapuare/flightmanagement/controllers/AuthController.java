@@ -6,9 +6,11 @@ import com.sakurapuare.flightmanagement.mapper.*;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
-import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
-import com.sakurapuare.flightmanagement.pojo.entity.user.User;
+import com.sakurapuare.flightmanagement.pojo.entity.user.*;
 import com.sakurapuare.flightmanagement.pojo.entity.user.info.AirlineInfo;
+import com.sakurapuare.flightmanagement.pojo.entity.user.info.MerchantInfo;
+import com.sakurapuare.flightmanagement.pojo.entity.user.info.PassengerInfo;
+import com.sakurapuare.flightmanagement.pojo.entity.user.info.StaffInfo;
 import com.sakurapuare.flightmanagement.pojo.vo.UserLoginVO;
 import com.sakurapuare.flightmanagement.services.AuthService;
 import com.sakurapuare.flightmanagement.utils.UserTypeUtils;
@@ -48,10 +50,9 @@ public class AuthController {
     private StaffMapper staffMapper;
 
     @PostMapping("/login")
-    public Response<UserLoginVO> login(@Validated @RequestBody UserLoginDTO userLoginDTO) {
-        User user = userMapper.findUserByUsernameAndPassword(
-                userLoginDTO.getUsername(),
-                userLoginDTO.getPassword());
+    public Response<UserLoginVO> login(
+            @Validated @RequestBody UserLoginDTO userLoginDTO) {
+        User user = userMapper.findUserByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
         if (user == null) {
             return Response.error("Invalid username or password");
         } else {
@@ -96,22 +97,116 @@ public class AuthController {
         return Response.error("User already exists");
     }
 
-    // @PostMapping("/register/merchant")
-    // public Response<Void> register_merchant(@Valid @RequestBody
-    // MerchantRegisterDTO merchantRegisterDTO) {
-    // User user = userMapper.findUserByUsername(merchantRegisterDTO.getUsername());
-    // Merchant merchant =
-    // merchantMapper.findMerchantByMerchantCode(merchantRegisterDTO.getData().getMerchantCode());
+    @PostMapping("/register/merchant")
+    public Response<Void> register_merchant(
+            @Valid @RequestBody UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
+        User user = userMapper.findUserByUsername(merchantInfoUserRegisterDTO.getUsername());
+        Merchant merchant = merchantMapper
+                .findMerchantByMerchantName(merchantInfoUserRegisterDTO.getData().getMerchantName());
 
-    // if (user == null) {
-    // user = new User();
-    // BeanUtils.copyProperties(merchantRegisterDTO, user);
-    // user.setRole(UserType.MERCHANT);
-    // userMapper.insert(user);
-    // return Response.success("Merchant Register success");
-    // }
-    // return Response.error("User already exists");
-    // }
+        if (user != null && merchant != null) {
+            return Response.error("Merchant already exists");
+        }
+
+        // check password
+        if (user != null) {
+            if (!merchantInfoUserRegisterDTO.getPassword().equals(user.getPassword())) {
+                return Response.error("Password not match");
+            }
+        }
+
+        if (user == null) {
+            user = new User();
+            BeanUtils.copyProperties(merchantInfoUserRegisterDTO, user);
+            user.setRole(UserType.MERCHANT);
+            userMapper.insert(user);
+        }
+
+        if (merchant == null) {
+            merchant = new Merchant();
+            BeanUtils.copyProperties(merchantInfoUserRegisterDTO.getData(), merchant);
+            user.setRole(UserTypeUtils.addRole(user.getRole(), UserType.MERCHANT));
+            merchant.setUserId(user.getUserId());
+            merchantMapper.insert(merchant);
+            userMapper.updateById(user);
+            return Response.success("Merchant Register success");
+        }
+
+        return Response.error("User already exists");
+    }
+
+    @PostMapping("/register/passenger")
+    public Response<Void> register_passenger(
+            @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
+        User user = userMapper.findUserByUsername(passengerInfoUserRegisterDTO.getUsername());
+        Passenger passenger = passengerMapper.findPassengerByPassengerName(passengerInfoUserRegisterDTO.getUsername());
+
+        if (user != null && passenger != null) {
+            return Response.error("Passenger already exists");
+        }
+
+        // check password
+        if (user != null) {
+            if (!passengerInfoUserRegisterDTO.getPassword().equals(user.getPassword())) {
+                return Response.error("Password not match");
+            }
+        }
+
+        if (user == null) {
+            user = new User();
+            BeanUtils.copyProperties(passengerInfoUserRegisterDTO, user);
+            user.setRole(UserType.PASSENGER);
+            userMapper.insert(user);
+        }
+
+        if (passenger == null) {
+            passenger = new Passenger();
+            BeanUtils.copyProperties(passengerInfoUserRegisterDTO.getData(), passenger);
+            user.setRole(UserTypeUtils.addRole(user.getRole(), UserType.PASSENGER));
+            passenger.setUserId(user.getUserId());
+            passengerMapper.insert(passenger);
+            userMapper.updateById(user);
+            return Response.success("Passenger Register success");
+        }
+
+        return Response.error("User already exists");
+    }
+
+    @PostMapping("/register/staff")
+    public Response<Void> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
+        User user = userMapper.findUserByUsername(baseUserRegisterDTO.getUsername());
+        Staff staff = staffMapper.findStaffByStaffName(baseUserRegisterDTO.getUsername());
+
+        if (user != null && staff != null) {
+            return Response.error("Staff already exists");
+        }
+
+        // check password
+        if (user != null) {
+            if (!baseUserRegisterDTO.getPassword().equals(user.getPassword())) {
+                return Response.error("Password not match");
+            }
+        }
+
+        if (user == null) {
+            user = new User();
+            BeanUtils.copyProperties(baseUserRegisterDTO, user);
+            user.setRole(UserType.STAFF);
+            userMapper.insert(user);
+        }
+
+        if (staff == null) {
+            staff = new Staff();
+            BeanUtils.copyProperties(baseUserRegisterDTO.getData(), staff);
+            user.setRole(UserTypeUtils.addRole(user.getRole(), UserType.STAFF));
+            staff.setUserId(user.getUserId());
+            staffMapper.insert(staff);
+            userMapper.updateById(user);
+            return Response.success("Staff Register success");
+        }
+
+        return Response.error("User already exists");
+    }
 
     @PostMapping("/register")
     public Response<Void> register_user(@Valid @RequestBody BaseUserRegisterDTO baseUserRegisterDTO) {
@@ -124,44 +219,5 @@ public class AuthController {
         }
         return Response.error("User already exists");
     }
-
-    // public Response<Void> register_user(@Valid @RequestBody UserRegisterDTO
-    // userRegisterDTO) {
-    // User user = userMapper.findUserByUsername(userRegisterDTO.getUsername());
-    // int role = userRegisterDTO.getRole();
-
-    // // ALL type is not allowed to register
-    // if (role == UserType.ALL || UserTypeUtils.getRoleCount(role) != 1)
-    // return Response.error("Invalid role");
-    // if (userRegisterDTO.getData() == null)
-    // return Response.error("User info is required");
-
-    // if (user == null) {
-    // user = new User();
-    // BeanUtils.copyProperties(userRegisterDTO, user);
-    // userMapper.insert(user);
-    // if (role != 0) {
-    // if (userRegisterDTO.getData() == null)
-    // return Response.error("User info is required");
-
-    // UserInfo userInfo = UserRegisterInfoFactory.create(userRegisterDTO, role);
-    // if (userInfo == null || !userInfo.checkDataIntegrity())
-    // return Response.error("Data integrity error");
-    // }
-    // } else {
-    // if (!user.getPassword().equals(userRegisterDTO.getPassword()))
-    // return Response.error("Invalid password");
-    // if (UserTypeUtils.isContain(user.getRole(), role))
-    // return Response.error("User already exists");
-    // if (userRegisterDTO.getData() == null)
-    // return Response.error("User info is required");
-
-    // UserInfo userInfo = UserRegisterInfoFactory.create(userRegisterDTO, role);
-    // if (userInfo == null || !userInfo.checkDataIntegrity())
-    // return Response.error("Data integrity error");
-    // }
-
-    // return Response.success("Register success");
-    // }
 
 }
