@@ -1,12 +1,11 @@
 package com.sakurapuare.flightmanagement.services.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sakurapuare.flightmanagement.mapper.UserMapper;
+import com.sakurapuare.flightmanagement.mapper.user.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.AuthService;
 import com.sakurapuare.flightmanagement.utils.JwtTokenUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -15,8 +14,11 @@ import java.util.Map;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
+
+    public AuthServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public User login(UserLoginDTO userLoginDTO) {

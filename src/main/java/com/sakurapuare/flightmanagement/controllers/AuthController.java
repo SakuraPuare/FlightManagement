@@ -2,7 +2,7 @@ package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.constant.UserType;
-import com.sakurapuare.flightmanagement.mapper.*;
+import com.sakurapuare.flightmanagement.mapper.user.*;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,23 +30,26 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Auth Controller", description = "Auth API Endpoints")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private AirlineMapper airlineMapper;
+    private final AirlineMapper airlineMapper;
 
-    @Autowired
-    private MerchantMapper merchantMapper;
+    private final MerchantMapper merchantMapper;
 
-    @Autowired
-    private PassengerMapper passengerMapper;
+    private final PassengerMapper passengerMapper;
 
-    @Autowired
-    private StaffMapper staffMapper;
+    private final StaffMapper staffMapper;
+
+    public AuthController(AuthService authService, UserMapper userMapper, AirlineMapper airlineMapper, MerchantMapper merchantMapper, PassengerMapper passengerMapper, StaffMapper staffMapper) {
+        this.authService = authService;
+        this.userMapper = userMapper;
+        this.airlineMapper = airlineMapper;
+        this.merchantMapper = merchantMapper;
+        this.passengerMapper = passengerMapper;
+        this.staffMapper = staffMapper;
+    }
 
     @PostMapping("/login")
     public Response<UserLoginVO> login(

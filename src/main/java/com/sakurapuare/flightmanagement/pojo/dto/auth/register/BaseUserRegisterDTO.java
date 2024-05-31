@@ -14,7 +14,4 @@ public class BaseUserRegisterDTO {
 
     @Email(message = "Email is invalid")
     public String email;
-
-    // @Size(min = 0, max = UserType.ALL, message = "Role is invalid")
-    // public int role;
 }

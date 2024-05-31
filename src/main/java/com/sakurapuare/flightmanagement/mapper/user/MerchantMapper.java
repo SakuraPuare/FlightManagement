@@ -1,4 +1,4 @@
-package com.sakurapuare.flightmanagement.mapper;
+package com.sakurapuare.flightmanagement.mapper.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
