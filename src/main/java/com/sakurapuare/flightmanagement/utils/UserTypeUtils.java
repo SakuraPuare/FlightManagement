@@ -70,7 +70,7 @@ public class UserTypeUtils {
         return userType & UserType.ALL - UserType.STAFF;
     }
 
-    public static List<String> getUserType(int userType) {
+    public static List<String> getRoleList(int userType) {
         List<String> userTypeList = new ArrayList<>();
         if (isPassenger(userType)) {
             userTypeList.add("Passenger");
@@ -85,5 +85,22 @@ public class UserTypeUtils {
             userTypeList.add("Staff");
         }
         return userTypeList;
+    }
+
+    public static int getRoleCount(int userType) {
+        int count = 0;
+        if (isPassenger(userType)) {
+            count++;
+        }
+        if (isMerchant(userType)) {
+            count++;
+        }
+        if (isAirline(userType)) {
+            count++;
+        }
+        if (isStaff(userType)) {
+            count++;
+        }
+        return count;
     }
 }

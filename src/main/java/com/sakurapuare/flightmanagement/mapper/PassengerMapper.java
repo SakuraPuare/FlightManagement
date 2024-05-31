@@ -1,7 +1,7 @@
 package com.sakurapuare.flightmanagement.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sakurapuare.flightmanagement.pojo.entity.Passenger;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Passenger;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

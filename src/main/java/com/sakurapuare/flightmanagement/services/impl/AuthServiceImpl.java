@@ -3,7 +3,7 @@ package com.sakurapuare.flightmanagement.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sakurapuare.flightmanagement.mapper.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
-import com.sakurapuare.flightmanagement.pojo.entity.User;
+import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.AuthService;
 import com.sakurapuare.flightmanagement.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

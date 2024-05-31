@@ -1,7 +1,6 @@
-package com.sakurapuare.flightmanagement.pojo.entity;
+package com.sakurapuare.flightmanagement.pojo.entity.user;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -9,21 +8,21 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class User {
-    @TableId(value = "user_id", type = IdType.AUTO)
+public class Merchant {
+    @TableId(value = "merchant_id")
+    private Long merchantId;
+
+    @TableField(value = "user_id")
     private Long userId;
 
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "merchant_name")
+    private String merchantName;
 
-    @TableField(value = "password")
-    private String password;
+    @TableField(value = "merchant_address")
+    private String merchantAddress;
 
-    @TableField(value = "email")
-    private String email;
-
-    @TableField(value = "role")
-    private int role;
+    @TableField(value = "merchant_description")
+    private String merchantDescription;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
