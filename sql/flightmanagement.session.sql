@@ -39,6 +39,38 @@ CREATE TABLE IF NOT EXISTS `airline` (
     PRIMARY KEY (`airline_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+INSERT INTO `airline` (
+        `airline_id`,
+        `user_id`,
+        `airline_name`,
+        `airline_country`,
+        `airline_code`,
+        `airline_description`
+    )
+VALUES (
+        1,
+        1,
+        'Garuda Indonesia',
+        'Indonesia',
+        'GA',
+        'Garuda Indonesia is the flag carrier of Indonesia.'
+    ),
+    (
+        2,
+        1,
+        'Lion Air',
+        'Indonesia',
+        'JT',
+        'Lion Air is an Indonesian low-cost airline.'
+    ),
+    (
+        3,
+        1,
+        'Citilink',
+        'Indonesia',
+        'QG',
+        'Citilink is a low-cost airline headquartered in Jakarta, Indonesia.'
+    );
 CREATE TABLE IF NOT EXISTS `merchant` (
     `merchant_id` BIGINT NULL AUTO_INCREMENT,
     `user_id` BIGINT NOT NULL,
@@ -73,11 +105,25 @@ CREATE TABLE IF NOT EXISTS `staff` (
 CREATE TABLE IF NOT EXISTS `good` (
     `id` BIGINT NULL AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
-    `description` varchar(255) NULL DEFAULT "",
+    `description` varchar(255) NULL DEFAULT '',
     `price` decimal(10, 2) NOT NULL DEFAULT 0.00,
     `stock` BIGINT NOT NULL DEFAULT 0,
-    `category` varchar(100) NOT NULL DEFAULT "",
+    `category` varchar(100) NOT NULL DEFAULT '',
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `flight` (
+    `id` BIGINT NULL AUTO_INCREMENT,
+    `airline_id` BIGINT NOT NULL,
+    `flight_number` varchar(50) NOT NULL,
+    `capacity` int NOT NULL,
+    `departure_city` varchar(100) NOT NULL,
+    `arrival_city` varchar(100) NOT NULL,
+    `date_of_departure` datetime NOT NULL,
+    `estimated_travel_time` int NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`airline_id`) REFERENCES `airline`(`airline_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
