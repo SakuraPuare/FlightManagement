@@ -38,19 +38,19 @@ public class UserTypeUtils {
         return userType | type;
     }
 
-    public static int setPassenger(int userType) {
+    public static int addPassenger(int userType) {
         return userType | UserType.PASSENGER;
     }
 
-    public static int setMerchant(int userType) {
+    public static int addMerchant(int userType) {
         return userType | UserType.MERCHANT;
     }
 
-    public static int setAirline(int userType) {
+    public static int addAirline(int userType) {
         return userType | UserType.AIRLINE;
     }
 
-    public static int setStaff(int userType) {
+    public static int addStaff(int userType) {
         return userType | UserType.STAFF;
     }
 
