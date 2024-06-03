@@ -10,7 +10,7 @@ public class Response<T> implements Serializable {
     private int code;
     private String message;
     private T data;
-    private int timestamp;
+    private int time;
 
     public Response(String message, T data) {
         this.message = message;
@@ -26,7 +26,7 @@ public class Response<T> implements Serializable {
     }
 
     public Response() {
-        this.timestamp = (int) (System.currentTimeMillis() / 1000);
+        this.time = (int) (System.currentTimeMillis() / 1000);
     }
 
     public static <T> Response<T> success(String message) {

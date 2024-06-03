@@ -70,3 +70,14 @@ CREATE TABLE IF NOT EXISTS `staff` (
     PRIMARY KEY (`staff_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `good` (
+    `id` BIGINT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `description` varchar(255) NULL DEFAULT "",
+    `price` decimal(10, 2) NOT NULL DEFAULT 0.00,
+    `stock` BIGINT NOT NULL DEFAULT 0,
+    `category` varchar(100) NOT NULL DEFAULT "",
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
