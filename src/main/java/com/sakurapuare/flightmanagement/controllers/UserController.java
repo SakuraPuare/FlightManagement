@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Tag(name = "User Controller", description = "User API Endpoints")
 public class UserController {
 

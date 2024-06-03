@@ -10,22 +10,24 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/good")
+@RequestMapping("/goods")
 @Tag(name = "Good Controller", description = "Good API Endpoints")
 public class GoodController {
 
-    @Autowired
-    private GoodService goodService;
+    private final GoodService goodService;
 
-    @Autowired
-    private GoodMapper goodMapper;
+    private final GoodMapper goodMapper;
+
+    public GoodController(GoodService goodService, GoodMapper goodMapper) {
+        this.goodService = goodService;
+        this.goodMapper = goodMapper;
+    }
 
     @GetMapping("/list")
     public Response<List<Good>> getGoodList(@Valid @RequestBody PaginationDTO paginationDTO) {
@@ -56,7 +58,7 @@ public class GoodController {
 
     @PutMapping("/{id}")
     public Response<Void> updateGood(@Valid @PathVariable(name = "id") Long id,
-            @Valid @RequestBody GoodDTO goodDTO) {
+                                     @Valid @RequestBody GoodDTO goodDTO) {
         Good good = goodMapper.selectById(id);
         if (good == null) {
             return Response.error("Good not found");

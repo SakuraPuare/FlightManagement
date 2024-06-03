@@ -6,7 +6,6 @@ import com.sakurapuare.flightmanagement.mapper.GoodMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Good;
 import com.sakurapuare.flightmanagement.services.GoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -16,14 +15,19 @@ import java.util.Set;
 @Service
 public class GoodServiceImpl implements GoodService {
 
-    @Autowired
-    private GoodMapper goodMapper;
+    private final GoodMapper goodMapper;
 
+    public GoodServiceImpl(GoodMapper goodMapper) {
+        this.goodMapper = goodMapper;
+    }
+
+    @Override
     public List<Good> getGoodsByPagination(PaginationDTO paginationDTO) {
         Page<Good> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
         return goodMapper.selectPage(page, null).getRecords();
     }
 
+    @Override
     public List<Good> search(String query) {
         Set<Good> goods = new HashSet<>();
         goods.addAll(goodMapper.selectList(new QueryWrapper<Good>().like("name", query)));
@@ -32,6 +36,7 @@ public class GoodServiceImpl implements GoodService {
         return List.copyOf(goods);
     }
 
+    @Override
     public Good getGoodByName(String name) {
         return goodMapper.selectOne(new QueryWrapper<Good>().eq("name", name));
     }

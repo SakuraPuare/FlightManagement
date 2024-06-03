@@ -42,7 +42,8 @@ public class AuthController {
 
     private final StaffMapper staffMapper;
 
-    public AuthController(AuthService authService, UserMapper userMapper, AirlineMapper airlineMapper, MerchantMapper merchantMapper, PassengerMapper passengerMapper, StaffMapper staffMapper) {
+    public AuthController(AuthService authService, UserMapper userMapper, AirlineMapper airlineMapper,
+                          MerchantMapper merchantMapper, PassengerMapper passengerMapper, StaffMapper staffMapper) {
         this.authService = authService;
         this.userMapper = userMapper;
         this.airlineMapper = airlineMapper;
