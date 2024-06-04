@@ -29,6 +29,7 @@ public class FlightDTO {
     @NotEmpty(message = "Date of departure cannot be empty")
     private LocalDateTime dateOfDeparture;
 
+    // Estimated travel time in minutes
     @Positive(message = "Estimated travel time must be positive")
     private int estimatedTravelTime;
 }

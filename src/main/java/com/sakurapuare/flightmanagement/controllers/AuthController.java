@@ -41,7 +41,7 @@ public class AuthController {
     private final StaffService staffService;
 
     public AuthController(AuthService authService, UserService userService, AirlineService airlineService,
-            MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
+                          MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
         this.authService = authService;
         this.userService = userService;
         this.airlineService = airlineService;
