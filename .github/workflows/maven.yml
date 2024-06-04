@@ -41,17 +41,17 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Wait for MySQL to be ready
-        run: |
-          while ! mysqladmin ping -h"localhost" --silent; do
-            sleep 1
-          done
-        env:
-          MYSQL_PWD: 123456
+      # - name: Wait for MySQL to be ready
+      #   run: |
+      #     while ! mysqladmin ping -h"localhost" --silent; do
+      #       sleep 1
+      #     done
+      #   env:
+      #     MYSQL_PWD: 123456
 
       - name: Initialize database schema
         run: |
-          mysql -u root -h localhost -p123456 testdb < sql/flightmanagement.session.sql
+          mysql -u root -h localhost -p123456 flightmanagement < sql/flightmanagement.session.sql
         env:
           MYSQL_PWD: 123456
 
