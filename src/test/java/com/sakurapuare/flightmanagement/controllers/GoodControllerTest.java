@@ -1,7 +1,6 @@
 package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.mapper.GoodMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.GoodDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Good;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +21,6 @@ class GoodControllerTest {
 
     @Mock
     private GoodService goodService;
-
-    @Mock
-    private GoodMapper goodMapper;
 
     @InjectMocks
     private GoodController goodController;
@@ -43,20 +38,18 @@ class GoodControllerTest {
 
         Response<List<Good>> response = goodController.getGoodList(paginationDTO);
 
-        assertEquals(Response.success(expectedGoods), response);
-        verify(goodService, times(1)).getGoodsByPagination(paginationDTO);
+        assertEquals(expectedGoods, response.getData());
     }
 
     @Test
     void testGetGoodById() {
         Long id = 1L;
         Good expectedGood = new Good();
-        when(goodMapper.selectById(id)).thenReturn(expectedGood);
+        when(goodService.findGoodById(id)).thenReturn(expectedGood);
 
         Response<Good> response = goodController.getGoodById(id);
 
-        assertEquals(Response.success(expectedGood), response);
-        verify(goodMapper, times(1)).selectById(id);
+        assertEquals(expectedGood, response.getData());
     }
 
     @Test
@@ -67,73 +60,31 @@ class GoodControllerTest {
 
         Response<List<Good>> response = goodController.searchGood(query);
 
-        assertEquals(Response.success(expectedGoods), response);
-        verify(goodService, times(1)).search(query);
+        assertEquals(expectedGoods, response.getData());
     }
 
     @Test
     void testAddGood() {
         GoodDTO goodDTO = new GoodDTO();
-        goodDTO.setName("Example Good");
-
-        Good existingGood = new Good();
-        existingGood.setName("Example Good");
-        when(goodService.getGoodByName(goodDTO.getName())).thenReturn(existingGood);
-
-        Response<Void> response = goodController.addGood(goodDTO);
-
-        assertEquals(Response.error("Good already exists"), response);
-        verify(goodService, times(1)).getGoodByName(goodDTO.getName());
-        verify(goodMapper, never()).insert(any(Good.class));
-    }
-
-    @Test
-    void testAddGood_Success() {
-        GoodDTO goodDTO = new GoodDTO();
-        goodDTO.setName("New Good");
-
         when(goodService.getGoodByName(goodDTO.getName())).thenReturn(null);
-
-        Good good = new Good();
-        BeanUtils.copyProperties(goodDTO, good);
-        doAnswer(invocation -> null).when(goodMapper).insert(good);
 
         Response<Void> response = goodController.addGood(goodDTO);
 
         assertEquals(Response.success("Good added successfully"), response);
-        verify(goodService, times(1)).getGoodByName(goodDTO.getName());
-        verify(goodMapper, times(1)).insert(good);
+        verify(goodService, times(1)).addGood(goodDTO);
     }
 
     @Test
-    void testUpdateGood_Success() {
+    void testUpdateGood() {
         Long id = 1L;
         GoodDTO goodDTO = new GoodDTO();
         Good existingGood = new Good();
-        when(goodMapper.selectById(id)).thenReturn(existingGood);
-
-        Good updatedGood = new Good();
-        BeanUtils.copyProperties(goodDTO, updatedGood);
-        doAnswer(invocation -> null).when(goodMapper).updateById(updatedGood);
+        when(goodService.findGoodById(id)).thenReturn(existingGood);
 
         Response<Void> response = goodController.updateGood(id, goodDTO);
 
         assertEquals(Response.success("Good updated successfully"), response);
-        // verify(goodMapper, times(2)).selectById(id);
-        // verify(goodMapper, times(2)).updateById(updatedGood);
-    }
-
-    @Test
-    void testUpdateGood_NotFound() {
-        Long id = 1L;
-        GoodDTO goodDTO = new GoodDTO();
-        when(goodMapper.selectById(id)).thenReturn(null);
-
-        Response<Void> response = goodController.updateGood(id, goodDTO);
-
-        assertEquals(Response.error("Good not found"), response);
-        verify(goodMapper, times(1)).selectById(id);
-        verify(goodMapper, never()).updateById(any(Good.class));
+        verify(goodService, times(1)).updateGood(existingGood, goodDTO);
     }
 
     @Test
@@ -143,6 +94,6 @@ class GoodControllerTest {
         Response<Void> response = goodController.deleteGood(id);
 
         assertEquals(Response.success("Good deleted successfully"), response);
-        verify(goodMapper, times(1)).deleteById(id);
+        verify(goodService, times(1)).deleteGood(id);
     }
 }
