@@ -3,7 +3,6 @@ package com.sakurapuare.flightmanagement.services;
 import com.sakurapuare.flightmanagement.pojo.dto.GoodDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Good;
-import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -14,11 +13,11 @@ public interface GoodService {
 
     Good getGoodByName(String name);
 
-    Good findGoodById(@Valid Long id);
+    Good findGoodById(Long id);
 
-    Good addGood(@Valid GoodDTO goodDTO);
+    Good addGood(GoodDTO goodDTO);
 
-    boolean updateGood(@Valid Good good, @Valid GoodDTO goodDTO);
+    boolean updateGood(Good good, GoodDTO goodDTO);
 
-    boolean deleteGood(@Valid Long id);
+    boolean deleteGood(Long id);
 }

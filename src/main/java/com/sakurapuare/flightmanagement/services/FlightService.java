@@ -3,7 +3,6 @@ package com.sakurapuare.flightmanagement.services;
 import com.sakurapuare.flightmanagement.pojo.dto.FlightDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Flight;
-import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface FlightService {
 
     Flight findFlightById(Long id);
 
-    Flight addFlight(@Valid FlightDTO flightDTO);
+    Flight addFlight(FlightDTO flightDTO);
 
     boolean updateFlight(Flight flight, FlightDTO flightDTO);
 

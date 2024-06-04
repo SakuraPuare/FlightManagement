@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 @Data
 public class Response<T> implements Serializable {
-    private int code;
-    private String message;
-    private T data;
+    private int code = ResponseCode.SUCCESS;
+    private String message = "";
+    private T data = null;
     private int time;
 
     public Response(String message, T data) {
@@ -40,6 +40,7 @@ public class Response<T> implements Serializable {
         Response<T> response = new Response<>();
         response.setCode(ResponseCode.SUCCESS);
         response.setData(data);
+        response.setMessage("Success");
         return response;
     }
 
@@ -68,6 +69,7 @@ public class Response<T> implements Serializable {
     public static <T> Response<T> error(int code) {
         Response<T> response = new Response<>();
         response.setCode(code);
+        response.setMessage("Error");
         return response;
     }
 
