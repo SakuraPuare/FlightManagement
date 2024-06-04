@@ -10,22 +10,57 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: flightmanagement
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 22
         uses: actions/setup-java@v3
         with:
-          java-version: '22'
-          distribution: 'temurin'
+          java-version: "22"
+          distribution: "temurin"
           cache: maven
+
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! mysqladmin ping -h"localhost" --silent; do
+            sleep 1
+          done
+        env:
+          MYSQL_PWD: 123456
+
+      - name: Initialize database schema
+        run: |
+          mysql -u root -h localhost -p123456 testdb < sql/flightmanagement.session.sql
+        env:
+          MYSQL_PWD: 123456
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
+      - name: Run tests
+        run: mvn test
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/testdb
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: 123456
