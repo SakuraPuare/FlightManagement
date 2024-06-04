@@ -3,9 +3,11 @@ package com.sakurapuare.flightmanagement.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.GoodMapper;
+import com.sakurapuare.flightmanagement.pojo.dto.GoodDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Good;
 import com.sakurapuare.flightmanagement.services.GoodService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -39,5 +41,30 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public Good getGoodByName(String name) {
         return goodMapper.selectOne(new QueryWrapper<Good>().eq("name", name));
+    }
+
+    @Override
+    public Good findGoodById(Long id) {
+        return goodMapper.selectById(id);
+    }
+
+    @Override
+    public Good addGood(GoodDTO goodDTO) {
+        Good good = new Good();
+        BeanUtils.copyProperties(goodDTO, good);
+        goodMapper.insert(good);
+        return good;
+    }
+
+    @Override
+    public boolean updateGood(Good good, GoodDTO goodDTO) {
+        BeanUtils.copyProperties(goodDTO, good);
+        return goodMapper.updateById(good) == 1;
+
+    }
+
+    @Override
+    public boolean deleteGood(Long id) {
+        return goodMapper.deleteById(id) == 1;
     }
 }

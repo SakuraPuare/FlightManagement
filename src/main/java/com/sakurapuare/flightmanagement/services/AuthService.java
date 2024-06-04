@@ -5,7 +5,7 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 
 public interface AuthService {
 
-    User login(UserLoginDTO userLoginDTO);
+    boolean login(UserLoginDTO userLoginDTO);
 
     String generateToken(User user);
 }
