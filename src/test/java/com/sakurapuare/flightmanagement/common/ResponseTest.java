@@ -54,7 +54,7 @@ class ResponseTest {
     void testErrorWithCode() {
         Response<String> response = Response.error(404);
         assertEquals(404, response.getCode());
-        assertNull(response.getMessage());
+        assertEquals("Error", response.getMessage());
         assertNull(response.getData());
     }
 
