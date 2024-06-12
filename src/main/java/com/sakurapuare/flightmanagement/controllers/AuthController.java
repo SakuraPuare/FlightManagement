@@ -70,7 +70,7 @@ public class AuthController {
             @Valid @RequestBody UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(airlineInfoUserRegisterDTO.getUsername());
         Airline airline = airlineService
-                .findAirlineByAirlineCode(airlineInfoUserRegisterDTO.getData().getAirlineCode());
+                .getAirlineByAirlineCode(airlineInfoUserRegisterDTO.getData().getAirlineCode());
 
         if (user != null && airline != null) {
             return Response.error("Airline already exists");
@@ -100,7 +100,7 @@ public class AuthController {
             @Valid @RequestBody UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(merchantInfoUserRegisterDTO.getUsername());
         Merchant merchant = merchantService
-                .findMerchantByMerchantName(merchantInfoUserRegisterDTO.getData().getMerchantName());
+                .getMerchantByMerchantName(merchantInfoUserRegisterDTO.getData().getMerchantName());
 
         if (user != null && merchant != null) {
             return Response.error("Merchant already exists");
@@ -130,7 +130,7 @@ public class AuthController {
     public Response<Void> register_passenger(
             @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(passengerInfoUserRegisterDTO.getUsername());
-        Passenger passenger = passengerService.findPassengerByPassengerName(passengerInfoUserRegisterDTO.getUsername());
+        Passenger passenger = passengerService.getPassengerByPassengerName(passengerInfoUserRegisterDTO.getUsername());
 
         if (user != null && passenger != null) {
             return Response.error("Passenger already exists");
@@ -159,7 +159,7 @@ public class AuthController {
     @PostMapping("/register/staff")
     public Response<Void> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
         User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
-        Staff staff = staffService.findStaffByStaffName(baseUserRegisterDTO.getUsername());
+        Staff staff = staffService.getStaffByStaffName(baseUserRegisterDTO.getUsername());
 
         if (user != null && staff != null) {
             return Response.error("Staff already exists");

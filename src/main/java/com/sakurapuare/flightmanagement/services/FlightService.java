@@ -13,8 +13,6 @@ public interface FlightService {
 
     List<Flight> search(String query);
 
-    Flight findFlightById(long id);
-
     void addFlight(FlightDTO flightDTO);
 
     void updateFlight(Flight flight, FlightDTO flightDTO);

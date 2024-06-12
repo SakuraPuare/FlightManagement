@@ -19,7 +19,7 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public Merchant findMerchantByMerchantName(String merchantName) {
+    public Merchant getMerchantByMerchantName(String merchantName) {
         return merchantMapper.selectOne(
                 new QueryWrapper<Merchant>()
                         .eq("merchant_name", merchantName));
@@ -27,7 +27,7 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public void register(long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
-        Merchant merchant = findMerchantByMerchantName(
+        Merchant merchant = getMerchantByMerchantName(
                 merchantInfoUserRegisterDTO.getData().getMerchantName());
         if (merchant != null) {
             return;

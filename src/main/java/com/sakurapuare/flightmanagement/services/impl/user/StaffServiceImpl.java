@@ -19,7 +19,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff findStaffByStaffName(String username) {
+    public Staff getStaffByStaffName(String username) {
         return staffMapper.selectOne(
                 new QueryWrapper<Staff>()
                         .eq("staff_name", username));
@@ -27,7 +27,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void register(long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
-        Staff staff = findStaffByStaffName(
+        Staff staff = getStaffByStaffName(
                 baseUserRegisterDTO.getData().getStaffName());
 
         if (staff != null) {

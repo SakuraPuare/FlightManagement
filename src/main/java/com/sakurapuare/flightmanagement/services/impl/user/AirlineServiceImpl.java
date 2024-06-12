@@ -19,7 +19,7 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline findAirlineByAirlineCode(String airlineCode) {
+    public Airline getAirlineByAirlineCode(String airlineCode) {
         return airlineMapper.selectOne(
                 new QueryWrapper<Airline>()
                         .eq("airline_code", airlineCode));
@@ -27,7 +27,7 @@ public class AirlineServiceImpl implements AirlineService {
 
     @Override
     public void register(long userId, UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
-        Airline airline = findAirlineByAirlineCode(
+        Airline airline = getAirlineByAirlineCode(
                 airlineInfoUserRegisterDTO.getData().getAirlineCode());
         if (airline != null) {
             return;
@@ -41,7 +41,7 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline findAirlineById(long airlineId) {
+    public Airline getAirlineById(long airlineId) {
         return airlineMapper.selectById(airlineId);
     }
 }

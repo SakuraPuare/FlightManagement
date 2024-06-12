@@ -6,7 +6,7 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.MerchantInfo;
 
 public interface MerchantService {
 
-    Merchant findMerchantByMerchantName(String merchantName);
+    Merchant getMerchantByMerchantName(String merchantName);
 
     void register(long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO);
 

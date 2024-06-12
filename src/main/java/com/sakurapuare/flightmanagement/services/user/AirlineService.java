@@ -6,10 +6,10 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.AirlineInfo;
 
 public interface AirlineService {
 
-    Airline findAirlineByAirlineCode(String airlineCode);
+    Airline getAirlineByAirlineCode(String airlineCode);
 
     void register(long userId, UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO);
 
-    Airline findAirlineById(long airlineId);
+    Airline getAirlineById(long airlineId);
 
 }

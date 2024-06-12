@@ -44,11 +44,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight findFlightById(long id) {
-        return flightMapper.selectById(id);
-    }
-
-    @Override
     public void addFlight(FlightDTO flightDTO) {
         Flight flight = new Flight();
         BeanUtils.copyProperties(flightDTO, flight);

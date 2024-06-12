@@ -34,7 +34,7 @@ public class FlightController {
 
     @GetMapping("/{id}")
     public Response<Flight> getFlightById(@PathVariable(name = "id") long id) {
-        Flight flight = flightService.findFlightById(id);
+        Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");
         }
@@ -49,7 +49,7 @@ public class FlightController {
 
     @PostMapping("/")
     public Response<Void> addFlight(@Valid @RequestBody FlightDTO flightDTO) {
-        Airline airline = airlineService.findAirlineById(flightDTO.getAirlineId());
+        Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
         if (airline == null) {
             return Response.error("Airline not found");
         }
@@ -60,12 +60,12 @@ public class FlightController {
 
     @PutMapping("/{id}")
     public Response<Void> updateFlight(@PathVariable(name = "id") long id, @Valid @RequestBody FlightDTO flightDTO) {
-        Flight flight = flightService.findFlightById(id);
+        Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");
         }
 
-        Airline airline = airlineService.findAirlineById(flightDTO.getAirlineId());
+        Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
         if (airline == null) {
             return Response.error("Airline not found");
         }
@@ -76,7 +76,7 @@ public class FlightController {
 
     @DeleteMapping("/{id}")
     public Response<Void> deleteFlight(@PathVariable(name = "id") long id) {
-        Flight flight = flightService.findFlightById(id);
+        Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");
         }

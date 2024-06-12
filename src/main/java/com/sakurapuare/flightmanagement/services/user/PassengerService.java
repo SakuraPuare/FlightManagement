@@ -6,7 +6,7 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.PassengerInfo;
 
 public interface PassengerService {
 
-    Passenger findPassengerByPassengerName(String username);
+    Passenger getPassengerByPassengerName(String username);
 
     void register(long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO);
 

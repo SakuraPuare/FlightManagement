@@ -23,13 +23,13 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
-    public List<Luggage> getLuggagesByPagination(@Valid PaginationDTO paginationDTO) {
+    public List<Luggage> getLuggageByPagination(@Valid PaginationDTO paginationDTO) {
         Page<Luggage> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
         return luggageMapper.selectPage(page, null).getRecords();
     }
 
     @Override
-    public List<Luggage> getLuggagesByPaginationAndId(@Valid PaginationDTO paginationDTO, long userId) {
+    public List<Luggage> getLuggageByPaginationAndId(@Valid PaginationDTO paginationDTO, long userId) {
         Page<Luggage> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
         return luggageMapper.selectPage(page, new QueryWrapper<Luggage>()
                 .eq("user_id", userId)).getRecords();

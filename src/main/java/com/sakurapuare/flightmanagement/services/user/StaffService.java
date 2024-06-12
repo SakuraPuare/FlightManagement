@@ -6,7 +6,7 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.StaffInfo;
 
 public interface StaffService {
 
-    Staff findStaffByStaffName(String username);
+    Staff getStaffByStaffName(String username);
 
     void register(long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO);
 

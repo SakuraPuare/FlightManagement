@@ -19,7 +19,7 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public Passenger findPassengerByPassengerName(String username) {
+    public Passenger getPassengerByPassengerName(String username) {
         return passengerMapper.selectOne(
                 new QueryWrapper<Passenger>()
                         .eq("passenger_name", username));
@@ -27,7 +27,7 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Override
     public void register(long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
-        Passenger passenger = findPassengerByPassengerName(
+        Passenger passenger = getPassengerByPassengerName(
                 passengerInfoUserRegisterDTO.getData().getPassengerName());
 
         if (passenger != null) {
