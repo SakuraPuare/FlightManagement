@@ -19,7 +19,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUsernameAndPassword(String username, String password) {
+    public User getUserById(long userId) {
+        return userMapper.selectById(userId);
+    }
+
+    @Override
+    public User getUserByUsernameAndPassword(String username, String password) {
         return userMapper.selectOne(
                 new QueryWrapper<User>()
                         .eq("username", username)
@@ -27,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userMapper.selectOne(
                 new QueryWrapper<User>()
                         .eq("username", username));
@@ -35,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(BaseUserRegisterDTO baseUserRegisterDTO) {
-        User user = findUserByUsername(
+        User user = getUserByUsername(
                 baseUserRegisterDTO.getUsername());
         if (user != null) {
             return user;
@@ -49,15 +54,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserType(Long userId, int role) {
+    public void updateUserType(long userId, int role) {
         User user = userMapper.selectById(userId);
         if (user == null) {
-            return false;
+            return;
         }
 
         user.setRole(UserTypeUtils.addRole(user.getRole(), role));
         userMapper.updateById(user);
 
-        return true;
     }
 }

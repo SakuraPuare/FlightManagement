@@ -31,7 +31,7 @@ class FlightControllerTest {
     @Test
     void testGetFlightById() {
         // Arrange
-        Long flightId = 1L;
+        long flightId = 1L;
         Flight flight = new Flight();
         flight.setId(flightId);
         when(flightService.findFlightById(flightId)).thenReturn(flight);

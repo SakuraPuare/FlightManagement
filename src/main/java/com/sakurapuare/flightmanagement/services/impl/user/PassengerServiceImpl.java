@@ -26,12 +26,12 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public Passenger register(Long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
+    public void register(long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
         Passenger passenger = findPassengerByPassengerName(
                 passengerInfoUserRegisterDTO.getData().getPassengerName());
 
         if (passenger != null) {
-            return null;
+            return;
         }
 
         passenger = new Passenger();
@@ -39,6 +39,5 @@ public class PassengerServiceImpl implements PassengerService {
         BeanUtils.copyProperties(passengerInfoUserRegisterDTO.getData(), passenger);
         passengerMapper.insert(passenger);
 
-        return passenger;
     }
 }

@@ -9,16 +9,22 @@ import java.util.List;
 
 public interface TicketService {
 
-    List<Ticket> getTicketList(PaginationDTO paginationDTO);
+    List<Ticket> getTicketsByPagination(PaginationDTO paginationDTO);
 
-    Ticket getTicket(Long id);
+    Ticket getTicketById(long id);
 
-    boolean isTicketConflict(TicketDTO ticketDTO);
+    boolean isTicketSoldOut(Ticket ticket);
 
-    boolean addTicket(TicketDTO ticketDTO);
+    void addTicket(TicketDTO ticketDTO);
 
-    boolean updateTicket(Long id, @Valid TicketDTO ticketDTO);
+    void updateTicket(long id, @Valid TicketDTO ticketDTO);
 
-    boolean deleteTicket(Long id);
+    void deleteTicket(long id);
+
+    Ticket getTicketByFlightIdAndSeatClass(long flightId, String seatClass);
+
+    boolean sellTicket(Ticket ticket);
+
+    boolean refundTicket(Ticket ticket);
 
 }

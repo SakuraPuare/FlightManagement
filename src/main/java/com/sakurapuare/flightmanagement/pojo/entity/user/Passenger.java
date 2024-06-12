@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
-@EqualsAndHashCode(callSuper = false)
 @Data
 public class Passenger {
     @TableId(value = "passenger_id")

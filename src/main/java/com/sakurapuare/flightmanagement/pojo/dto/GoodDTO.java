@@ -16,5 +16,5 @@ public class GoodDTO {
     private double price;
 
     @NotBlank(message = "Stock cannot be empty")
-    private int stock;
+    private Integer stock;
 }

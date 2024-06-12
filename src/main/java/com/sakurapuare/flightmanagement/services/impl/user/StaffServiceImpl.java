@@ -26,12 +26,12 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff register(Long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
+    public void register(long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
         Staff staff = findStaffByStaffName(
                 baseUserRegisterDTO.getData().getStaffName());
 
         if (staff != null) {
-            return staff;
+            return;
         }
 
         staff = new Staff();
@@ -39,6 +39,5 @@ public class StaffServiceImpl implements StaffService {
         BeanUtils.copyProperties(baseUserRegisterDTO.getData(), staff);
         staffMapper.insert(staff);
 
-        return staff;
     }
 }

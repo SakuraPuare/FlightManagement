@@ -10,18 +10,12 @@ public class TicketDTO {
     @Positive(message = "Flight ID must be positive")
     private Long flightId;
 
-    @Positive(message = "Passenger ID must be positive")
-    private Long passengerId;
-
     @NotEmpty(message = "Seat class must not be empty")
     private String seatClass;
 
-    @NotEmpty(message = "Seat number must not be empty")
-    private String seatNumber;
-
-    @NotEmpty(message = "Status must not be empty")
-    private String status;
+    @Positive(message = "Quota must be positive")
+    private Long quota;
 
     @NotEmpty(message = "Price must not be empty")
-    private String price;
+    private double price;
 }

@@ -43,9 +43,9 @@ class GoodControllerTest {
 
     @Test
     void testGetGoodById() {
-        Long id = 1L;
+        long id = 1L;
         Good expectedGood = new Good();
-        when(goodService.findGoodById(id)).thenReturn(expectedGood);
+        when(goodService.getGoodById(id)).thenReturn(expectedGood);
 
         Response<Good> response = goodController.getGoodById(id);
 
@@ -76,10 +76,10 @@ class GoodControllerTest {
 
     @Test
     void testUpdateGood() {
-        Long id = 1L;
+        long id = 1L;
         GoodDTO goodDTO = new GoodDTO();
         Good existingGood = new Good();
-        when(goodService.findGoodById(id)).thenReturn(existingGood);
+        when(goodService.getGoodById(id)).thenReturn(existingGood);
 
         Response<Void> response = goodController.updateGood(id, goodDTO);
 
@@ -89,7 +89,7 @@ class GoodControllerTest {
 
     @Test
     void testDeleteGood() {
-        Long id = 1L;
+        long id = 1L;
 
         Response<Void> response = goodController.deleteGood(id);
 

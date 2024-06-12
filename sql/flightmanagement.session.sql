@@ -1,7 +1,7 @@
 drop database flightmanagement;
 create database flightmanagement;
 USE `flightmanagement`;
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `users` (
   `user_id` BIGINT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-INSERT INTO `user` (
+INSERT INTO `users` (
     `user_id`,
     `username`,
     `password`,
@@ -27,7 +27,7 @@ VALUES (
     'sakurapuare@sakurapuare.com',
     15
   );
-CREATE TABLE IF NOT EXISTS `airline` (
+CREATE TABLE IF NOT EXISTS `airlines` (
   `airline_id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `airline_name` varchar(100) NOT NULL,
@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS `airline` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`airline_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-INSERT INTO `airline` (
+INSERT INTO `airlines` (
     `airline_id`,
     `user_id`,
     `airline_name`,
@@ -71,7 +71,7 @@ VALUES (
     'QG',
     'Citi link is a low-cost airline headquartered in Jakarta, Indonesia.'
   );
-CREATE TABLE IF NOT EXISTS `merchant` (
+CREATE TABLE IF NOT EXISTS `merchants` (
   `merchant_id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `merchant_name` varchar(100) NOT NULL,
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `merchant` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`merchant_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-CREATE TABLE IF NOT EXISTS `passenger` (
+CREATE TABLE IF NOT EXISTS `passengers` (
   `passenger_id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `passenger_name` varchar(100) NOT NULL,
@@ -91,25 +91,25 @@ CREATE TABLE IF NOT EXISTS `passenger` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`passenger_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-INSERT INTO passenger (
+INSERT INTO passengers (
     user_id,
     passenger_name,
     passenger_phone,
     identity_number
   )
 VALUES (1, 'John Doe', '1234567890', 'ABC123XYZ');
-CREATE TABLE IF NOT EXISTS `staff` (
+CREATE TABLE IF NOT EXISTS `staffs` (
   `staff_id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `staff_name` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`staff_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-CREATE TABLE IF NOT EXISTS `good` (
+CREATE TABLE IF NOT EXISTS `goods` (
   `id` BIGINT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NULL DEFAULT '',
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `good` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-CREATE TABLE IF NOT EXISTS `flight` (
+CREATE TABLE IF NOT EXISTS `flights` (
   `id` BIGINT NULL AUTO_INCREMENT,
   `airline_id` BIGINT NOT NULL,
   `flight_number` varchar(50) NOT NULL,
@@ -132,9 +132,9 @@ CREATE TABLE IF NOT EXISTS `flight` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`airline_id`) REFERENCES `airline` (`airline_id`)
+  FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`airline_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-INSERT INTO `flight` (
+INSERT INTO `flights` (
     `id`,
     `airline_id`,
     `flight_number`,
@@ -164,17 +164,60 @@ VALUES (
     '2022-10-02 09:00:00',
     90
   );
-CREATE TABLE IF NOT EXISTS `ticket` (
+CREATE TABLE IF NOT EXISTS `tickets` (
   `id` BIGINT NULL AUTO_INCREMENT,
   `flight_id` BIGINT NOT NULL,
-  `passenger_id` BIGINT NOT NULL,
   `seat_class` varchar(50) NOT NULL,
-  `seat_number` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
+  `quota` BIGINT NOT NULL DEFAULT 0,
   `price` decimal(10, 2) NOT NULL DEFAULT 0.00,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`),
-  FOREIGN KEY (`passenger_id`) REFERENCES `passenger` (`passenger_id`)
+  FOREIGN KEY (`flight_id`) REFERENCES `flights` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+INSERT INTO `tickets` (
+    `id`,
+    `flight_id`,
+    `seat_class`,
+    `quota`,
+    `price`
+  )
+VALUES (
+    1,
+    1,
+    'Economy',
+    100,
+    1000000.00
+  ),
+  (
+    2,
+    1,
+    'Business',
+    50,
+    2000000.00
+  ),
+  (
+    3,
+    2,
+    'Economy',
+    75,
+    750000.00
+  ),
+  (
+    4,
+    2,
+    'Business',
+    50,
+    1500000.00
+  );
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` BIGINT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL,
+  `ticket_id` BIGINT NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'unpaid',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;

@@ -12,19 +12,6 @@ public class Response<T> implements Serializable {
     private T data = null;
     private int time;
 
-    public Response(String message, T data) {
-        this.message = message;
-        this.data = data;
-    }
-
-    public Response(String message) {
-        this.message = message;
-    }
-
-    public Response(int code) {
-        this.code = code;
-    }
-
     public Response() {
         this.time = (int) (System.currentTimeMillis() / 1000);
     }

@@ -8,6 +8,6 @@ public interface MerchantService {
 
     Merchant findMerchantByMerchantName(String merchantName);
 
-    Merchant register(Long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO);
+    void register(long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO);
 
 }

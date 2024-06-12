@@ -2,17 +2,14 @@ package com.sakurapuare.flightmanagement.services.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sakurapuare.flightmanagement.mapper.FlightMapper;
 import com.sakurapuare.flightmanagement.mapper.TicketMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.TicketDTO;
-import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,79 +17,72 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketMapper ticketMapper;
 
-    private final FlightMapper flightMapper;
-
-    public TicketServiceImpl(TicketMapper ticketMapper, FlightMapper flightMapper) {
+    public TicketServiceImpl(TicketMapper ticketMapper) {
         this.ticketMapper = ticketMapper;
-        this.flightMapper = flightMapper;
     }
 
     @Override
-    public List<Ticket> getTicketList(PaginationDTO paginationDTO) {
+    public List<Ticket> getTicketsByPagination(PaginationDTO paginationDTO) {
         Page<Ticket> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
         return ticketMapper.selectPage(page, null).getRecords();
     }
 
     @Override
-    public Ticket getTicket(Long id) {
+    public Ticket getTicketById(long id) {
         return ticketMapper.selectById(id);
     }
 
     @Override
-    public boolean isTicketConflict(TicketDTO ticketDTO) {
-        // get person's ticket list
-        List<Ticket> ticketList = ticketMapper
-                .selectList(new QueryWrapper<Ticket>()
-                        .eq("passenger_id", ticketDTO.getPassengerId()));
-
-        if (ticketList.isEmpty()) {
-            return false;
-        }
-
-        // check if the person has bought the same flight
-        for (Ticket ticket : ticketList) {
-            if (ticket.getFlightId().equals(ticketDTO.getFlightId())) {
-                return true;
-            }
-        }
-
-        // find the flight
-        Flight flight = flightMapper.selectById(ticketDTO.getFlightId());
-        // check if you have a conflict time
-        for (Ticket ticket : ticketList) {
-            LocalDateTime newDepartureTime = flight.getDateOfDeparture();
-            Flight flight1 = flightMapper.selectById(ticket.getFlightId());
-            LocalDateTime departureTime = flight1.getDateOfDeparture();
-            LocalDateTime arrivalTime = flight1.getDateOfDeparture().plusMinutes(flight1.getEstimatedTravelTime());
-            if (newDepartureTime.isAfter(departureTime) && newDepartureTime.isBefore(arrivalTime)) {
-                return true;
-            }
-        }
-        return false;
+    public Ticket getTicketByFlightIdAndSeatClass(long flightId, String seatClass) {
+        return ticketMapper.selectOne(
+                new QueryWrapper<Ticket>()
+                        .eq("flight_id", flightId)
+                        .eq("seat_class", seatClass));
     }
 
     @Override
-    public boolean addTicket(TicketDTO ticketDTO) {
+    public boolean isTicketSoldOut(Ticket ticket) {
+        return ticket.getQuota() <= 0;
+    }
+
+    @Override
+    public void addTicket(TicketDTO ticketDTO) {
         Ticket ticket = new Ticket();
         BeanUtils.copyProperties(ticketDTO, ticket);
-        return ticketMapper.insert(ticket) > 0;
+        ticketMapper.insert(ticket);
     }
 
     @Override
-    public boolean updateTicket(Long id, TicketDTO ticketDTO) {
-        Ticket ticket = getTicket(id);
+    public void updateTicket(long id, TicketDTO ticketDTO) {
+        Ticket ticket = getTicketById(id);
         if (ticket == null) {
-            return false;
+            return;
         }
-        return ticketMapper.updateById(ticket) > 0;
+        BeanUtils.copyProperties(ticketDTO, ticket);
+        ticketMapper.updateById(ticket);
     }
 
     @Override
-    public boolean deleteTicket(Long id) {
-        Ticket ticket = getTicket(id);
+    public void deleteTicket(long id) {
+        Ticket ticket = getTicketById(id);
         if (ticket == null) {
-            return false;
+            return;
         }
-        return ticketMapper.deleteById(id) > 0;
+        ticketMapper.deleteById(id);
     }
+
+    @Override
+    public boolean sellTicket(Ticket ticket) {
+        ticket.setQuota(ticket.getQuota() - 1);
+        ticketMapper.updateById(ticket);
+        return true;
+    }
+
+    @Override
+    public boolean refundTicket(Ticket ticket) {
+        ticket.setQuota(ticket.getQuota() + 1);
+        ticketMapper.updateById(ticket);
+        return true;
+    }
+
 }

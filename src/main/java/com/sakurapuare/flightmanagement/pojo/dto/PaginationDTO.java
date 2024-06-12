@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 public class PaginationDTO {
     @PositiveOrZero(message = "Page number must be greater than or equal to 0")
-    int page;
+    Integer page;
 
     @Positive(message = "Page count must be greater than 0")
     @Max(value = 100, message = "Page count must be less than or equal to 100")
-    int count;
+    Integer count;
 }

@@ -53,7 +53,7 @@ public class AuthController {
     @PostMapping("/login")
     public Response<UserLoginVO> login(
             @Validated @RequestBody UserLoginDTO userLoginDTO) {
-        User user = userService.findUserByUsernameAndPassword(
+        User user = userService.getUserByUsernameAndPassword(
                 userLoginDTO.getUsername(),
                 userLoginDTO.getPassword());
         if (user == null) {
@@ -68,7 +68,7 @@ public class AuthController {
     @PostMapping("/register/airline")
     public Response<Void> register_airline(
             @Valid @RequestBody UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
-        User user = userService.findUserByUsername(airlineInfoUserRegisterDTO.getUsername());
+        User user = userService.getUserByUsername(airlineInfoUserRegisterDTO.getUsername());
         Airline airline = airlineService
                 .findAirlineByAirlineCode(airlineInfoUserRegisterDTO.getData().getAirlineCode());
 
@@ -98,7 +98,7 @@ public class AuthController {
     @PostMapping("/register/merchant")
     public Response<Void> register_merchant(
             @Valid @RequestBody UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
-        User user = userService.findUserByUsername(merchantInfoUserRegisterDTO.getUsername());
+        User user = userService.getUserByUsername(merchantInfoUserRegisterDTO.getUsername());
         Merchant merchant = merchantService
                 .findMerchantByMerchantName(merchantInfoUserRegisterDTO.getData().getMerchantName());
 
@@ -129,7 +129,7 @@ public class AuthController {
     @PostMapping("/register/passenger")
     public Response<Void> register_passenger(
             @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
-        User user = userService.findUserByUsername(passengerInfoUserRegisterDTO.getUsername());
+        User user = userService.getUserByUsername(passengerInfoUserRegisterDTO.getUsername());
         Passenger passenger = passengerService.findPassengerByPassengerName(passengerInfoUserRegisterDTO.getUsername());
 
         if (user != null && passenger != null) {
@@ -158,7 +158,7 @@ public class AuthController {
 
     @PostMapping("/register/staff")
     public Response<Void> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
-        User user = userService.findUserByUsername(baseUserRegisterDTO.getUsername());
+        User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
         Staff staff = staffService.findStaffByStaffName(baseUserRegisterDTO.getUsername());
 
         if (user != null && staff != null) {
@@ -187,7 +187,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public Response<Void> register_user(@Valid @RequestBody BaseUserRegisterDTO baseUserRegisterDTO) {
-        User user = userService.findUserByUsername(baseUserRegisterDTO.getUsername());
+        User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
         if (user == null) {
             userService.register(baseUserRegisterDTO);
             return Response.success("Register success");

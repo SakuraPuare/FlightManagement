@@ -1,6 +1,6 @@
 package com.sakurapuare.flightmanagement.utils;
 
-import com.sakurapuare.flightmanagement.common.config.JWTConfig;
+import com.sakurapuare.flightmanagement.config.JWTConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -32,6 +32,9 @@ public class JwtTokenUtil {
     }
 
     public static Claims parseToken(String signKey, String jwt) {
+        if (jwt.startsWith("Bearer ")) {
+            jwt = jwt.substring(7);
+        }
         return Jwts.parser().setSigningKey(signKey) // 指定签名密钥
                 .parseClaimsJws(jwt) // 指定令牌Token
                 .getBody();

@@ -13,11 +13,11 @@ public interface GoodService {
 
     Good getGoodByName(String name);
 
-    Good findGoodById(Long id);
+    Good getGoodById(long id);
 
-    Good addGood(GoodDTO goodDTO);
+    void addGood(GoodDTO goodDTO);
 
-    boolean updateGood(Good good, GoodDTO goodDTO);
+    void updateGood(Good good, GoodDTO goodDTO);
 
-    boolean deleteGood(Long id);
+    void deleteGood(long id);
 }

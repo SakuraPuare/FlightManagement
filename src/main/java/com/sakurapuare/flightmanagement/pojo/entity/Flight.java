@@ -3,11 +3,13 @@ package com.sakurapuare.flightmanagement.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@TableName(value = "flights")
 public class Flight {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
@@ -19,7 +21,7 @@ public class Flight {
     private String flightNumber;
 
     @TableField(value = "capacity")
-    private int capacity;
+    private Integer capacity;
 
     @TableField(value = "departure_city")
     private String departureCity;
@@ -31,5 +33,5 @@ public class Flight {
     private LocalDateTime dateOfDeparture;
 
     @TableField(value = "estimated_travel_time")
-    private int estimatedTravelTime;
+    private Integer estimatedTravelTime;
 }

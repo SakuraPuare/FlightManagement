@@ -1,14 +1,12 @@
 package com.sakurapuare.flightmanagement.pojo.entity.user;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@TableName(value = "users")
 public class User {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
@@ -23,7 +21,7 @@ public class User {
     private String email;
 
     @TableField(value = "role")
-    private int role;
+    private Integer role;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;

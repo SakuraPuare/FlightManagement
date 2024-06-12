@@ -26,11 +26,11 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline register(Long userId, UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
+    public void register(long userId, UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
         Airline airline = findAirlineByAirlineCode(
                 airlineInfoUserRegisterDTO.getData().getAirlineCode());
         if (airline != null) {
-            return airline;
+            return;
         }
 
         airline = new Airline();
@@ -38,11 +38,10 @@ public class AirlineServiceImpl implements AirlineService {
         BeanUtils.copyProperties(airlineInfoUserRegisterDTO.getData(), airline);
         airlineMapper.insert(airline);
 
-        return airline;
     }
 
     @Override
-    public Airline findAirlineById(Long airlineId) {
+    public Airline findAirlineById(long airlineId) {
         return airlineMapper.selectById(airlineId);
     }
 }

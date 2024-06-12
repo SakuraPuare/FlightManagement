@@ -1,4 +1,4 @@
-package com.sakurapuare.flightmanagement.common.config;
+package com.sakurapuare.flightmanagement.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

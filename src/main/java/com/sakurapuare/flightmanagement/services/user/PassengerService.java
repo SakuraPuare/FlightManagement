@@ -8,6 +8,6 @@ public interface PassengerService {
 
     Passenger findPassengerByPassengerName(String username);
 
-    Passenger register(Long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO);
+    void register(long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO);
 
 }

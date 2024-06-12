@@ -44,27 +44,26 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    public Good findGoodById(Long id) {
+    public Good getGoodById(long id) {
         return goodMapper.selectById(id);
     }
 
     @Override
-    public Good addGood(GoodDTO goodDTO) {
+    public void addGood(GoodDTO goodDTO) {
         Good good = new Good();
         BeanUtils.copyProperties(goodDTO, good);
         goodMapper.insert(good);
-        return good;
     }
 
     @Override
-    public boolean updateGood(Good good, GoodDTO goodDTO) {
+    public void updateGood(Good good, GoodDTO goodDTO) {
         BeanUtils.copyProperties(goodDTO, good);
-        return goodMapper.updateById(good) == 1;
+        goodMapper.updateById(good);
 
     }
 
     @Override
-    public boolean deleteGood(Long id) {
-        return goodMapper.deleteById(id) == 1;
+    public void deleteGood(long id) {
+        goodMapper.deleteById(id);
     }
 }

@@ -17,7 +17,7 @@ public class FlightDTO {
     private String flightNumber;
 
     @Positive(message = "Capacity must be positive")
-    private int capacity;
+    private Integer capacity;
 
     @NotEmpty(message = "Departure city cannot be empty")
     private String departureCity;
@@ -31,5 +31,5 @@ public class FlightDTO {
 
     // Estimated travel time in minutes
     @Positive(message = "Estimated travel time must be positive")
-    private int estimatedTravelTime;
+    private Integer estimatedTravelTime;
 }

@@ -5,12 +5,14 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 
 public interface UserService {
 
-    User findUserByUsernameAndPassword(String username, String password);
+    User getUserById(long userId);
 
-    User findUserByUsername(String username);
+    User getUserByUsernameAndPassword(String username, String password);
+
+    User getUserByUsername(String username);
 
     User register(BaseUserRegisterDTO baseUserRegisterDTO);
 
-    boolean updateUserType(Long userId, int role);
+    void updateUserType(long userId, int role);
 
 }

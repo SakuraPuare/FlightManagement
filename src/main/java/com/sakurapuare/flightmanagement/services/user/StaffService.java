@@ -8,6 +8,6 @@ public interface StaffService {
 
     Staff findStaffByStaffName(String username);
 
-    Staff register(Long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO);
+    void register(long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO);
 
 }

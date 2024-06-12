@@ -26,18 +26,20 @@ public class TicketController {
 
     @GetMapping("/list")
     public Response<List<Ticket>> getTicketList(@Valid @RequestBody PaginationDTO paginationDTO) {
-        return Response.success(ticketService.getTicketList(paginationDTO));
+        return Response.success(ticketService.getTicketsByPagination(paginationDTO));
     }
 
     @GetMapping("/{id}")
-    public Response<Ticket> getTicket(@PathVariable("id") Long id) {
-        return Response.success(ticketService.getTicket(id));
+    public Response<Ticket> getTicket(@PathVariable("id") long id) {
+        return Response.success(ticketService.getTicketById(id));
     }
 
     @PostMapping("/")
     public Response<Void> addTicket(@Valid @RequestBody TicketDTO ticketDTO) {
-        if (ticketService.isTicketConflict(ticketDTO)) {
-            return Response.error("Ticket conflict");
+        Ticket ticket = ticketService.getTicketByFlightIdAndSeatClass(ticketDTO.getFlightId(),
+                ticketDTO.getSeatClass());
+        if (ticket != null) {
+            return Response.error("Ticket already exists");
         }
         ticketService.addTicket(ticketDTO);
 
@@ -45,17 +47,23 @@ public class TicketController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateTicket(@PathVariable("id") Long id, @Valid @RequestBody TicketDTO ticketDTO) {
-        if (!ticketService.isTicketConflict(ticketDTO)) {
-            return Response.error("Ticket conflict");
+    public Response<Void> updateTicket(@PathVariable("id") long id, @Valid @RequestBody TicketDTO ticketDTO) {
+        Ticket ticket = ticketService.getTicketById(id);
+        if (ticket == null) {
+            return Response.error("Ticket not found");
         }
+
+        if (ticketService.getTicketByFlightIdAndSeatClass(ticketDTO.getFlightId(), ticketDTO.getSeatClass()) != null) {
+            return Response.error("Ticket already exists");
+        }
+
         ticketService.updateTicket(id, ticketDTO);
 
         return Response.success("Ticket updated successfully");
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteTicket(@PathVariable("id") Long id) {
+    public Response<Void> deleteTicket(@PathVariable("id") long id) {
         ticketService.deleteTicket(id);
 
         return Response.success("Ticket deleted successfully");

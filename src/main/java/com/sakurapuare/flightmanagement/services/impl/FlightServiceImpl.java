@@ -24,6 +24,11 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public Flight getFlightById(long id) {
+        return flightMapper.selectById(id);
+    }
+
+    @Override
     public List<Flight> getFlightsByPagination(PaginationDTO paginationDTO) {
         Page<Flight> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
         return flightMapper.selectPage(page, null).getRecords();
@@ -39,28 +44,27 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight findFlightById(Long id) {
+    public Flight findFlightById(long id) {
         return flightMapper.selectById(id);
     }
 
     @Override
-    public Flight addFlight(FlightDTO flightDTO) {
+    public void addFlight(FlightDTO flightDTO) {
         Flight flight = new Flight();
         BeanUtils.copyProperties(flightDTO, flight);
         flightMapper.insert(flight);
 
-        return flight;
     }
 
     @Override
-    public boolean updateFlight(Flight flight, FlightDTO flightDTO) {
+    public void updateFlight(Flight flight, FlightDTO flightDTO) {
         BeanUtils.copyProperties(flightDTO, flight);
-        return flightMapper.updateById(flight) == 1;
+        flightMapper.updateById(flight);
     }
 
     @Override
-    public boolean deleteFlight(Long id) {
-        return flightMapper.deleteById(id) == 1;
+    public void deleteFlight(long id) {
+        flightMapper.deleteById(id);
     }
 
 }

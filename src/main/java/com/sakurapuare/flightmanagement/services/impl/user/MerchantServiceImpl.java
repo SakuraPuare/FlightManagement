@@ -26,11 +26,11 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public Merchant register(Long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
+    public void register(long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
         Merchant merchant = findMerchantByMerchantName(
                 merchantInfoUserRegisterDTO.getData().getMerchantName());
         if (merchant != null) {
-            return merchant;
+            return;
         }
 
         merchant = new Merchant();
@@ -38,6 +38,5 @@ public class MerchantServiceImpl implements MerchantService {
         BeanUtils.copyProperties(merchantInfoUserRegisterDTO.getData(), merchant);
         merchantMapper.insert(merchant);
 
-        return merchant;
     }
 }

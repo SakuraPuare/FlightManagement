@@ -7,16 +7,18 @@ import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import java.util.List;
 
 public interface FlightService {
+    Flight getFlightById(long id);
+
     List<Flight> getFlightsByPagination(PaginationDTO paginationDTO);
 
     List<Flight> search(String query);
 
-    Flight findFlightById(Long id);
+    Flight findFlightById(long id);
 
-    Flight addFlight(FlightDTO flightDTO);
+    void addFlight(FlightDTO flightDTO);
 
-    boolean updateFlight(Flight flight, FlightDTO flightDTO);
+    void updateFlight(Flight flight, FlightDTO flightDTO);
 
-    boolean deleteFlight(Long id);
+    void deleteFlight(long id);
 
 }
