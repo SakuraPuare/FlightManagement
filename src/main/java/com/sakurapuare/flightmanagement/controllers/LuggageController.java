@@ -4,15 +4,13 @@ import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.pojo.dto.LuggageDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Luggage;
+import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.services.LuggageService;
 import com.sakurapuare.flightmanagement.services.OrderService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-
-import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +32,7 @@ public class LuggageController {
 
     @GetMapping("/my")
     public Response<List<Luggage>> getMyLuggageList(@Valid @RequestBody PaginationDTO paginationDTO,
-            HttpServletRequest request) {
+                                                    HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         return Response.success(luggageService.getLuggagesByPaginationAndId(paginationDTO, userId));
@@ -47,7 +45,7 @@ public class LuggageController {
 
     @GetMapping("/{id}")
     public Response<Luggage> getLuggageById(@PathVariable(name = "id") long id,
-            HttpServletRequest request) {
+                                            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -60,7 +58,7 @@ public class LuggageController {
 
     @PostMapping("/")
     public Response<Void> addLuggage(@Valid @RequestBody LuggageDTO luggageDTO,
-            HttpServletRequest request) {
+                                     HttpServletRequest request) {
         long staffId = Long.parseLong(request.getAttribute("userId").toString());
         long userId = luggageDTO.getUserId();
         Order order = orderService.getOrderByIdAndUserId(luggageDTO.getOrderId(), userId);
@@ -77,7 +75,7 @@ public class LuggageController {
 
     @PutMapping("/{id}")
     public Response<Void> updateLuggage(@PathVariable(name = "id") long id, @Valid @RequestBody LuggageDTO luggageDTO,
-            HttpServletRequest request) {
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -91,7 +89,7 @@ public class LuggageController {
 
     @DeleteMapping("/{id}")
     public Response<Void> deleteLuggage(@PathVariable(name = "id") long id,
-            HttpServletRequest request) {
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
