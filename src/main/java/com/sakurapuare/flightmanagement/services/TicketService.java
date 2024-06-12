@@ -23,8 +23,8 @@ public interface TicketService {
 
     Ticket getTicketByFlightIdAndSeatClass(long flightId, String seatClass);
 
-    boolean sellTicket(Ticket ticket);
+    void sellTicket(Ticket ticket);
 
-    boolean refundTicket(Ticket ticket);
+    void refundTicket(Ticket ticket);
 
 }

@@ -41,11 +41,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderByIdAndUserId(long id, long userId) {
-        Order order = orderMapper.selectById(id);
-        if (order == null || order.getUserId() != userId) {
-            return null;
-        }
-        return order;
+        return orderMapper.selectOne(
+                new QueryWrapper<Order>()
+                        .eq("id", id)
+                        .eq("user_id", userId));
     }
 
     @Override
@@ -117,4 +116,10 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateById(order);
     }
 
+    @Override
+    public List<Order> getOrdersAll(long userId) {
+        return orderMapper.selectList(
+                new QueryWrapper<Order>()
+                        .eq("user_id", userId));
+    }
 }

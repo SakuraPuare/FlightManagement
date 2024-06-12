@@ -18,4 +18,6 @@ public interface OrderService {
     boolean isOrderConflict(long id, long userId);
 
     void payOrder(Order order);
+
+    List<Order> getOrdersAll(long userId);
 }

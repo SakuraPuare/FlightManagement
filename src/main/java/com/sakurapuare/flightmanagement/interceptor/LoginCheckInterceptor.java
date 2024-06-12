@@ -33,6 +33,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         try {
             Claims claims = JwtTokenUtil.parseToken(token);
+            request.setAttribute("userId", claims.get("userId"));
+
             AuthInfo authInfo = new AuthInfo();
             authInfo.setUserId(Long.parseLong(claims.get("userId").toString()));
             authInfo.setUsername(claims.get("username").toString());

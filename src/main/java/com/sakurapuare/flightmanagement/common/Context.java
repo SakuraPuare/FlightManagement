@@ -1,5 +1,6 @@
 package com.sakurapuare.flightmanagement.common;
 
+@Deprecated
 public class Context {
 
     public static final ThreadLocal<AuthInfo> threadLocal = new ThreadLocal<>();

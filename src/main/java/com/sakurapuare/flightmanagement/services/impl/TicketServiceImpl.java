@@ -64,25 +64,19 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void deleteTicket(long id) {
-        Ticket ticket = getTicketById(id);
-        if (ticket == null) {
-            return;
-        }
         ticketMapper.deleteById(id);
     }
 
     @Override
-    public boolean sellTicket(Ticket ticket) {
+    public void sellTicket(Ticket ticket) {
         ticket.setQuota(ticket.getQuota() - 1);
         ticketMapper.updateById(ticket);
-        return true;
     }
 
     @Override
-    public boolean refundTicket(Ticket ticket) {
+    public void refundTicket(Ticket ticket) {
         ticket.setQuota(ticket.getQuota() + 1);
         ticketMapper.updateById(ticket);
-        return true;
     }
 
 }
