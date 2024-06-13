@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class TicketDTO {
 
@@ -17,5 +19,5 @@ public class TicketDTO {
     private Long quota;
 
     @NotEmpty(message = "Price must not be empty")
-    private double price;
+    private BigDecimal price;
 }

@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `luggages` (
   `id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `order_id` BIGINT NOT NULL,
-  `weight` double NOT NULL,
+  `weight` decimal(10, 2) NOT NULL,
   `staff_id` BIGINT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

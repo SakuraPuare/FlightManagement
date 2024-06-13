@@ -4,6 +4,7 @@ import com.sakurapuare.flightmanagement.pojo.dto.GoodDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Good;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface GoodService {
@@ -22,4 +23,6 @@ public interface GoodService {
     void deleteGood(long id);
 
     long count();
+
+    BigDecimal getTotalPrice();
 }

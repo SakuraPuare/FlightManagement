@@ -3,7 +3,7 @@ package com.sakurapuare.flightmanagement.pojo.vo;
 import lombok.Data;
 
 @Data
-public class AllCountVO {
+public class AllCountStatisticVO {
 
     private long airlineCount;
 

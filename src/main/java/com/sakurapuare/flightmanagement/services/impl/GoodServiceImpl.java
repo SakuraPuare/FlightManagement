@@ -10,6 +10,7 @@ import com.sakurapuare.flightmanagement.services.GoodService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -70,5 +71,13 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public long count() {
         return goodMapper.selectCount(null);
+    }
+
+    @Override
+    public BigDecimal getTotalPrice() {
+        return goodMapper.selectList(null)
+                .stream()
+                .map(Good::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
