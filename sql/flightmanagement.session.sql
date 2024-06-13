@@ -232,3 +232,15 @@ CREATE TABLE IF NOT EXISTS `luggages` (
   FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `requests` (
+  `id` BIGINT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL,
+  `info` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'unhandled',
+  `handler_id` BIGINT NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  FOREIGN KEY (`handler_id`) REFERENCES `staffs` (`staff_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
