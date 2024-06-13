@@ -1,5 +1,3 @@
-import { Pagination } from "./types";
-
 export type Goods = {
   name: string;
   description: string;

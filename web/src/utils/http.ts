@@ -22,7 +22,7 @@ service.interceptors.request.use(
     // 处理请求错误
     console.error(error); // for debug
     Promise.reject(error).then((r) => console.log(r));
-  },
+  }
 );
 
 // response拦截器
@@ -31,9 +31,7 @@ service.interceptors.response.use(
     // 在这里你可以对响应数据做一些处理
     if (response.status !== 200) {
       console.error("error" + response); // for debug
-    }
-    else {
-
+    } else {
     }
     return response.data;
   },
@@ -41,7 +39,7 @@ service.interceptors.response.use(
     // 处理响应错误
     console.error("err" + error); // for debug
     return Promise.reject(error);
-  },
+  }
 );
 
 export default service;
