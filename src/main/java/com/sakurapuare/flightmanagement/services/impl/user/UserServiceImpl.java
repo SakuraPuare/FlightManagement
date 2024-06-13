@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updateById(user);
 
     }
+
+    @Override
+    public long count() {
+        return userMapper.selectCount(null);
+    }
 }

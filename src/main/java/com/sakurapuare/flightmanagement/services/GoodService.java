@@ -20,4 +20,6 @@ public interface GoodService {
     void updateGood(Good good, GoodDTO goodDTO);
 
     void deleteGood(long id);
+
+    long count();
 }

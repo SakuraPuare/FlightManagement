@@ -27,4 +27,6 @@ public interface TicketService {
 
     void refundTicket(Ticket ticket);
 
+    long count();
+
 }

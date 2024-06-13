@@ -40,4 +40,9 @@ public class PassengerServiceImpl implements PassengerService {
         passengerMapper.insert(passenger);
 
     }
+
+    @Override
+    public long count() {
+        return passengerMapper.selectCount(null);
+    }
 }

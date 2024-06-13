@@ -39,4 +39,9 @@ public class MerchantServiceImpl implements MerchantService {
         merchantMapper.insert(merchant);
 
     }
+
+    @Override
+    public long count() {
+        return merchantMapper.selectCount(null);
+    }
 }

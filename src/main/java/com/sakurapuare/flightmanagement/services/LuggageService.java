@@ -20,4 +20,6 @@ public interface LuggageService {
 
     void deleteLuggage(long id, long userId);
 
+    long count();
+
 }

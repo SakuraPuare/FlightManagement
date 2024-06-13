@@ -21,4 +21,6 @@ public interface RequestService {
 
     void handleRequest(Request requests, long userId);
 
+    long count();
+
 }

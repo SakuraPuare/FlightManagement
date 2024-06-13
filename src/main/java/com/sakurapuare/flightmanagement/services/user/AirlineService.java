@@ -12,4 +12,6 @@ public interface AirlineService {
 
     Airline getAirlineById(long airlineId);
 
+    long count();
+
 }

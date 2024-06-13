@@ -79,4 +79,9 @@ public class TicketServiceImpl implements TicketService {
         ticketMapper.updateById(ticket);
     }
 
+    @Override
+    public long count() {
+        return ticketMapper.selectCount(null);
+    }
+
 }

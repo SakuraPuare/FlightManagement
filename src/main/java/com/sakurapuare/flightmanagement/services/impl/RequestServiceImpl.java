@@ -6,13 +6,11 @@ import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.RequestDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Request;
 import com.sakurapuare.flightmanagement.services.RequestService;
-
 import jakarta.validation.Valid;
-
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -58,6 +56,11 @@ public class RequestServiceImpl implements RequestService {
         requests.setHandlerId(userId);
         requests.setStatus("handled");
         requestMapper.updateById(requests);
+    }
+
+    @Override
+    public long count() {
+        return requestMapper.selectCount(null);
     }
 
 }

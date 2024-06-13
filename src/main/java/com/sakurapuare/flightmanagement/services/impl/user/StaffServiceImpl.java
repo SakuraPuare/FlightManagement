@@ -40,4 +40,9 @@ public class StaffServiceImpl implements StaffService {
         staffMapper.insert(staff);
 
     }
+
+    @Override
+    public long count() {
+        return staffMapper.selectCount(null);
+    }
 }

@@ -10,4 +10,6 @@ public interface PassengerService {
 
     void register(long userId, UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO);
 
+    long count();
+
 }

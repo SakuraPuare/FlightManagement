@@ -62,4 +62,9 @@ public class FlightServiceImpl implements FlightService {
         flightMapper.deleteById(id);
     }
 
+    @Override
+    public long count() {
+        return flightMapper.selectCount(null);
+    }
+
 }

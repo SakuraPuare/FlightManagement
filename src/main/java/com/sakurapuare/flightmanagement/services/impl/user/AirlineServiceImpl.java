@@ -44,4 +44,9 @@ public class AirlineServiceImpl implements AirlineService {
     public Airline getAirlineById(long airlineId) {
         return airlineMapper.selectById(airlineId);
     }
+
+    @Override
+    public long count() {
+        return airlineMapper.selectCount(null);
+    }
 }

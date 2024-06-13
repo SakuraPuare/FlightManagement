@@ -15,4 +15,6 @@ public interface UserService {
 
     void updateUserType(long userId, int role);
 
+    long count();
+
 }

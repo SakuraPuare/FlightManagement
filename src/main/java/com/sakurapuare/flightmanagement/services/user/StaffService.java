@@ -10,4 +10,6 @@ public interface StaffService {
 
     void register(long userId, UserRegisterDTO<StaffInfo> baseUserRegisterDTO);
 
+    long count();
+
 }

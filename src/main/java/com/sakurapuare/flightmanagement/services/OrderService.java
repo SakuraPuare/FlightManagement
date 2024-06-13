@@ -20,4 +20,6 @@ public interface OrderService {
     void payOrder(Order order);
 
     List<Order> getOrdersAll(long userId);
+
+    long count();
 }

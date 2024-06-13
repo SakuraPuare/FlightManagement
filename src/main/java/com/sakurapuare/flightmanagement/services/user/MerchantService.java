@@ -10,4 +10,6 @@ public interface MerchantService {
 
     void register(long userId, UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO);
 
+    long count();
+
 }

@@ -64,4 +64,9 @@ public class LuggageServiceImpl implements LuggageService {
                 .eq("user_id", userId));
     }
 
+    @Override
+    public long count() {
+        return luggageMapper.selectCount(null);
+    }
+
 }

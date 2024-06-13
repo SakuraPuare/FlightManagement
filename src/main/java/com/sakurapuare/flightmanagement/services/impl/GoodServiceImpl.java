@@ -66,4 +66,9 @@ public class GoodServiceImpl implements GoodService {
     public void deleteGood(long id) {
         goodMapper.deleteById(id);
     }
+
+    @Override
+    public long count() {
+        return goodMapper.selectCount(null);
+    }
 }

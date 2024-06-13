@@ -19,4 +19,6 @@ public interface FlightService {
 
     void deleteFlight(long id);
 
+    long count();
+
 }
