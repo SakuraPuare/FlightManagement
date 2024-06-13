@@ -74,7 +74,7 @@ public class LuggageController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateLuggage(@PathVariable(name = "id") long id, @Valid @RequestBody LuggageDTO luggageDTO,
+    public Response<Void> updateLuggage(@PathVariable(name = "id") long id, @RequestBody LuggageDTO luggageDTO,
                                         HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 

@@ -30,7 +30,7 @@ public class GoodController {
     }
 
     @GetMapping("/{id}")
-    public Response<Good> getGoodById(@Valid @PathVariable(name = "id") long id) {
+    public Response<Good> getGoodById(@PathVariable(name = "id") long id) {
         Good good = goodService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");
@@ -54,8 +54,8 @@ public class GoodController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateGood(@Valid @PathVariable(name = "id") long id,
-                                     @Valid @RequestBody GoodDTO goodDTO) {
+    public Response<Void> updateGood(@PathVariable(name = "id") long id,
+                                     @RequestBody GoodDTO goodDTO) {
         Good good = goodService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");
@@ -65,7 +65,7 @@ public class GoodController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteGood(@Valid @PathVariable(name = "id") long id) {
+    public Response<Void> deleteGood(@PathVariable(name = "id") long id) {
         goodService.deleteGood(id);
         return Response.success("Good deleted successfully");
     }

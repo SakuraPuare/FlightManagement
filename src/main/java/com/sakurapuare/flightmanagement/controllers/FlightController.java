@@ -59,7 +59,7 @@ public class FlightController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateFlight(@PathVariable(name = "id") long id, @Valid @RequestBody FlightDTO flightDTO) {
+    public Response<Void> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO) {
         Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");

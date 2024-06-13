@@ -48,8 +48,8 @@ public class RequestController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateRequest(@PathVariable(name = "id") long id, @Valid @RequestBody RequestDTO requestDTO,
-            HttpServletRequest request) {
+    public Response<Void> updateRequest(@PathVariable(name = "id") long id, @RequestBody RequestDTO requestDTO,
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
         Request requests = requestService.getRequestById(id);
         if (requests == null) {
