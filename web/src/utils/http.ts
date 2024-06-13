@@ -4,7 +4,7 @@ axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 const service = axios.create({
-  baseURL: "http://0.0.0.0:8000/", // api的base_url
+  baseURL: "http://localhost:8080/", // api的base_url
   timeout: 5000, // 请求超时时间
 });
 
@@ -29,7 +29,13 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     // 在这里你可以对响应数据做一些处理
-    return response;
+    if (response.status !== 200) {
+      console.error("error" + response); // for debug
+    }
+    else {
+
+    }
+    return response.data;
   },
   (error) => {
     // 处理响应错误
