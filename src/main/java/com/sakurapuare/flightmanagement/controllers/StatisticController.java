@@ -2,7 +2,7 @@ package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.pojo.vo.AllCountStatisticVO;
-import com.sakurapuare.flightmanagement.pojo.vo.GoodStatisticVO;
+import com.sakurapuare.flightmanagement.pojo.vo.GoodsStatisticVO;
 import com.sakurapuare.flightmanagement.services.*;
 import com.sakurapuare.flightmanagement.services.user.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +30,7 @@ public class StatisticController {
 
     private final FlightService flightService;
 
-    private final GoodService goodService;
+    private final GoodsService goodsService;
 
     private final LuggageService luggageService;
 
@@ -42,7 +42,7 @@ public class StatisticController {
 
     public StatisticController(AirlineService airlineService, MerchantService merchantService,
             PassengerService passengerService, StaffService staffService, UserService userService,
-            FlightService flightService, GoodService goodService, LuggageService luggageService,
+            FlightService flightService, GoodsService goodsService, LuggageService luggageService,
             OrderService orderService, RequestService requestService, TicketService ticketService) {
         this.airlineService = airlineService;
         this.merchantService = merchantService;
@@ -50,7 +50,7 @@ public class StatisticController {
         this.staffService = staffService;
         this.userService = userService;
         this.flightService = flightService;
-        this.goodService = goodService;
+        this.goodsService = goodsService;
         this.luggageService = luggageService;
         this.orderService = orderService;
         this.requestService = requestService;
@@ -66,7 +66,7 @@ public class StatisticController {
         allCountVO.setStaffCount(staffService.count());
         allCountVO.setUserCount(userService.count());
         allCountVO.setFlightCount(flightService.count());
-        allCountVO.setGoodsCount(goodService.count());
+        allCountVO.setGoodsCount(goodsService.count());
         allCountVO.setLuggageCount(luggageService.count());
         allCountVO.setOrderCount(orderService.count());
         allCountVO.setRequestCount(requestService.count());
@@ -97,8 +97,8 @@ public class StatisticController {
             case "flight":
                 count = flightService.count();
                 break;
-            case "good":
-                count = goodService.count();
+            case "goods":
+                count = goodsService.count();
                 break;
             case "luggage":
                 count = luggageService.count();
@@ -120,10 +120,10 @@ public class StatisticController {
 
     // good sell statistics
     @GetMapping("/good")
-    public Response<GoodStatisticVO> getGoodSellStatistics() {
-        GoodStatisticVO goodStatisticVO = new GoodStatisticVO();
-        goodStatisticVO.setGoodsCount(goodService.count());
-        goodStatisticVO.setGoodsTotalPrice(goodService.getTotalPrice());
+    public Response<GoodsStatisticVO> getGoodSellStatistics() {
+        GoodsStatisticVO goodStatisticVO = new GoodsStatisticVO();
+        goodStatisticVO.setGoodsCount(goodsService.count());
+        goodStatisticVO.setGoodsTotalPrice(goodsService.getTotalPrice());
         return Response.success(goodStatisticVO);
     }
 

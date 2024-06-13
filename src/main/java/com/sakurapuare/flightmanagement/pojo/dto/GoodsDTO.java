@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class GoodDTO {
+public class GoodsDTO {
     @NotBlank(message = "Name cannot be empty")
     private String name;
 

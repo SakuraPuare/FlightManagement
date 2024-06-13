@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class GoodStatisticVO {
+public class GoodsStatisticVO {
     private long goodsCount;
 
     private BigDecimal goodsTotalPrice;

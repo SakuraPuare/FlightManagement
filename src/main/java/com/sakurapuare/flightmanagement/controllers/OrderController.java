@@ -79,7 +79,7 @@ public class OrderController {
     }
 
     @Transactional
-    @PostMapping("/pay/{id}")
+    @PostMapping("/{id}/pay")
     public Response<Void> payOrder(@PathVariable("id") long id,
                                    HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
