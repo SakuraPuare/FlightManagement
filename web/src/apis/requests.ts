@@ -7,7 +7,7 @@ import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 
 export const getRequestsAPI = async (
-  id: number
+  id: number,
 ): Promise<getRequestResponse> => {
   return http
     .get(`/requests/${id}`)
@@ -15,22 +15,22 @@ export const getRequestsAPI = async (
 };
 
 export const getRequestsListAPI = async (
-  params: Pagination
+  params: Pagination,
 ): Promise<getRequestResponse[]> => {
   return http
-    .get("/requests/", { params })
+    .get("/requests/list", { params })
     .then((res) => res.data as getRequestResponse[]);
 };
 
 export const createRequestAPI = async (
-  params: createRequestRequest
+  params: createRequestRequest,
 ): Promise<void> => {
   return http.post(`/requests/`, params).then((res) => res.data);
 };
 
 export const updateRequestAPI = async (
   id: number,
-  params: updateRequestRequest
+  params: updateRequestRequest,
 ): Promise<void> => {
   return http.put(`/requests/${id}`, params).then((res) => res.data);
 };

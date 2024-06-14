@@ -7,10 +7,10 @@ export const getOrderAPI = async (id: number): Promise<getOrderResponse> => {
 };
 
 export const getOrdersListAPI = async (
-  params: Pagination
+  params: Pagination,
 ): Promise<getOrderResponse[]> => {
   return http
-    .get("/orders/", { params })
+    .get("/orders/list", { params })
     .then((res) => res.data as getOrderResponse[]);
 };
 

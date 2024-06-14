@@ -9,7 +9,7 @@ export const getAllCountStatistic =
   };
 
 export const getTypesCountStatistic = async (
-  type: TypesStatistic
+  type: TypesStatistic,
 ): Promise<AllCountStatisticResponse> => {
   return http
     .get(`/statistics/count/${type}`)

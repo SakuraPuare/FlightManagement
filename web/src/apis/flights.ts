@@ -11,20 +11,22 @@ export const getFlightAPI = async (id: number): Promise<Flight> => {
 };
 
 export const getFlightsListAPI = async (
-  params: Pagination
+  params: Pagination,
 ): Promise<Flight[]> => {
-  return http.get("/flights/", { params }).then((res) => res.data as Flight[]);
+  return http
+    .get("/flights/list", { params })
+    .then((res) => res.data as Flight[]);
 };
 
 export const createFlightAPI = async (
-  params: createFlightRequest
+  params: createFlightRequest,
 ): Promise<void> => {
   return http.post("/flights/", params).then((res) => res.data);
 };
 
 export const updateFlightAPI = async (
   id: number,
-  params: updateFlightRequest
+  params: updateFlightRequest,
 ): Promise<void> => {
   return http.put(`/flights/${id}`, params).then((res) => res.data);
 };
