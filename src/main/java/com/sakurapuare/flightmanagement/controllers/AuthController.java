@@ -13,6 +13,8 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.StaffInfo;
 import com.sakurapuare.flightmanagement.pojo.vo.UserLoginVO;
 import com.sakurapuare.flightmanagement.services.AuthService;
 import com.sakurapuare.flightmanagement.services.user.*;
+import com.sakurapuare.flightmanagement.utils.UserTypeUtils;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +43,7 @@ public class AuthController {
     private final StaffService staffService;
 
     public AuthController(AuthService authService, UserService userService, AirlineService airlineService,
-                          MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
+            MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
         this.authService = authService;
         this.userService = userService;
         this.airlineService = airlineService;
@@ -81,6 +83,9 @@ public class AuthController {
             if (!airlineInfoUserRegisterDTO.getPassword().equals(user.getPassword())) {
                 return Response.error("Password not match");
             }
+
+            if (UserTypeUtils.isAirline(user.getRole()))
+                return Response.error("User already exists");
         }
 
         if (user == null) {
@@ -111,6 +116,9 @@ public class AuthController {
             if (!merchantInfoUserRegisterDTO.getPassword().equals(user.getPassword())) {
                 return Response.error("Password not match");
             }
+
+            if (UserTypeUtils.isMerchant(user.getRole()))
+                return Response.error("User already exists");
         }
 
         if (user == null) {
@@ -130,7 +138,8 @@ public class AuthController {
     public Response<Void> register_passenger(
             @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(passengerInfoUserRegisterDTO.getUsername());
-        Passenger passenger = passengerService.getPassengerByPassengerName(passengerInfoUserRegisterDTO.getData().getPassengerName());
+        Passenger passenger = passengerService
+                .getPassengerByPassengerName(passengerInfoUserRegisterDTO.getData().getPassengerName());
 
         if (user != null && passenger != null) {
             return Response.error("Passenger already exists");
@@ -141,6 +150,9 @@ public class AuthController {
             if (!passengerInfoUserRegisterDTO.getPassword().equals(user.getPassword())) {
                 return Response.error("Password not match");
             }
+
+            if (UserTypeUtils.isPassenger(user.getRole()))
+                return Response.error("User already exists");
         }
 
         if (user == null) {
@@ -159,7 +171,7 @@ public class AuthController {
     @PostMapping("/register/staff")
     public Response<Void> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
         User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
-        Staff staff = staffService.getStaffByStaffName(baseUserRegisterDTO.getUsername());
+        Staff staff = staffService.getStaffByStaffName(baseUserRegisterDTO.getData().getStaffName());
 
         if (user != null && staff != null) {
             return Response.error("Staff already exists");
@@ -170,6 +182,9 @@ public class AuthController {
             if (!baseUserRegisterDTO.getPassword().equals(user.getPassword())) {
                 return Response.error("Password not match");
             }
+
+            if (UserTypeUtils.isStaff(user.getRole()))
+                return Response.error("User already exists");
         }
 
         if (user == null) {
