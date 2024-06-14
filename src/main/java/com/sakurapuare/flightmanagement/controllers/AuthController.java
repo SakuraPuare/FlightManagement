@@ -130,7 +130,7 @@ public class AuthController {
     public Response<Void> register_passenger(
             @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(passengerInfoUserRegisterDTO.getUsername());
-        Passenger passenger = passengerService.getPassengerByPassengerName(passengerInfoUserRegisterDTO.getUsername());
+        Passenger passenger = passengerService.getPassengerByPassengerName(passengerInfoUserRegisterDTO.getData().getPassengerName());
 
         if (user != null && passenger != null) {
             return Response.error("Passenger already exists");
