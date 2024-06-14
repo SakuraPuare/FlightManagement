@@ -1,10 +1,11 @@
+import { BASE_URL } from "@/config";
 import axios from "axios";
 
 axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 const service = axios.create({
-  baseURL: "http://localhost:8080/", // api的base_url
+  baseURL: BASE_URL, // api的base_url
   timeout: 5000, // 请求超时时间
 });
 
