@@ -1,15 +1,14 @@
 package com.sakurapuare.flightmanagement.pojo.entity.user;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@TableName(value = "airlines")
 public class Airline {
-    @TableId(value = "airline_id")
+    @TableId(value = "airline_id", type = IdType.AUTO)
     private Long airlineId;
 
     @TableField(value = "user_id")
