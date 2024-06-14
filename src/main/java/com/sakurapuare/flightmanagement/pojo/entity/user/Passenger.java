@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName(value = "passengers")
 public class Passenger {
-    @TableId(value = "passenger_id"),type =IdType.AUTO
+    @TableId(value = "passenger_id", type = IdType.AUTO)
     private Long passengerId;
 
     @TableField(value = "user_id")
