@@ -15,7 +15,7 @@ public interface RequestService {
 
     void addRequest(@Valid RequestDTO requestDTO, long userId);
 
-    void updateRequest(Request requests, @Valid RequestDTO requestDTO, long userId);
+    void updateRequest(Request requests, @Valid RequestDTO requestDTO);
 
     void deleteRequest(Request request);
 

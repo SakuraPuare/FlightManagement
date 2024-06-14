@@ -41,7 +41,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void updateRequest(Request requests, @Valid RequestDTO requestDTO, long userId) {
+    public void updateRequest(Request requests, @Valid RequestDTO requestDTO) {
         BeanUtils.copyProperties(requestDTO, requests);
         requestMapper.updateById(requests);
     }

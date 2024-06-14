@@ -48,15 +48,13 @@ public class RequestController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateRequest(@PathVariable(name = "id") long id, @RequestBody RequestDTO requestDTO,
-                                        HttpServletRequest request) {
-        long userId = Long.parseLong(request.getAttribute("userId").toString());
+    public Response<Void> updateRequest(@PathVariable(name = "id") long id, @RequestBody RequestDTO requestDTO) {
         Request requests = requestService.getRequestById(id);
         if (requests == null) {
             return Response.error("Request not found");
         }
 
-        requestService.updateRequest(requests, requestDTO, userId);
+        requestService.updateRequest(requests, requestDTO);
         return Response.success("Request updated");
     }
 
