@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { TITLE } from "@/config";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const menuItems = [
   { id: 1, label: "Home", link: "#" },
