@@ -1,9 +1,19 @@
 <script lang="ts" setup>
 import { ref, Ref } from "vue";
 import TitleComp from "@/components/TitleComp.vue";
-import { AirlineInfo, MerchantInfo, PassengerInfo, StaffInfo } from "@/types/auth/info";
+import {
+  AirlineInfo,
+  MerchantInfo,
+  PassengerInfo,
+  StaffInfo,
+} from "@/types/auth/info";
 import { BaseRegisterParams, RegisterParams } from "@/types/auth/register";
-import { registerAirlineAPI, registerMerchantAPI, registerPassengerAPI, registerStaffAPI } from "@/apis/auth";
+import {
+  registerAirlineAPI,
+  registerMerchantAPI,
+  registerPassengerAPI,
+  registerStaffAPI,
+} from "@/apis/auth";
 
 const items = ["Passenger", "Merchant", "Airline", "Staff"];
 let selectedIndex = ref(0);
@@ -35,20 +45,34 @@ const staffInfo: Ref<StaffInfo> = ref({
 });
 
 const checkIntegrity = () => {
-  if (user.value.username === "" || user.value.email === "" || user.value.password === "") {
+  if (
+    user.value.username === "" ||
+    user.value.email === "" ||
+    user.value.password === ""
+  ) {
     return false;
   }
   if (selectedIndex.value === 0) {
-    return passengerInfo.value.passengerName !== "" && passengerInfo.value.passengerPhone !== "" &&
-      passengerInfo.value.identityNumber !== "";
+    return (
+      passengerInfo.value.passengerName !== "" &&
+      passengerInfo.value.passengerPhone !== "" &&
+      passengerInfo.value.identityNumber !== ""
+    );
   }
   if (selectedIndex.value === 1) {
-    return merchantInfo.value.merchantName !== "" && merchantInfo.value.merchantAddress !== "" &&
-      merchantInfo.value.merchantDescription !== "";
+    return (
+      merchantInfo.value.merchantName !== "" &&
+      merchantInfo.value.merchantAddress !== "" &&
+      merchantInfo.value.merchantDescription !== ""
+    );
   }
   if (selectedIndex.value === 2) {
-    return airlineInfo.value.airlineName !== "" && airlineInfo.value.airlineCode !== "" &&
-      airlineInfo.value.airlineCountry !== "" && airlineInfo.value.airlineDescription !== "";
+    return (
+      airlineInfo.value.airlineName !== "" &&
+      airlineInfo.value.airlineCode !== "" &&
+      airlineInfo.value.airlineCountry !== "" &&
+      airlineInfo.value.airlineDescription !== ""
+    );
   }
   if (selectedIndex.value === 3) {
     return staffInfo.value.staffName !== "";
@@ -78,7 +102,6 @@ const register = async () => {
   await registerAPI(registerFunctions[selectedIndex.value]);
 };
 
-
 const selectItem = (index: number) => {
   selectedIndex.value = index;
 };
@@ -99,22 +122,22 @@ const selectItem = (index: number) => {
           <div class="space-y-3 md:space-y-6 w-full">
             <div>
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="email">Your email</label>
-              <input id="username"
+              <input id="username" v-model="user.username"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="username" required type="text" v-model="user.username" />
+                name="username" required type="text" />
             </div>
             <div>
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="email">Your email</label>
-              <input id="email"
+              <input id="email" v-model="user.email"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="email" placeholder="name@company.com" required type="email" v-model="user.email" />
+                name="email" placeholder="name@company.com" required type="email" />
             </div>
             <div>
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 for="password">Password</label>
-              <input id="password"
+              <input id="password" v-model="user.password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="password" placeholder="••••••••" required type="password" v-model="user.password" />
+                name="password" placeholder="••••••••" required type="password" />
             </div>
             <!-- <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -149,13 +172,17 @@ const selectItem = (index: number) => {
               <ul
                 class="flex text-sm font-medium text-center text-gray-500 rounded-md shadow dark:divide-gray-700 dark:text-gray-400">
                 <li v-for="(item, index) in items" :key="index" class="w-full focus-within:z-10">
-                  <span @click="selectItem(index)" :class="[
+                  <span :class="[
                     'inline-block w-full px-4 py-2 border-r border-gray-200 dark:border-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none',
                     selectedIndex === index
                       ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
                       : 'bg-white hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700',
-                    index === 0 ? 'rounded-s-lg' : index === items.length - 1 ? 'rounded-e-lg border-s-0' : ''
-                  ]">
+                    index === 0
+                      ? 'rounded-s-lg'
+                      : index === items.length - 1
+                        ? 'rounded-e-lg border-s-0'
+                        : '',
+                  ]" @click="selectItem(index)">
                     {{ item }}
                   </span>
                 </li>
@@ -194,8 +221,7 @@ const selectItem = (index: number) => {
                   class="w-full px-4 py-2 border rounded-md dark:text-gray-900" type="text" />
               </div>
               <div>
-                <label class="block text-sm mb-2 font-medium text-gray-900 dark:text-white">Merchant
-                  Description</label>
+                <label class="block text-sm mb-2 font-medium text-gray-900 dark:text-white">Merchant Description</label>
                 <input v-model="merchantInfo.merchantDescription"
                   class="w-full px-4 py-2 border rounded-md dark:text-gray-900" type="text" />
               </div>
@@ -219,8 +245,7 @@ const selectItem = (index: number) => {
                   class="w-full px-4 py-2 border rounded-md dark:text-gray-900" type="text" />
               </div>
               <div>
-                <label class="block text-sm mb-2 font-medium text-gray-900 dark:text-white">Airline
-                  Description</label>
+                <label class="block text-sm mb-2 font-medium text-gray-900 dark:text-white">Airline Description</label>
                 <input v-model="airlineInfo.airlineDescription"
                   class="w-full px-4 py-2 border rounded-md dark:text-gray-900" type="text" />
               </div>
@@ -233,7 +258,6 @@ const selectItem = (index: number) => {
                   type="text" />
               </div>
             </template>
-
           </div>
         </div>
       </div>
