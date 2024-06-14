@@ -22,8 +22,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         log.info("开始注册自定义拦截器...");
         registry.addInterceptor(loginCheckInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/login", "/register", "/register/*");
+                .excludePathPatterns("/login", "/register", "/register/*")
+                .addPathPatterns("/**");
     }
 
     // 设置静态资源映射
