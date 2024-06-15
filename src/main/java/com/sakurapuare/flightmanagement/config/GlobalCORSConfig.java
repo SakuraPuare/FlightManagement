@@ -11,7 +11,7 @@ public class GlobalCORSConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-        //1. 添加 CORS配置信息
+        // 1. 添加 CORS配置信息
         CorsConfiguration config = new CorsConfiguration();
         // 放行哪些原始域
         config.addAllowedOrigin("*");
@@ -21,10 +21,10 @@ public class GlobalCORSConfig {
         config.addAllowedHeader("*");
         // 暴露哪些头部信息
         config.addExposedHeader("*");
-        //2. 添加映射路径
+        // 2. 添加映射路径
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        corsConfigurationSource.registerCorsConfiguration("/**",config);
-        //3. 返回新的CorsFilter
+        corsConfigurationSource.registerCorsConfiguration("/**", config);
+        // 3. 返回新的CorsFilter
         return new CorsFilter(corsConfigurationSource);
     }
 }

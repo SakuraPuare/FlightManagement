@@ -1,7 +1,6 @@
 package com.sakurapuare.flightmanagement.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sakurapuare.flightmanagement.common.AuthInfo;
 import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
