@@ -12,4 +12,6 @@ public interface StaffService {
 
     long count();
 
+    Staff getStaffById(Long id);
+
 }

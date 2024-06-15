@@ -13,7 +13,7 @@ public interface UserService {
 
     User register(BaseUserRegisterDTO baseUserRegisterDTO);
 
-    void updateUserType(long userId, int role);
+    void updateRole(long userId, int role);
 
     long count();
 

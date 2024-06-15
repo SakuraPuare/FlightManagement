@@ -12,4 +12,6 @@ public interface MerchantService {
 
     long count();
 
+    Merchant getMerchantById(Long id);
+
 }

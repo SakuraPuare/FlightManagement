@@ -12,4 +12,5 @@ public interface PassengerService {
 
     long count();
 
+    Passenger getPassengerById(Long id);
 }

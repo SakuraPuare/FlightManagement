@@ -45,4 +45,9 @@ public class StaffServiceImpl implements StaffService {
     public long count() {
         return staffMapper.selectCount(null);
     }
+
+    @Override
+    public Staff getStaffById(Long id) {
+        return staffMapper.selectById(id);
+    }
 }

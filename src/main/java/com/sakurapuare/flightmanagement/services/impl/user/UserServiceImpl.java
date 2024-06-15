@@ -5,7 +5,7 @@ import com.sakurapuare.flightmanagement.mapper.user.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.user.UserService;
-import com.sakurapuare.flightmanagement.utils.UserTypeUtils;
+import com.sakurapuare.flightmanagement.utils.RoleUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -54,13 +54,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserType(long userId, int role) {
+    public void updateRole(long userId, int role) {
         User user = userMapper.selectById(userId);
         if (user == null) {
             return;
         }
 
-        user.setRole(UserTypeUtils.addRole(user.getRole(), role));
+        user.setRole(RoleUtils.addRole(user.getRole(), role));
         userMapper.updateById(user);
 
     }

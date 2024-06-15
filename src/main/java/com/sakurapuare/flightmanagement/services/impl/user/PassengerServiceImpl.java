@@ -45,4 +45,9 @@ public class PassengerServiceImpl implements PassengerService {
     public long count() {
         return passengerMapper.selectCount(null);
     }
+
+    @Override
+    public Passenger getPassengerById(Long id) {
+        return passengerMapper.selectById(id);
+    }
 }

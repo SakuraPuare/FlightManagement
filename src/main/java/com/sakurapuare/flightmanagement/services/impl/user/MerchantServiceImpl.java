@@ -44,4 +44,9 @@ public class MerchantServiceImpl implements MerchantService {
     public long count() {
         return merchantMapper.selectCount(null);
     }
+
+    @Override
+    public Merchant getMerchantById(Long id) {
+        return merchantMapper.selectById(id);
+    }
 }
