@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.pojo.vo.UserVO;
 import com.sakurapuare.flightmanagement.constant.Role;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Merchant;
