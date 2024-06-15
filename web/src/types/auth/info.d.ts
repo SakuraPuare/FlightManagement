@@ -1,3 +1,12 @@
+export type UserInfo = {
+  userId: number;
+  username: string;
+  email: string;
+  role: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type AirlineInfo = {
   airlineName: string;
   airlineCode: string;

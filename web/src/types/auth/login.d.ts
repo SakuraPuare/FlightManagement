@@ -3,7 +3,7 @@ export type LoginParams = {
   password: string;
 };
 
-export type LoginResponse = {
+export type LoginResponse = UserInfo & {
   token: string;
   expiresTime: string;
 };

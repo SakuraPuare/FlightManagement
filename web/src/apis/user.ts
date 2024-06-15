@@ -1,4 +1,4 @@
-import { Airline, Merchant, Passenger, Staff, User } from "@/types/user";
+import { Airline, Merchant, Passenger, Staff, User } from "@/types/users";
 import http from "@/utils/http";
 
 export const getUserAPI = async (userId: number): Promise<User> => {

@@ -17,8 +17,7 @@ const login = async (e: Event) => {
     username: username.value,
     password: password.value,
   };
-  const response = await loginAPI(params);
-  user.setToken(response);
+  user.setToken(await loginAPI(params));
 
   // return to last page
   router.push("/");

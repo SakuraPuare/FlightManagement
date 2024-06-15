@@ -1,43 +1,31 @@
 <script lang="ts" setup>
 import { getUserAPI } from "@/apis/user";
+import { UserInfo } from "@/types/auth/info";
 // import { useUserStore } from "@/stores/user";
-import { User } from "@/types/user";
+import { User } from "@/types/users";
 import { ReadableDate } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { getUserRoleList } from "@/utils/role";
 import router from "@/utils/router";
+import { watch } from "vue";
 import { onMounted, ref, Ref } from "vue";
 import Avatar from "vue-boring-avatars";
 
-const id_ = router.currentRoute.value.params.id as string;
-
-// if id is not a number
-if (isNaN(parseInt(id_))) {
-    router.push("/404");
-    console.error("Invalid user id");
-}
-const id = parseInt(id_);
-// const user = useUserStore();
-let userData: Ref<User> = ref({
-    userId: id,
-    username: "",
-    password: "",
-    email: "",
-    role: 0,
-    createdAt: "",
-    updatedAt: "",
-});
 const headerlessHeight = ref(0); // Define the headerlessHeight property
 
-onMounted(async () => {
-    headerlessHeight.value = getHeightWithoutHeader(); // Assign the value of headerlessHeight
+const parseId = (id: string) => {
+    console.log("id", id);
+    const parsedId = parseInt(id);
+    if (isNaN(parsedId)) {
+        router.push("/404");
+        console.error("Invalid user id");
+    }
+    return parsedId;
+};
 
-    window.addEventListener("resize", () => {
-        headerlessHeight.value = getHeightWithoutHeader();
-    });
-
+const update = async () => {
     try {
-        const res = await getUserAPI(id);
+        const res = await getUserAPI(id.value);
         if (res === null) {
             console.error("User not found");
             router.push("/404");
@@ -48,12 +36,49 @@ onMounted(async () => {
         console.error("Error fetching user:", error);
         router.push("/");
     }
+};
+
+const id_ = router.currentRoute.value.params.id;
+const id = ref(parseId(id_ as string));
+
+// const user = useUserStore();
+let userData: Ref<UserInfo> = ref({
+    userId: 0,
+    username: "",
+    email: "",
+    role: 0,
+    createdAt: "",
+    updatedAt: "",
 });
+
+onMounted(async () => {
+    headerlessHeight.value = getHeightWithoutHeader();
+    window.addEventListener("resize", () => {
+        headerlessHeight.value = getHeightWithoutHeader();
+    });
+
+    update();
+});
+
+watch(
+    () => router.currentRoute.value.params.id,
+    (newId) => {
+        // console.log("newId", newId);
+        newId = newId as string;
+        if (isNaN(parseInt(newId))) {
+            router.push("/404");
+            console.error("Invalid user id");
+        }
+        id.value = parseInt(newId);
+        update();
+    }
+);
+
 </script>
 
 <template>
     <section :class="'bg-gray-50 dark:bg-gray-900 h-[' + headerlessHeight + 'px]'">
-        <div class="mx-auto max-w-screen-xl py-8 space-y-4">
+        <div class="mx-auto max-w-screen-xl py-8 space-y-4" v-if="userData.userId">
             <h1 class="text-4xl font-bold">User Profile</h1>
             <div class="bg-white p-8 rounded-lg ring-0 ring-black shadow-lg max-w-screen-sm">
                 <div class="flex space-x-4">

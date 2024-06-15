@@ -61,7 +61,7 @@ public class AuthController {
             return Response.error("Invalid username or password");
         } else {
             String token = authService.generateToken(user);
-            UserLoginVO userLoginVO = new UserLoginVO(token);
+            UserLoginVO userLoginVO = new UserLoginVO(user, token);
             return Response.success("Login Success", userLoginVO);
         }
     }
