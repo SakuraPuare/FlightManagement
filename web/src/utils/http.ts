@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/config";
+import { useUserStore } from "@/stores/user";
 import axios from "axios";
 
 axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -9,6 +10,8 @@ const service = axios.create({
   timeout: 5000, // 请求超时时间
 });
 
+const user = useUserStore();
+
 // request拦截器
 service.interceptors.request.use(
   (config) => {
@@ -17,6 +20,9 @@ service.interceptors.request.use(
     // if (store.getters.token) {
     //   config.headers['Authorization'] = `Bearer ${store.getters.token}`;
     // }
+    if (user.token) {
+      config.headers["Authorization"] = `Bearer ${user.token.token}`;
+    }
     return config;
   },
   (error) => {

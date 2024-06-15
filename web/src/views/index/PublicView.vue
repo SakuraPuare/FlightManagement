@@ -9,16 +9,20 @@ import {
   faShield,
   faSuitcaseRolling,
 } from "@fortawesome/free-solid-svg-icons";
+import TitleComp from "@/components/TitleComp.vue";
 </script>
 
 <template>
   <HeaderComp />
-  <section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-      <div class="max-w-screen-md mb-8 lg:mb-16">
-        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-          Introduction to Airport Management System
-        </h2>
+  <section class="bg-white dark:bg-gray-900 h-screen">
+    <div class="py-6 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+      <div class="max-w-screen-lg mb-6 lg:mb-16">
+        <div class="flex">
+          <h2 class="max-w-xl mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            Introduction to Airport Management System
+          </h2>
+          <TitleComp class="w-fit text-nowrap my-auto" />
+        </div>
         <p class="text-gray-500 sm:text-xl dark:text-gray-400">
           The Airport Management System is designed to streamline and automate
           various operations and processes in an airport. It provides a

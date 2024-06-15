@@ -2,19 +2,25 @@
 import { TITLE } from "@/config";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useUserStore } from "@/stores/user.ts";
+import { ref } from "vue";
+import Avatar from "vue-boring-avatars";
 
 const menuItems = [
-  { id: 1, label: "Home", link: "#" },
-  { id: 2, label: "Company", link: "#" },
-  { id: 3, label: "Marketplace", link: "#" },
-  { id: 4, label: "Features", link: "#" },
-  { id: 5, label: "Team", link: "#" },
-  { id: 6, label: "Contact", link: "#" },
+  { id: 1, label: "Home", link: "/" },
+  { id: 2, label: "Company", link: "/" },
+  { id: 3, label: "Marketplace", link: "/" },
+  { id: 4, label: "Features", link: "/" },
+  { id: 5, label: "Team", link: "/" },
+  { id: 6, label: "Contact", link: "/" },
 ];
+
+const user = useUserStore();
+const isLogin = ref(user.isLogin());
 </script>
 
 <template>
-  <header>
+  <header id="header">
     <nav class="bg-pink-400 border-gray-200 px-4 lg:px-6 py-2.5 h-14 dark:bg-gray-800">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
         <router-link class="flex items-center text-xl font-semibold whitespace-nowrap dark:text-white" to="/">
@@ -23,17 +29,30 @@ const menuItems = [
             }}</span>
         </router-link>
         <div class="flex items-center lg:order-2">
-          <router-link to="/login">
+          <template v-if="!isLogin">
+            <router-link to="/login">
+              <span
+                class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                Log in
+              </span>
+            </router-link>
+            <router-link to="/register">
+              <span
+                class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-pink-600 dark:hover:bg-pink-700 focus:outline-none dark:focus:ring-pink-800">Get
+                started</span>
+            </router-link>
+          </template>
+          <template v-else>
+            <router-link :to="`/users/${user.userId}`">
+              <Avatar :name="user.username" :size="36" class="mx-5" variant="beam" />
+            </router-link>
             <span
-              class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-              Log in
-            </span>
-          </router-link>
-          <router-link to="/register">
-            <span
-              class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-pink-600 dark:hover:bg-pink-700 focus:outline-none dark:focus:ring-pink-800"
-              to="/register">Get started</span>
-          </router-link>
+              class="text-white bg-pink-700 hover:bg-pink-800 select-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-pink-600 dark:hover:bg-pink-700 focus:outline-none dark:focus:ring-pink-800"
+              @click="
+                user.logout();
+              isLogin = false;
+              ">Log out</span>
+          </template>
 
           <button
             class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

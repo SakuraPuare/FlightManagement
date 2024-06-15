@@ -1,4 +1,5 @@
 import { LoginResponse } from "@/types/auth/login";
+import { User } from "@/types/user";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore({
@@ -9,7 +10,10 @@ export const useUserStore = defineStore({
     password: "",
     email: "",
     role: 0,
-    token: {} as LoginResponse,
+    token: {
+      token: "",
+      expiresTime: "",
+    } as LoginResponse,
     createdAt: "",
     updatedAt: "",
   }),
@@ -24,5 +28,18 @@ export const useUserStore = defineStore({
     isLogin() {
       return this.token.token !== "";
     },
+    logout() {
+      this.clearToken();
+    },
+    setUser(data: User) {
+      this.userId = data.userId;
+      this.username = data.username;
+      this.password = data.password;
+      this.email = data.email;
+      this.role = data.role;
+      this.createdAt = data.createdAt;
+      this.updatedAt = data.updatedAt;
+    },
   },
+  persist: true,
 });
