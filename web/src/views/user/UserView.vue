@@ -2,7 +2,6 @@
 import { getUserAPI } from "@/apis/user";
 import { UserInfo } from "@/types/auth/info";
 // import { useUserStore } from "@/stores/user";
-import { User } from "@/types/users";
 import { ReadableDate } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { getUserRoleList } from "@/utils/role";

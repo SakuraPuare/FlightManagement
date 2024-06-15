@@ -1,5 +1,5 @@
 import { LoginResponse } from "@/types/auth/login";
-import { User } from "@/types/user";
+import { User } from "@/types/users";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore({
@@ -34,7 +34,6 @@ export const useUserStore = defineStore({
     setUser(data: User) {
       this.userId = data.userId;
       this.username = data.username;
-      this.password = data.password;
       this.email = data.email;
       this.role = data.role;
       this.createdAt = data.createdAt;
