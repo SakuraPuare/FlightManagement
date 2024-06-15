@@ -1,11 +1,11 @@
 package com.sakurapuare.flightmanagement.utils;
 
-import com.sakurapuare.flightmanagement.constant.UserType;
+import com.sakurapuare.flightmanagement.constant.Role;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserTypeUtils {
+public class RoleUtils {
 
     // 掩码 实现用户类型的判断
     // Passenger, Merchant, Airline, Staff
@@ -15,23 +15,23 @@ public class UserTypeUtils {
     }
 
     public static boolean isPassenger(int userType) {
-        return (userType & UserType.PASSENGER) == UserType.PASSENGER;
+        return (userType & Role.PASSENGER) == Role.PASSENGER;
     }
 
     public static boolean isMerchant(int userType) {
-        return (userType & UserType.MERCHANT) == UserType.MERCHANT;
+        return (userType & Role.MERCHANT) == Role.MERCHANT;
     }
 
     public static boolean isAirline(int userType) {
-        return (userType & UserType.AIRLINE) == UserType.AIRLINE;
+        return (userType & Role.AIRLINE) == Role.AIRLINE;
     }
 
     public static boolean isStaff(int userType) {
-        return (userType & UserType.STAFF) == UserType.STAFF;
+        return (userType & Role.STAFF) == Role.STAFF;
     }
 
     public static boolean isAll(int userType) {
-        return userType == UserType.ALL;
+        return userType == Role.ALL;
     }
 
     public static int addRole(int userType, int type) {
@@ -39,35 +39,35 @@ public class UserTypeUtils {
     }
 
     public static int addPassenger(int userType) {
-        return userType | UserType.PASSENGER;
+        return userType | Role.PASSENGER;
     }
 
     public static int addMerchant(int userType) {
-        return userType | UserType.MERCHANT;
+        return userType | Role.MERCHANT;
     }
 
     public static int addAirline(int userType) {
-        return userType | UserType.AIRLINE;
+        return userType | Role.AIRLINE;
     }
 
     public static int addStaff(int userType) {
-        return userType | UserType.STAFF;
+        return userType | Role.STAFF;
     }
 
     public static int removePassenger(int userType) {
-        return userType & UserType.ALL - UserType.PASSENGER;
+        return userType & Role.ALL - Role.PASSENGER;
     }
 
     public static int removeMerchant(int userType) {
-        return userType & UserType.ALL - UserType.MERCHANT;
+        return userType & Role.ALL - Role.MERCHANT;
     }
 
     public static int removeAirline(int userType) {
-        return userType & UserType.ALL - UserType.AIRLINE;
+        return userType & Role.ALL - Role.AIRLINE;
     }
 
     public static int removeStaff(int userType) {
-        return userType & UserType.ALL - UserType.STAFF;
+        return userType & Role.ALL - Role.STAFF;
     }
 
     public static List<String> getRoleList(int userType) {

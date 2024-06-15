@@ -1,7 +1,7 @@
 package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.constant.UserType;
+import com.sakurapuare.flightmanagement.constant.Role;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.login.UserLoginDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
@@ -13,7 +13,7 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.info.StaffInfo;
 import com.sakurapuare.flightmanagement.pojo.vo.UserLoginVO;
 import com.sakurapuare.flightmanagement.services.AuthService;
 import com.sakurapuare.flightmanagement.services.user.*;
-import com.sakurapuare.flightmanagement.utils.UserTypeUtils;
+import com.sakurapuare.flightmanagement.utils.RoleUtils;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -84,7 +84,7 @@ public class AuthController {
                 return Response.error("Password not match");
             }
 
-            if (UserTypeUtils.isAirline(user.getRole()))
+            if (RoleUtils.isAirline(user.getRole()))
                 return Response.error("User already exists");
         }
 
@@ -94,7 +94,7 @@ public class AuthController {
 
         if (airline == null) {
             airlineService.register(user.getUserId(), airlineInfoUserRegisterDTO);
-            userService.updateUserType(user.getUserId(), UserType.AIRLINE);
+            userService.updateRole(user.getUserId(), Role.AIRLINE);
             return Response.success("Airline Register success");
         }
         return Response.error("User already exists");
@@ -117,7 +117,7 @@ public class AuthController {
                 return Response.error("Password not match");
             }
 
-            if (UserTypeUtils.isMerchant(user.getRole()))
+            if (RoleUtils.isMerchant(user.getRole()))
                 return Response.error("User already exists");
         }
 
@@ -127,7 +127,7 @@ public class AuthController {
 
         if (merchant == null) {
             merchantService.register(user.getUserId(), merchantInfoUserRegisterDTO);
-            userService.updateUserType(user.getUserId(), UserType.MERCHANT);
+            userService.updateRole(user.getUserId(), Role.MERCHANT);
             return Response.success("Merchant Register success");
         }
 
@@ -151,7 +151,7 @@ public class AuthController {
                 return Response.error("Password not match");
             }
 
-            if (UserTypeUtils.isPassenger(user.getRole()))
+            if (RoleUtils.isPassenger(user.getRole()))
                 return Response.error("User already exists");
         }
 
@@ -161,7 +161,7 @@ public class AuthController {
 
         if (passenger == null) {
             passengerService.register(user.getUserId(), passengerInfoUserRegisterDTO);
-            userService.updateUserType(user.getUserId(), UserType.PASSENGER);
+            userService.updateRole(user.getUserId(), Role.PASSENGER);
             return Response.success("Passenger Register success");
         }
 
@@ -183,7 +183,7 @@ public class AuthController {
                 return Response.error("Password not match");
             }
 
-            if (UserTypeUtils.isStaff(user.getRole()))
+            if (RoleUtils.isStaff(user.getRole()))
                 return Response.error("User already exists");
         }
 
@@ -193,7 +193,7 @@ public class AuthController {
 
         if (staff == null) {
             staffService.register(user.getUserId(), baseUserRegisterDTO);
-            userService.updateUserType(user.getUserId(), UserType.STAFF);
+            userService.updateRole(user.getUserId(), Role.STAFF);
             return Response.success("Staff Register success");
         }
 
