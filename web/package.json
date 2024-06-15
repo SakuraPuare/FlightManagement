@@ -21,6 +21,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.21",
+    "vue-boring-avatars": "^1.4.0",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
