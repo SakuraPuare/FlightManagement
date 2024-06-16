@@ -18,17 +18,17 @@ export const getUserRoleList = (role: number): string[] => {
 };
 
 export const isPassenger = (role: number): boolean => {
-  return role & Role.PASSENGER ? true : false;
+  return !!(role & Role.PASSENGER);
 };
 
 export const isMerchant = (role: number): boolean => {
-  return role & Role.MERCHANT ? true : false;
+  return !!(role & Role.MERCHANT);
 };
 
 export const isAirline = (role: number): boolean => {
-  return role & Role.AIRLINE ? true : false;
+  return !!(role & Role.AIRLINE);
 };
 
 export const isStaff = (role: number): boolean => {
-  return role & Role.STAFF ? true : false;
+  return !!(role & Role.STAFF);
 };
