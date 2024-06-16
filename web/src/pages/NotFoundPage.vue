@@ -32,19 +32,24 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import router from "@/utils/router";
 
 const countdown = ref(3);
 
 const startCountdown = () => {
-  setInterval(() => {
+  const timer = setInterval(() => {
     if (countdown.value > 0) {
       countdown.value--;
     } else if (countdown.value === 0) {
+      console.log("router to /");
       router.push("/");
     }
   }, 1000);
+
+  onUnmounted(() => {
+    clearInterval(timer);
+  });
 };
 
 onMounted(startCountdown);
