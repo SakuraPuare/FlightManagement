@@ -1,13 +1,12 @@
 package com.sakurapuare.flightmanagement.services;
 
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 
 import java.util.List;
 
 public interface OrderService {
 
-    List<Order> getOrdersByPaginationAndUserId(PaginationDTO paginationDTO, long userId);
+    List<Order> getOrdersByPaginationAndUserId(int page, int count, long userId);
 
     Order getOrderByIdAndUserId(long id, long userId);
 

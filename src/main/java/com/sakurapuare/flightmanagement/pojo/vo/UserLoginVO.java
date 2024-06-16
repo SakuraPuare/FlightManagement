@@ -1,13 +1,11 @@
 package com.sakurapuare.flightmanagement.pojo.vo;
 
+import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.time.LocalDateTime;
-
 import org.springframework.beans.BeanUtils;
 
-import com.sakurapuare.flightmanagement.pojo.entity.user.User;
+import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

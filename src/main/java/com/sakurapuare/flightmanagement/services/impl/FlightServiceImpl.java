@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.FlightMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.FlightDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import org.springframework.beans.BeanUtils;
@@ -29,9 +28,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> getFlightsByPagination(PaginationDTO paginationDTO) {
-        Page<Flight> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return flightMapper.selectPage(page, null).getRecords();
+    public List<Flight> getFlightsByPagination(int page, int count) {
+        Page<Flight> pagination = new Page<>(page, count);
+        return flightMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override

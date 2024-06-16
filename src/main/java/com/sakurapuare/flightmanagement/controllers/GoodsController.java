@@ -2,7 +2,6 @@ package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.pojo.dto.GoodsDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Goods;
 import com.sakurapuare.flightmanagement.services.GoodsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,8 +24,9 @@ public class GoodsController {
     }
 
     @GetMapping("/list")
-    public Response<List<Goods>> getGoodList(@Valid @RequestBody PaginationDTO paginationDTO) {
-        return Response.success(goodsService.getGoodsByPagination(paginationDTO));
+    public Response<List<Goods>> getGoodList(@RequestParam("page") int page, @RequestParam("count") int count) {
+
+        return Response.success(goodsService.getGoodsByPagination(page, count));
     }
 
     @GetMapping("/{id}")
@@ -55,7 +55,7 @@ public class GoodsController {
 
     @PutMapping("/{id}")
     public Response<Void> updateGood(@PathVariable(name = "id") long id,
-                                     @RequestBody GoodsDTO goodDTO) {
+            @RequestBody GoodsDTO goodDTO) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");

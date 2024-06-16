@@ -1,7 +1,6 @@
 package com.sakurapuare.flightmanagement.services;
 
 import com.sakurapuare.flightmanagement.pojo.dto.FlightDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public interface FlightService {
     Flight getFlightById(long id);
 
-    List<Flight> getFlightsByPagination(PaginationDTO paginationDTO);
+    List<Flight> getFlightsByPagination(int page, int count);
 
     List<Flight> search(String query);
 

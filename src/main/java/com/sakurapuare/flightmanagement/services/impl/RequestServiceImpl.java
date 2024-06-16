@@ -2,11 +2,9 @@ package com.sakurapuare.flightmanagement.services.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.RequestMapper;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.RequestDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Request;
 import com.sakurapuare.flightmanagement.services.RequestService;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +20,9 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> getRequestByPagination(@Valid PaginationDTO paginationDTO) {
-        Page<Request> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return requestMapper.selectPage(page, null).getRecords();
+    public List<Request> getRequestByPagination(int page, int count) {
+        Page<Request> pagination = new Page<>(page, count);
+        return requestMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override
@@ -33,7 +31,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void addRequest(@Valid RequestDTO requestDTO, long userId) {
+    public void addRequest(RequestDTO requestDTO, long userId) {
         Request request = new Request();
         BeanUtils.copyProperties(requestDTO, request);
         request.setUserId(userId);
@@ -41,7 +39,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void updateRequest(Request requests, @Valid RequestDTO requestDTO) {
+    public void updateRequest(Request requests, RequestDTO requestDTO) {
         BeanUtils.copyProperties(requestDTO, requests);
         requestMapper.updateById(requests);
     }

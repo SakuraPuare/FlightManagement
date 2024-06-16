@@ -50,10 +50,4 @@ public class AirlineServiceImpl implements AirlineService {
         return airlineMapper.selectCount(null);
     }
 
-    @Override
-    public Airline getAirlineByUserId(Long id) {
-        return airlineMapper.selectOne(
-                new QueryWrapper<Airline>()
-                        .eq("user_id", id));
-    }
 }

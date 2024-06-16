@@ -3,7 +3,6 @@ package com.sakurapuare.flightmanagement.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.TicketMapper;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.TicketDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
 import com.sakurapuare.flightmanagement.services.TicketService;
@@ -22,9 +21,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTicketsByPagination(PaginationDTO paginationDTO) {
-        Page<Ticket> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return ticketMapper.selectPage(page, null).getRecords();
+    public List<Ticket> getTicketsByPagination(int page, int count) {
+        Page<Ticket> pagination = new Page<>(page, count);
+        return ticketMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override

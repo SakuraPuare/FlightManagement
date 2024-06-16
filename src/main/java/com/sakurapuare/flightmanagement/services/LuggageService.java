@@ -1,16 +1,15 @@
 package com.sakurapuare.flightmanagement.services;
 
 import com.sakurapuare.flightmanagement.pojo.dto.LuggageDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Luggage;
 
 import java.util.List;
 
 public interface LuggageService {
 
-    List<Luggage> getLuggageByPagination(PaginationDTO paginationDTO);
+    List<Luggage> getLuggageByPagination(int page, int count);
 
-    List<Luggage> getLuggageByPaginationAndId(PaginationDTO paginationDTO, long userId);
+    List<Luggage> getLuggageByPaginationAndId(int page, int count, long userId);
 
     Luggage getLuggageByIdAndUserId(long id, long userId);
 

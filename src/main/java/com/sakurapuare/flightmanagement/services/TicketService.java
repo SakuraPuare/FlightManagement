@@ -1,15 +1,13 @@
 package com.sakurapuare.flightmanagement.services;
 
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.TicketDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
-import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface TicketService {
 
-    List<Ticket> getTicketsByPagination(PaginationDTO paginationDTO);
+    List<Ticket> getTicketsByPagination(int page, int count);
 
     Ticket getTicketById(long id);
 
@@ -17,7 +15,7 @@ public interface TicketService {
 
     void addTicket(TicketDTO ticketDTO);
 
-    void updateTicket(long id, @Valid TicketDTO ticketDTO);
+    void updateTicket(long id, TicketDTO ticketDTO);
 
     void deleteTicket(long id);
 

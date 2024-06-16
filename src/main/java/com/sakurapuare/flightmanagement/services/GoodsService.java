@@ -1,14 +1,13 @@
 package com.sakurapuare.flightmanagement.services;
 
 import com.sakurapuare.flightmanagement.pojo.dto.GoodsDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Goods;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface GoodsService {
-    List<Goods> getGoodsByPagination(PaginationDTO paginationDTO);
+    List<Goods> getGoodsByPagination(int page, int count);
 
     List<Goods> search(String query);
 

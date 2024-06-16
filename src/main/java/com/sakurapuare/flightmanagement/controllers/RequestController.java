@@ -1,7 +1,6 @@
 package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.dto.RequestDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Request;
 import com.sakurapuare.flightmanagement.services.RequestService;
@@ -26,8 +25,9 @@ public class RequestController {
     }
 
     @GetMapping("/list")
-    public Response<List<Request>> getRequestList(@Valid @RequestBody PaginationDTO paginationDTO) {
-        return Response.success(requestService.getRequestByPagination(paginationDTO));
+    public Response<List<Request>> getRequestList(@RequestParam("page") int page, @RequestParam("count") int count) {
+
+        return Response.success(requestService.getRequestByPagination(page, count));
     }
 
     @GetMapping("/{id}")

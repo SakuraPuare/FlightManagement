@@ -1,14 +1,12 @@
 package com.sakurapuare.flightmanagement.controllers;
 
 import com.sakurapuare.flightmanagement.common.Response;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
 import com.sakurapuare.flightmanagement.services.OrderService;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -32,17 +30,18 @@ public class OrderController {
 
     // Get my order list
     @GetMapping("/list")
-    public Response<List<Order>> getOrderList(@Valid @RequestBody PaginationDTO paginationDTO,
-                                              HttpServletRequest request) {
+    public Response<List<Order>> getOrderList(@RequestParam("page") int page, @RequestParam("count") int count,
+            HttpServletRequest request) {
+
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
-        List<Order> orders = orderService.getOrdersByPaginationAndUserId(paginationDTO, userId);
+        List<Order> orders = orderService.getOrdersByPaginationAndUserId(page, count, userId);
         return Response.success(orders);
     }
 
     @GetMapping("/{id}")
     public Response<Order> getOrder(@PathVariable("id") long id,
-                                    HttpServletRequest request) {
+            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);
@@ -57,7 +56,7 @@ public class OrderController {
     @Transactional
     @PostMapping("/{id}")
     public Response<Void> addOrder(@PathVariable("id") long id,
-                                   HttpServletRequest request) {
+            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Ticket ticket = ticketService.getTicketById(id);
@@ -81,7 +80,7 @@ public class OrderController {
     @Transactional
     @PostMapping("/{id}/pay")
     public Response<Void> payOrder(@PathVariable("id") long id,
-                                   HttpServletRequest request) {
+            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);
@@ -97,7 +96,7 @@ public class OrderController {
     @Transactional
     @DeleteMapping("/{id}")
     public Response<Void> deleteOrder(@PathVariable("id") long id,
-                                      HttpServletRequest request) {
+            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);

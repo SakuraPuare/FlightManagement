@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.GoodsMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.GoodsDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Goods;
 import com.sakurapuare.flightmanagement.services.GoodsService;
 import org.springframework.beans.BeanUtils;
@@ -25,9 +24,9 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getGoodsByPagination(PaginationDTO paginationDTO) {
-        Page<Goods> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return goodMapper.selectPage(page, null).getRecords();
+    public List<Goods> getGoodsByPagination(int page, int count) {
+        Page<Goods> pagination = new Page<>(page, count);
+        return goodMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override

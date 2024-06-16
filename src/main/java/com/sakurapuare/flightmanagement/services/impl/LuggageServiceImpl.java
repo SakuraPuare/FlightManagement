@@ -4,10 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.LuggageMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.LuggageDTO;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Luggage;
 import com.sakurapuare.flightmanagement.services.LuggageService;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +21,15 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
-    public List<Luggage> getLuggageByPagination(@Valid PaginationDTO paginationDTO) {
-        Page<Luggage> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return luggageMapper.selectPage(page, null).getRecords();
+    public List<Luggage> getLuggageByPagination(int page, int count) {
+        Page<Luggage> pagination = new Page<>(page, count);
+        return luggageMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override
-    public List<Luggage> getLuggageByPaginationAndId(@Valid PaginationDTO paginationDTO, long userId) {
-        Page<Luggage> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return luggageMapper.selectPage(page, new QueryWrapper<Luggage>()
+    public List<Luggage> getLuggageByPaginationAndId(int page, int count, long userId) {
+        Page<Luggage> pagination = new Page<>(page, count);
+        return luggageMapper.selectPage(pagination, new QueryWrapper<Luggage>()
                 .eq("user_id", userId)).getRecords();
     }
 
@@ -43,7 +41,7 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
-    public void addLuggage(@Valid LuggageDTO luggageDTO, long userId) {
+    public void addLuggage(LuggageDTO luggageDTO, long userId) {
         Luggage luggage = new Luggage();
         luggage.setStaffId(userId);
         BeanUtils.copyProperties(luggageDTO, luggage);
@@ -51,7 +49,7 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
-    public void updateLuggage(Luggage luggage, @Valid LuggageDTO luggageDTO, long userId) {
+    public void updateLuggage(Luggage luggage, LuggageDTO luggageDTO, long userId) {
         luggage.setStaffId(userId);
         BeanUtils.copyProperties(luggageDTO, luggage);
         luggageMapper.updateById(luggage);

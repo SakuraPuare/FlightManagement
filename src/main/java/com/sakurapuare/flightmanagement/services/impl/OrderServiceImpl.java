@@ -3,7 +3,6 @@ package com.sakurapuare.flightmanagement.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.OrderMapper;
-import com.sakurapuare.flightmanagement.pojo.dto.PaginationDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
@@ -31,9 +30,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrdersByPaginationAndUserId(PaginationDTO paginationDTO, long userId) {
-        Page<Order> page = new Page<>(paginationDTO.getPage(), paginationDTO.getCount());
-        return orderMapper.selectPage(page,
+    public List<Order> getOrdersByPaginationAndUserId(int page, int count, long userId) {
+        Page<Order> pagination = new Page<>(page, count);
+        return orderMapper.selectPage(pagination,
                 new QueryWrapper<Order>()
                         .eq("user_id", userId))
                 .getRecords();
