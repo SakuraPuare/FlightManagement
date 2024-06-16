@@ -24,21 +24,21 @@ export const getRequestsListAPI = async (
 
 export const createRequestAPI = async (
   params: createRequestRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.post(`/requests/`, params).then((res) => res.data);
 };
 
 export const updateRequestAPI = async (
   id: number,
   params: updateRequestRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.put(`/requests/${id}`, params).then((res) => res.data);
 };
 
-export const deleteRequestAPI = async (id: number): Promise<void> => {
+export const deleteRequestAPI = async (id: number): Promise<null> => {
   return http.delete(`/requests/${id}`).then((res) => res.data);
 };
 
-export const handleRequestAPI = async (id: number): Promise<void> => {
+export const handleRequestAPI = async (id: number): Promise<null> => {
   return http.post(`/requests/${id}/handle`).then((res) => res.data);
 };

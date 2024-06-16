@@ -20,18 +20,18 @@ export const getFlightsListAPI = async (
 
 export const createFlightAPI = async (
   params: createFlightRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/flights/", params).then((res) => res.data);
 };
 
 export const updateFlightAPI = async (
   id: number,
   params: updateFlightRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.put(`/flights/${id}`, params).then((res) => res.data);
 };
 
-export const deleteFlightAPI = async (id: number): Promise<void> => {
+export const deleteFlightAPI = async (id: number): Promise<null> => {
   return http.delete(`/flights/${id}`).then((res) => res.data);
 };
 

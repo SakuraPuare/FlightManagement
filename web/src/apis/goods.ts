@@ -20,18 +20,18 @@ export const getGoodsListAPI = async (
 
 export const createGoodsAPI = async (
   params: createGoodsRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/goods/", params).then((res) => res.data);
 };
 
 export const updateGoodsAPI = async (
   id: number,
   params: updateGoodsRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.put(`/goods/${id}`, params).then((res) => res.data);
 };
 
-export const deleteGoodsAPI = async (id: number): Promise<void> => {
+export const deleteGoodsAPI = async (id: number): Promise<null> => {
   return http.delete(`/goods/${id}`).then((res) => res.data);
 };
 

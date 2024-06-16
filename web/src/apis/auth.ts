@@ -14,30 +14,30 @@ export const loginAPI = async (params: LoginParams): Promise<LoginResponse> => {
 
 export const registerUserAPI = async (
   params: BaseRegisterParams,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/register", params).then((res) => res.data);
 };
 
 export const registerAirlineAPI = async (
   params: RegisterParams<AirlineInfo>,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/register/airline", params).then((res) => res.data);
 };
 
 export const registerMerchantAPI = async (
   params: RegisterParams<MerchantInfo>,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/register/merchant", params).then((res) => res.data);
 };
 
 export const registerPassengerAPI = async (
   params: RegisterParams<PassengerInfo>,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/register/passenger", params).then((res) => res.data);
 };
 
 export const registerStaffAPI = async (
   params: RegisterParams<StaffInfo>,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/register/staff", params).then((res) => res.data);
 };

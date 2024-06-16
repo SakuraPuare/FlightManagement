@@ -14,14 +14,14 @@ export const getOrdersListAPI = async (
     .then((res) => res.data as getOrderResponse[]);
 };
 
-export const createOrderAPI = async (id: number): Promise<void> => {
+export const createOrderAPI = async (id: number): Promise<null> => {
   return http.post(`/orders/${id}`).then((res) => res.data);
 };
 
-export const deleteOrderAPI = async (id: number): Promise<void> => {
+export const deleteOrderAPI = async (id: number): Promise<null> => {
   return http.delete(`/orders/${id}`).then((res) => res.data);
 };
 
-export const payOrderAPI = async (id: number): Promise<void> => {
+export const payOrderAPI = async (id: number): Promise<null> => {
   return http.post(`/orders/pay/${id}`).then((res) => res.data);
 };

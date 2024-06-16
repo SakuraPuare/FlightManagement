@@ -32,17 +32,17 @@ export const getMyLuggageListAPI = async (
 
 export const createLuggageAPI = async (
   params: createLuggageRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.post("/luggages/", params).then((res) => res.data);
 };
 
 export const updateLuggageAPI = async (
   id: number,
   params: updateLuggageRequest,
-): Promise<void> => {
+): Promise<null> => {
   return http.put(`/luggages/${id}`, params).then((res) => res.data);
 };
 
-export const deleteLuggageAPI = async (id: number): Promise<void> => {
+export const deleteLuggageAPI = async (id: number): Promise<null> => {
   return http.delete(`/luggages/${id}`).then((res) => res.data);
 };
