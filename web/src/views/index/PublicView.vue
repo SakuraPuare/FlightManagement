@@ -18,7 +18,9 @@ import TitleComp from "@/components/TitleComp.vue";
     <div class="py-6 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
       <div class="max-w-screen-lg mb-6 lg:mb-16">
         <div class="flex">
-          <h2 class="max-w-xl mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <h2
+            class="max-w-xl mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white"
+          >
             Introduction to Airport Management System
           </h2>
           <TitleComp class="w-fit text-nowrap my-auto" />
@@ -30,12 +32,17 @@ import TitleComp from "@/components/TitleComp.vue";
           baggage handling, security, and more.
         </p>
       </div>
-      <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+      <div
+        class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0"
+      >
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faPlaneDeparture"
-              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faPlaneDeparture"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">
             Flight Management
@@ -48,9 +55,12 @@ import TitleComp from "@/components/TitleComp.vue";
         </div>
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faSuitcaseRolling"
-              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faSuitcaseRolling"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">
             Baggage Handling
@@ -62,8 +72,12 @@ import TitleComp from "@/components/TitleComp.vue";
         </div>
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faShield" class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faShield"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">Security</h3>
           <p class="text-gray-500 dark:text-gray-400">
@@ -73,8 +87,12 @@ import TitleComp from "@/components/TitleComp.vue";
         </div>
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faConciergeBell" class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faConciergeBell"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">
             Customer Service
@@ -86,8 +104,12 @@ import TitleComp from "@/components/TitleComp.vue";
         </div>
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faNetworkWired" class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faNetworkWired"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">
             Infrastructure Management
@@ -99,8 +121,12 @@ import TitleComp from "@/components/TitleComp.vue";
         </div>
         <div>
           <div
-            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900">
-            <font-awesome-icon :icon="faChartLine" class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300" />
+            class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-pink-100 lg:h-12 lg:w-12 dark:bg-pink-900"
+          >
+            <font-awesome-icon
+              :icon="faChartLine"
+              class="w-5 h-5 text-pink-600 lg:w-6 lg:h-6 dark:text-pink-300"
+            />
           </div>
           <h3 class="mb-2 text-xl font-bold dark:text-white">Data Analytics</h3>
           <p class="text-gray-500 dark:text-gray-400">
