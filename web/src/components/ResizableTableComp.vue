@@ -22,9 +22,9 @@
     <el-pagination
       :total="total"
       background
+      class="mx-auto"
       layout="prev, pager, next"
       @current-change="paginationChangeHandler"
-      class="mx-auto"
     />
   </div>
 </template>

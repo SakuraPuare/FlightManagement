@@ -156,8 +156,7 @@ onMounted(async () => {
   >
     <aside
       id="default-sidebar"
-      aria-label="Sidenav"
-      class="fixed top-[56px] left-0 z-40 w-72 shadow-lg h-screen transition-transform -translate-x-full sm:translate-x-0"
+      class="select-none fixed top-[56px] left-0 z-40 w-72 shadow-lg h-screen transition-transform -translate-x-full sm:translate-x-0"
     >
       <div
         class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
@@ -212,7 +211,7 @@ onMounted(async () => {
         </ul>
       </div>
     </aside>
-    <div v-if="isAtHomePath" class="ml-72">
+    <div v-if="isAtHomePath" class="ml-72 select-none">
       <div
         class="max-w-screen-md mx-auto w-full mt-[18%] flex justify-center place-content-center text-center"
       >
