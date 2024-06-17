@@ -131,6 +131,34 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+INSERT INTO `goods` (
+    `name`,
+    `description`,
+    `price`,
+    `stock`,
+    `category`
+  )
+VALUES (
+    'Laptop',
+    'Laptop for work',
+    10000000.00,
+    10,
+    'Electronics'
+  ),
+  (
+    'Smartphone',
+    'Smartphone for work',
+    5000000.00,
+    20,
+    'Electronics'
+  ),
+  (
+    'T-Shirt',
+    'T-Shirt for daily use',
+    100000.00,
+    50,
+    'Fashion'
+  );
 CREATE TABLE IF NOT EXISTS `flights` (
   `id` BIGINT NULL AUTO_INCREMENT,
   `airline_id` BIGINT NOT NULL,
