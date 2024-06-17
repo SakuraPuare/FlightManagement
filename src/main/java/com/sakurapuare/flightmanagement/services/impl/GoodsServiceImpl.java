@@ -79,4 +79,10 @@ public class GoodsServiceImpl implements GoodsService {
                 .map(Goods::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    @Override
+    public void buyGood(Goods good) {
+        good.setStock(good.getStock() - 1);
+        goodMapper.updateById(good);
+    }
 }

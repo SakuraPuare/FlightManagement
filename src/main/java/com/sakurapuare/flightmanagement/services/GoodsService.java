@@ -24,4 +24,6 @@ public interface GoodsService {
     long count();
 
     BigDecimal getTotalPrice();
+
+    void buyGood(Goods good);
 }

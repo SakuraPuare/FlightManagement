@@ -7,6 +7,8 @@ import com.sakurapuare.flightmanagement.services.GoodsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +43,21 @@ public class GoodsController {
     @GetMapping("/search")
     public Response<List<Goods>> searchGood(@RequestParam(name = "query") String query) {
         return Response.success(goodsService.search(query));
+    }
+
+    @Transactional
+    @PostMapping("/{id}/buy")
+    public Response<Void> buyGood(@PathVariable(name = "id") long id) {
+        Goods good = goodsService.getGoodById(id);
+        if (good == null) {
+            return Response.error("Good not found");
+        }
+        if (good.getStock() <= 0) {
+            return Response.error("Good out of stock");
+        }
+
+        goodsService.buyGood(good);
+        return Response.success("Good bought successfully");
     }
 
     @PostMapping("/")
