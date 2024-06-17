@@ -1,30 +1,32 @@
 <template>
-  <el-auto-resizer>
-    <template #default="{ height, width }">
-      <el-table-v2
-        :columns="columns"
-        :data="data"
-        :estimated-row-height="50"
-        :fixed="true"
-        :height="height"
-        :width="width"
-      >
-        <template #footer>
-          <div
-            class="flex items-center pb-4"
-            style="justify-content: center; height: 100%"
-          >
-            <el-pagination
-              :total="total"
-              background
-              layout="prev, pager, next"
-              @current-change="paginationChangeHandler"
-            />
-          </div>
-        </template>
-      </el-table-v2>
-    </template>
-  </el-auto-resizer>
+  <div class="flex flex-col h-full w-full">
+    <el-auto-resizer class="flex-grow">
+      <template #default="{ height, width }">
+        <el-table-v2
+          :columns="columns"
+          :data="data"
+          :estimated-row-height="50"
+          :fixed="true"
+          :height="height"
+          :width="width"
+        >
+          <template #footer>
+            <div
+              class="flex items-center pb-4"
+              style="justify-content: center; height: 100%"
+            ></div>
+          </template>
+        </el-table-v2>
+      </template>
+    </el-auto-resizer>
+    <el-pagination
+      :total="total"
+      background
+      layout="prev, pager, next"
+      @current-change="paginationChangeHandler"
+      class="mx-auto"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>

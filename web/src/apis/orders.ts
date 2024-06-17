@@ -23,5 +23,9 @@ export const deleteOrderAPI = async (id: number): Promise<null> => {
 };
 
 export const payOrderAPI = async (id: number): Promise<null> => {
-  return http.post(`/orders/pay/${id}`).then((res) => res.data);
+  return http.post(`/orders/${id}/pay`).then((res) => res.data);
+};
+
+export const cancelOrderAPI = async (id: number): Promise<null> => {
+  return http.post(`/orders/${id}/cancel`).then((res) => res.data);
 };

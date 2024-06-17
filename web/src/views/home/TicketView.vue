@@ -136,7 +136,7 @@ const allCount = ref(0);
 const getData = async (page: number) => {
   const pagination: Pagination = {
     page: page - 1,
-    count: 100,
+    count: 10,
   };
   const res = await getTicketsListAPI(pagination);
   if (!res || res.length === 0) return;
