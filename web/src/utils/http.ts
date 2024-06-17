@@ -1,6 +1,8 @@
 import { BASE_URL } from "@/config";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
+import { ElMessage } from "element-plus";
+import router from "./router";
 
 axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
@@ -36,15 +38,26 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     // 在这里你可以对响应数据做一些处理
-    if (response.status !== 200) {
-      console.error("error" + response); // for debug
+    if (response.data.code !== 200) {
+      console.error("error" + response.data); // for debug
+      ElMessage({
+        message: response.data.message || "服务异常",
+        type: "error",
+      });
     } else {
     }
     return response.data;
   },
   (error) => {
     // 处理响应错误
+    ElMessage({
+      message: error.response.data.message || "服务异常",
+      type: "error",
+    });
     console.error("err" + error); // for debug
+    if (error.response?.status === 401) {
+      router.push("/login").then(() => {});
+    }
     return Promise.reject(error);
   },
 );

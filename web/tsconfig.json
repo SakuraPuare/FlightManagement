@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -21,7 +23,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

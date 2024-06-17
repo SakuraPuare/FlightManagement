@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.js,.vue src",
+    "lint:fix": "eslint --ext .ts,.js,.vue src --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -14,6 +16,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/babel-plugin-jsx": "^1.2.2",
     "axios": "^1.6.8",
     "element-plus": "^2.7.1",
     "eslint-config-prettier": "^9.1.0",

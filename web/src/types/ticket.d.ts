@@ -7,7 +7,20 @@ export type Ticket = {
   updatedAt: string;
 };
 
-export type getTicketResponse = Id & Ticket;
+export type getTicketResponse = {
+  id: number;
+  airlineName: string;
+  airlineCountry: string;
+  flightNumber: string;
+  capacity: number;
+  departureCity: string;
+  arrivalCity: string;
+  dateOfDeparture: string;
+  estimatedTravelTime: number;
+  seatClass: string;
+  quota: number;
+  price: string;
+};
 
 export type createTicketRequest = {
   flightId: number;

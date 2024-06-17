@@ -17,15 +17,17 @@ const login = async (e: Event) => {
     username: username.value,
     password: password.value,
   };
-  user.setToken(await loginAPI(params));
-
-  // return to last page
-  router.push("/");
+  const res = await loginAPI(params);
+  user.setToken(res);
+  user.setUser(res);
+  console.log("router to /home");
+  await router.push("/home");
 };
 
 onMounted(() => {
   if (user.isLogin()) {
-    router.go(-1);
+    console.log("router to /home");
+    router.push("/home");
   }
 });
 </script>

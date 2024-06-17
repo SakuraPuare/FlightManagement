@@ -9,7 +9,7 @@ import {
 import { UserInfo } from "@/types/auth/info";
 import { Airline, Merchant, Passenger, Staff } from "@/types/users";
 // import { useUserStore } from "@/stores/user";
-import { ReadableDate } from "@/utils/date";
+import { readableDate } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import {
   getUserRoleList,
@@ -35,6 +35,7 @@ const parseId = (id: string) => {
   console.log("id", id);
   const parsedId = parseInt(id);
   if (isNaN(parsedId)) {
+    console.log("router to /404");
     router.push("/404");
     console.error("Invalid user id");
   }
@@ -46,6 +47,7 @@ const update = async () => {
     const res = await getUserAPI(id.value);
     if (res === null) {
       console.error("User not found");
+      console.log("router to /404");
       await router.push("/404");
     } else {
       userData.value = res;
@@ -139,6 +141,7 @@ watch(
     // console.log("newId", newId);
     newId = newId as string;
     if (isNaN(parseInt(newId))) {
+      console.log("router to /404");
       router.push("/404");
       console.error("Invalid user id");
     }
@@ -176,7 +179,7 @@ watch(
                 </div>
               </div>
               <p class="text-gray-500">
-                Register at: {{ ReadableDate(userData.createdAt) }}
+                Register at: {{ readableDate(userData.createdAt) }}
               </p>
             </div>
           </div>
@@ -208,7 +211,7 @@ watch(
               </p>
               <p class="text-gray-500">Code: {{ airlineData.airlineCode }}</p>
               <p class="text-gray-500">
-                Register at: {{ ReadableDate(airlineData.createdAt) }}
+                Register at: {{ readableDate(airlineData.createdAt) }}
               </p>
             </div>
           </div>
@@ -239,7 +242,7 @@ watch(
                 Address: {{ merchantData.merchantAddress }}
               </p>
               <p class="text-gray-500">
-                Register at: {{ ReadableDate(merchantData.createdAt) }}
+                Register at: {{ readableDate(merchantData.createdAt) }}
               </p>
             </div>
           </div>
@@ -270,7 +273,7 @@ watch(
                 Identity Number: {{ passengerData.identityNumber }}
               </p>
               <p class="text-gray-500">
-                Register at: {{ ReadableDate(passengerData.createdAt) }}
+                Register at: {{ readableDate(passengerData.createdAt) }}
               </p>
             </div>
           </div>
@@ -293,7 +296,7 @@ watch(
             <div class="w-2/3 space-y-4">
               <h3 class="text-xl font-bold">Staff {{ staffData.staffName }}</h3>
               <p class="text-gray-500">
-                Register at: {{ ReadableDate(staffData.createdAt) }}
+                Register at: {{ readableDate(staffData.createdAt) }}
               </p>
             </div>
           </div>

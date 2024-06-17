@@ -29,6 +29,12 @@ export const useUserStore = defineStore({
       return this.token.token !== "";
     },
     logout() {
+      this.userId = 0;
+      this.username = "";
+      this.email = "";
+      this.role = 0;
+      this.createdAt = "";
+      this.updatedAt = "";
       this.clearToken();
     },
     setUser(data: User) {

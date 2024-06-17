@@ -10,8 +10,8 @@ export const getAllCountStatistic =
 
 export const getTypesCountStatistic = async (
   type: TypesStatistic,
-): Promise<AllCountStatisticResponse> => {
+): Promise<number> => {
   return http
     .get(`/statistics/count/${type}`)
-    .then((res) => res.data as AllCountStatisticResponse);
+    .then((res) => res.data as number);
 };

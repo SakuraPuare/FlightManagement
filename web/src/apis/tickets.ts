@@ -1,4 +1,5 @@
 import { createTicketRequest, getTicketResponse } from "@/types/ticket";
+import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 
 export const getTicketAPI = async (id: number): Promise<getTicketResponse> => {
@@ -7,9 +8,11 @@ export const getTicketAPI = async (id: number): Promise<getTicketResponse> => {
     .then((res) => res.data as getTicketResponse);
 };
 
-export const getTicketsListAPI = async (): Promise<getTicketResponse[]> => {
+export const getTicketsListAPI = async (
+  params: Pagination,
+): Promise<getTicketResponse[]> => {
   return http
-    .get("/tickets/list")
+    .get("/tickets/list", { params })
     .then((res) => res.data as getTicketResponse[]);
 };
 
