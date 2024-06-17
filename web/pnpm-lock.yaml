@@ -61,7 +61,7 @@ importers:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       eslint:
-        specifier: ~9.5.0
+        specifier: ^9.5.0
         version: 9.5.0
       eslint-plugin-vue:
         specifier: ^9.26.0
