@@ -98,7 +98,8 @@ public class OrderServiceImpl implements OrderService {
         // check if you have a conflict time
         for (Order order : orders) {
             LocalDateTime newDepartureTime = flight.getDateOfDeparture();
-            Flight flight1 = flightService.getFlightById(order.getTicketId());
+            Ticket ticket1 = ticketService.getTicketById(order.getTicketId());
+            Flight flight1 = flightService.getFlightById(ticket1.getFlightId());
             LocalDateTime departureTime = flight1.getDateOfDeparture();
             LocalDateTime arrivalTime = flight1.getDateOfDeparture().plusMinutes(flight1.getEstimatedTravelTime());
             if (newDepartureTime.isAfter(departureTime) && newDepartureTime.isBefore(arrivalTime)) {
