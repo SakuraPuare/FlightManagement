@@ -7,6 +7,8 @@ import { Pagination } from "@/types/types";
 import { DateRender } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
+import { TableV2FixedDir } from "element-plus";
 
 const columns = [
   {
@@ -121,12 +123,9 @@ const columns = [
         Buy
       </div>
     ),
-    // cellRenderer: ({ rowData }: any) => {
-    //   console.log(rowData);
-    //   return "1";
-    // },
-    width: 150,
+    width: 100,
     align: "center",
+    fixed: TableV2FixedDir.RIGHT,
   },
 ];
 
@@ -173,7 +172,7 @@ const paginationChange = (v: number) => {
 </script>
 
 <template>
-  <div class="ml-72 p-8" :style="'height:' + headerlessHeight + 'px'">
+  <div :style="'height:' + headerlessHeight + 'px'" class="ml-72 p-8">
     <div
       class="mx-auto p-8 max-w-screen-xl w-full h-full shadow-lg rounded-lg flex flex-col space-y-4"
     >
@@ -182,33 +181,12 @@ const paginationChange = (v: number) => {
         <div v-for="_ in 20" class="h-10 w-10 m-8 bg-pink-500">{{ _ }}</div>
       </div> -->
       <div class="flex-grow h-full w-full">
-        <el-auto-resizer>
-          <template #default="{ height, width }">
-            <el-table-v2
-              :columns="columns"
-              :data="data"
-              :fixed="true"
-              :height="height"
-              :stimated-row-height="50"
-              :width="width"
-              estimated-row-height="50"
-            >
-              <template #footer
-                ><div
-                  class="flex items-center pb-4"
-                  style="justify-content: center; height: 100%"
-                >
-                  <el-pagination
-                    background
-                    layout="prev, pager, next"
-                    :total="allCount"
-                    @current-change="paginationChange"
-                  />
-                </div>
-              </template>
-            </el-table-v2>
-          </template>
-        </el-auto-resizer>
+        <ResizableTableComp
+          :columns="columns"
+          :data="data"
+          :total="allCount"
+          @paginationChange="paginationChange"
+        />
       </div>
     </div>
   </div>
