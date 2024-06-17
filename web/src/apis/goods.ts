@@ -42,3 +42,7 @@ export const searchGoodsAPI = async (
     .get(`/goods/search?query=${query}`)
     .then((res) => res.data as getGoodsResponse[]);
 };
+
+export const buyGoodsAPI = async (id: number): Promise<null> => {
+  return http.post(`/goods/${id}/buy`).then((res) => res.data);
+};
