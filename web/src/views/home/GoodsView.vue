@@ -1,13 +1,12 @@
 <script lang="tsx" setup>
-import { createOrderAPI } from "@/apis/orders";
 import { getTypesCountStatistic } from "@/apis/statistic";
-import { getTicketResponse } from "@/types/ticket";
 import { Pagination } from "@/types/types";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
 import ResizableTableComp from "@/components/ResizableTableComp.vue";
 import { TableV2FixedDir } from "element-plus";
 import { buyGoodsAPI, getGoodsListAPI } from "@/apis/goods";
+import { getGoodsResponse } from "@/types/goods";
 
 const columns = [
   {
@@ -72,7 +71,7 @@ const columns = [
   },
 ];
 
-const data: Ref<getTicketResponse[]> = ref<getTicketResponse[]>([]);
+const data: Ref<getGoodsResponse[]> = ref<getGoodsResponse[]>([]);
 const page = ref(1);
 const allCount = ref(0);
 
