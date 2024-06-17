@@ -21,4 +21,6 @@ public interface OrderService {
     List<Order> getOrdersAll(long userId);
 
     long count();
+
+    void cancelOrder(Order order);
 }

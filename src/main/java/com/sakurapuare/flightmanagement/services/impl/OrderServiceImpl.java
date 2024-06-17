@@ -81,20 +81,23 @@ public class OrderServiceImpl implements OrderService {
         // get the order list of the user
         List<Order> orders = orderMapper.selectList(
                 new QueryWrapper<Order>()
-                        .eq("user_id", userId));
+                        .eq("user_id", userId)
+                        .ne("status", "canceled"));
         if (orders.isEmpty()) {
             return false;
         }
 
+        // find the flight
+        Flight flight = flightService.getFlightById(ticket.getFlightId());
         // check if the user has bought the same ticket
         for (Order order : orders) {
-            if (order.getTicketId() == ticketId) {
+            Ticket ticket1 = ticketService.getTicketById(order.getTicketId());
+            Flight flight1 = flightService.getFlightById(ticket1.getFlightId());
+            if (flight.getId() == flight1.getId()) {
                 return true;
             }
         }
 
-        // find the flight
-        Flight flight = flightService.getFlightById(ticket.getFlightId());
         // check if you have a conflict time
         for (Order order : orders) {
             LocalDateTime newDepartureTime = flight.getDateOfDeparture();
@@ -117,6 +120,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void cancelOrder(Order order) {
+        order.setStatus("canceled");
+        Ticket ticket = ticketService.getTicketById(order.getTicketId());
+        ticketService.refundTicket(ticket);
+        orderMapper.updateById(order);
+    }
+
+    @Override
     public List<Order> getOrdersAll(long userId) {
         return orderMapper.selectList(
                 new QueryWrapper<Order>()
@@ -127,4 +138,5 @@ public class OrderServiceImpl implements OrderService {
     public long count() {
         return orderMapper.selectCount(null);
     }
+
 }

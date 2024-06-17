@@ -137,10 +137,32 @@ public class OrderController {
         if (order == null) {
             return Response.error(404, "Order not found");
         }
+        if (!order.getStatus().equals("unpaid")) {
+            return Response.error("Order is " + order.getStatus() + " already");
+        }
 
         orderService.payOrder(order);
 
         return Response.success("Order paid successfully");
+    }
+
+    @Transactional
+    @PostMapping("/{id}/cancel")
+    public Response<Void> cancelOrder(@PathVariable("id") long id,
+            HttpServletRequest request) {
+        long userId = Long.parseLong(request.getAttribute("userId").toString());
+
+        Order order = orderService.getOrderByIdAndUserId(id, userId);
+        if (order == null) {
+            return Response.error(404, "Order not found");
+        }
+        if (order.getStatus().equals("canceled")) {
+            return Response.error("Order is canceled");
+        }
+
+        orderService.cancelOrder(order);
+
+        return Response.success("Order canceled successfully");
     }
 
     @Transactional
