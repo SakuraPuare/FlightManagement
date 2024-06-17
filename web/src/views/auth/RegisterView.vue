@@ -201,9 +201,7 @@ const selectItem = (index: number) => {
             </p>
           </div>
           <div class="p-4">
-            <div
-              class="h-full border-r border-gray-200 dark:border-gray-700"
-            ></div>
+            <div class="h-full border-r border-gray-200 dark:border-gray-700" />
           </div>
           <div class="w-full space-y-4">
             <div>

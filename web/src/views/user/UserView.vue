@@ -155,6 +155,7 @@ watch(
   <section :class="'max-h-[' + headerlessHeight + 'px] h-full'">
     <div v-if="userData.userId" class="mx-auto max-w-screen-xl py-8 space-y-4">
       <h1 class="text-4xl font-bold">Profile</h1>
+
       <div class="flex flex-row flex-wrap">
         <div
           class="bg-white rounded-lg py-8 pl-8 pr-16 ring-0 ring-black shadow-lg max-w-screen-md w-fit m-6"
@@ -168,7 +169,9 @@ watch(
             <div class="w-2/3 space-y-4 text-nowrap">
               <h2 class="text-2xl font-bold">User {{ userData.username }}</h2>
               <h3 class="text-lg font-semibold">Id: {{ userData.userId }}</h3>
-              <p class="text-gray-500">{{ userData.email }}</p>
+              <p class="text-gray-500">
+                {{ userData.email }}
+              </p>
               <div class="flex flex-row space-x-2 select-none">
                 <div
                   v-for="role in userRoleList"

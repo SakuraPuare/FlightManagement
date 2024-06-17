@@ -151,8 +151,8 @@ onMounted(async () => {
   <HeaderComp />
 
   <div
-    class="pt-[56px] flex flex-col w-full"
     :style="'height:' + headerlessHeight + 'px'"
+    class="pt-[56px] flex flex-col w-full"
   >
     <aside
       id="default-sidebar"

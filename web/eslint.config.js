@@ -1,29 +1,11 @@
+// @ts-check
 import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
-import pluginPrettierRecommendedConfigs from "eslint-plugin-prettier/recommended";
 
 export default [
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.es2020,
-        ...globals.node,
-      },
-      ecmaVersion: 2020,
-      ecmaFeatures: {
-        // Allows for the parsing of JSX
-        jsx: true,
-      },
-      // parser: parserVue,
-      parserOptions: {
-        parser: tseslint.parser,
-      },
-    },
-  },
-  pluginPrettierRecommendedConfigs,
+  { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs["flat/essential"],
