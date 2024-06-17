@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import HeaderComp from "@/components/HeaderComp.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faChartLine,
@@ -9,7 +8,6 @@ import {
   faShield,
   faSuitcaseRolling,
 } from "@fortawesome/free-solid-svg-icons";
-import TitleComp from "@/components/TitleComp.vue";
 </script>
 
 <template>

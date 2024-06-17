@@ -7,7 +7,6 @@ import { Pagination } from "@/types/types";
 import { DateRender } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
-import ResizableTableComp from "@/components/ResizableTableComp.vue";
 import { TableV2FixedDir } from "element-plus";
 
 const columns = [

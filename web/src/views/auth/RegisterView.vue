@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, Ref } from "vue";
-import TitleComp from "@/components/TitleComp.vue";
 import {
   AirlineInfo,
   MerchantInfo,

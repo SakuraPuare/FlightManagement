@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import HeaderComp from "@/components/HeaderComp.vue";
 import { useUserStore } from "@/stores/user";
 import {
   getUserRoleList,

@@ -5,7 +5,6 @@ import { Pagination } from "@/types/types";
 import { DateRender } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, Ref, ref } from "vue";
-import ResizableTableComp from "@/components/ResizableTableComp.vue";
 import { getOrderResponse } from "@/types/order";
 import { TableV2FixedDir } from "element-plus";
 

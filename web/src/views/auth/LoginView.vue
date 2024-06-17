@@ -3,7 +3,6 @@ import { onMounted, ref } from "vue";
 import { loginAPI } from "@/apis/auth";
 import { useUserStore } from "@/stores/user";
 import { LoginParams } from "@/types/auth/login";
-import TitleComp from "@/components/TitleComp.vue";
 import router from "@/utils/router";
 
 const user = useUserStore();

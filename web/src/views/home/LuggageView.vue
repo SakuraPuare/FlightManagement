@@ -3,7 +3,6 @@ import { getTypesCountStatistic } from "@/apis/statistic";
 import { Pagination } from "@/types/types";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
-import ResizableTableComp from "@/components/ResizableTableComp.vue";
 import { getMyLuggagesListAPI } from "@/apis/luggages";
 import { getLuggageResponse } from "@/types/luggage";
 import { DateRender } from "@/utils/date";

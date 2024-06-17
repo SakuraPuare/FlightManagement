@@ -3,7 +3,6 @@ import { getTypesCountStatistic } from "@/apis/statistic";
 import { Pagination } from "@/types/types";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
-import ResizableTableComp from "@/components/ResizableTableComp.vue";
 import { TableV2FixedDir } from "element-plus";
 import { buyGoodsAPI, getGoodsListAPI } from "@/apis/goods";
 import { getGoodsResponse } from "@/types/goods";
