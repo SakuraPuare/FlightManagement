@@ -22,7 +22,7 @@ export const getLuggagesListAPI = async (
     .then((res) => res.data as getLuggageResponse[]);
 };
 
-export const getMyLuggageListAPI = async (
+export const getMyLuggagesListAPI = async (
   params: Pagination,
 ): Promise<getLuggageResponse[]> => {
   return http
