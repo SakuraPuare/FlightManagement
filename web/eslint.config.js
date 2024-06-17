@@ -15,7 +15,7 @@ export default [
       ecmaVersion: 2020,
       ecmaFeatures: {
         // Allows for the parsing of JSX
-        jsx: true
+        jsx: true,
       },
       // parser: parserVue,
       parserOptions: {

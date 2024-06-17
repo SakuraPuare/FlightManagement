@@ -9,11 +9,9 @@ import com.sakurapuare.flightmanagement.pojo.vo.TicketVO;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
