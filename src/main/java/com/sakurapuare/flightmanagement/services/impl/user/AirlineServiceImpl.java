@@ -59,4 +59,11 @@ public class AirlineServiceImpl implements AirlineService {
         return airlineMapper.selectPage(airlinePage, null).getRecords();
     }
 
+    @Override
+    public Airline getAirlineByUserId(Long userId) {
+        return airlineMapper.selectOne(
+                new QueryWrapper<Airline>()
+                        .eq("user_id", userId));
+    }
+
 }

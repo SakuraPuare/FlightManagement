@@ -7,6 +7,8 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.pojo.vo.FlightVO;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -85,8 +87,10 @@ public class FlightController {
     }
 
     @PostMapping("/")
-    public Response<Void> addFlight(@Valid @RequestBody FlightDTO flightDTO) {
-        Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
+    public Response<Void> addFlight(@Valid @RequestBody FlightDTO flightDTO, HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
+        Airline airline = airlineService.getAirlineByUserId(userId);
+        // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
         if (airline == null) {
             return Response.error("Airline not found");
         }
@@ -96,13 +100,17 @@ public class FlightController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO) {
+    public Response<Void> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO,
+            HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
+        Airline airline = airlineService.getAirlineByUserId(userId);
+        // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
         Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");
         }
 
-        Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
+        // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
         if (airline == null) {
             return Response.error("Airline not found");
         }

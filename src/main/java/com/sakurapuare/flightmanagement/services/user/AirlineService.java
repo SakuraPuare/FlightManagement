@@ -18,4 +18,6 @@ public interface AirlineService {
 
     List<Airline> getAirlinesByPagination(int page, int count);
 
+    Airline getAirlineByUserId(Long userId);
+
 }
