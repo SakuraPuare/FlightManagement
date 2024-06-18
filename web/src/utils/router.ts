@@ -32,6 +32,7 @@ const routes = [
       {
         path: "/home/passgenger",
         meta: { title: "Passenger", requiresAuth: true },
+        component: { render: () => null },
         children: [
           {
             path: "/home/passenger/ticket",
@@ -57,6 +58,8 @@ const routes = [
       },
       {
         path: "/home/merchant",
+        // return empty component
+        component: { render: () => null },
         meta: { title: "Merchant", requiresAuth: true },
         children: [
           {
@@ -70,6 +73,7 @@ const routes = [
       {
         path: "/home/airline",
         meta: { title: "Airline", requiresAuth: true },
+        component: { render: () => null },
         children: [
           {
             path: "/home/airline/order",
@@ -91,6 +95,7 @@ const routes = [
       {
         path: "/home/staff",
         meta: { title: "Staff", requiresAuth: true },
+        component: { render: () => null },
       },
     ],
   },
@@ -109,11 +114,11 @@ const routes = [
     component: () => import("@/pages/ForbiddenPage.vue"),
     meta: { title: "Forbidden" },
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   component: () => import("@/pages/NotFoundPage.vue"),
-  //   meta: { title: "Not Found" },
-  // },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/pages/NotFoundPage.vue"),
+    meta: { title: "Not Found" },
+  },
 ];
 
 const router = createRouter({
