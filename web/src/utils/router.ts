@@ -69,6 +69,11 @@ const routes = [
         component: () => import("@/views/home/management/StaffView.vue"),
         meta: { title: "Staff", requiresAuth: true },
       },
+      {
+        path: "/home/ticket",
+        component: () => import("@/views/home/management/TicketView.vue"),
+        meta: { title: "Ticket", requiresAuth: true },
+      },
     ],
   },
   {
