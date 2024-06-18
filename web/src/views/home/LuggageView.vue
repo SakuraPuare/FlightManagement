@@ -9,9 +9,9 @@ import { DateRender } from "@/utils/date";
 
 const columns = [
   {
-    key: "id",
+    key: "ids",
     title: "ID",
-    dataKey: "id",
+    dataKey: "ids",
     width: 50,
     align: "center",
   },
@@ -71,7 +71,7 @@ const getData = async (page: number) => {
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("luggage");
-  console.log(allCount.value);
+
   getData(page.value);
 });
 const headerlessHeight = ref(0);

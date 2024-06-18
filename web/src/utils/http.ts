@@ -44,8 +44,21 @@ service.interceptors.response.use(
         message: response.data.message || "服务异常",
         type: "error",
       });
-    } else {
     }
+
+    if (Array.isArray(response.data.data)) {
+      // replace id with ids
+      response.data.data = response.data.data.map(
+        (item: { id: unknown; ids: unknown }) => {
+          if (item.id) {
+            item.ids = item.id;
+            delete item.id;
+          }
+          return item;
+        },
+      );
+    }
+
     return response.data;
   },
   (error) => {

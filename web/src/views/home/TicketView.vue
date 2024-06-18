@@ -11,9 +11,9 @@ import { TableV2FixedDir } from "element-plus";
 
 const columns = [
   {
-    key: "id",
+    key: "ids",
     title: "ID",
-    dataKey: "id",
+    dataKey: "ids",
     width: 30,
     align: "center",
   },
@@ -116,8 +116,8 @@ const columns = [
         class={
           "bg-pink-500 rounded-lg py-1 px-2 select-none cursor-pointer text-white hover:font-bold hover:bg-pink-600"
         }
-        id={rowData.id}
-        onClick={() => buy(rowData.id)}
+        id={rowData.ids}
+        onClick={() => buy(rowData.ids)}
       >
         Buy
       </div>
@@ -143,15 +143,13 @@ const getData = async (page: number) => {
 };
 
 const buy = async (id: number) => {
-  console.log(id);
-
   await createOrderAPI(id);
   getData(page.value);
 };
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("ticket");
-  console.log(allCount.value);
+
   getData(page.value);
 });
 

@@ -85,7 +85,7 @@ let childrenItem: MenuItem[] = [];
 if (isPassenger(user.role)) {
   childrenItem.push({
     id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Passenger Management",
+    label: "Passenger",
     link: "/home/passenger",
     icon: faUser,
     children: [],
@@ -94,15 +94,15 @@ if (isPassenger(user.role)) {
 if (isAirline(user.role)) {
   childrenItem.push({
     id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Airline Management",
+    label: "Airline",
     link: "/home/airline",
     icon: faPlaneDeparture,
     children: [],
   });
-  // ticket management
+  // ticket
   childrenItem.push({
     id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Ticket Management",
+    label: "Ticket",
     link: "/home/ticket",
     icon: faTicket,
     children: [],
@@ -111,7 +111,7 @@ if (isAirline(user.role)) {
 if (isMerchant(user.role)) {
   childrenItem.push({
     id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Merchant Management",
+    label: "Merchant",
     link: "/home/merchant",
     icon: faBuilding,
     children: [],
@@ -120,7 +120,7 @@ if (isMerchant(user.role)) {
 if (isStaff(user.role)) {
   childrenItem.push({
     id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Staff Management",
+    label: "Staff",
     link: "/home/staff",
     icon: faUserTie,
     children: [],

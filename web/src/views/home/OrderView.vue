@@ -10,9 +10,9 @@ import { TableV2FixedDir } from "element-plus";
 
 const columns = [
   {
-    key: "id",
+    key: "ids",
     title: "ID",
-    dataKey: "id",
+    dataKey: "ids",
     width: 30,
     align: "center",
   },
@@ -129,7 +129,7 @@ const columns = [
           class={
             "bg-green-600 rounded-lg py-1 px-2 select-none cursor-pointer text-white hover:font-bold hover:bg-green-800"
           }
-          onClick={() => pay(rowData.id)}
+          onClick={() => pay(rowData.ids)}
         >
           Pay
         </div>
@@ -138,7 +138,7 @@ const columns = [
           class={
             "bg-pink-600 rounded-lg py-1 px-2 select-none cursor-pointer text-white hover:font-bold hover:bg-pink-800"
           }
-          onClick={() => cancel(rowData.id)}
+          onClick={() => cancel(rowData.ids)}
         >
           Cancel
         </div>
@@ -165,22 +165,18 @@ const getData = async (page: number) => {
 };
 
 const pay = async (id: number) => {
-  console.log(id);
-
   await payOrderAPI(id);
   getData(page.value);
 };
 
 const cancel = async (id: number) => {
-  console.log(id);
-
   await cancelOrderAPI(id);
   getData(page.value);
 };
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("order");
-  console.log(allCount.value);
+
   getData(page.value);
 });
 

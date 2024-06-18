@@ -32,7 +32,6 @@ import Avatar from "vue-boring-avatars";
 const headerlessHeight = ref(0); // Define the headerlessHeight property
 
 const parseId = (id: string) => {
-  console.log("id", id);
   const parsedId = parseInt(id);
   if (isNaN(parsedId)) {
     console.log("router to /404");
