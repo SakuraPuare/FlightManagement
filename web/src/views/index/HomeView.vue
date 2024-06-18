@@ -1,27 +1,19 @@
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/user";
-import {
-  getUserRoleList,
-  isAirline,
-  isMerchant,
-  isPassenger,
-  isStaff,
-} from "@/utils/role";
+import { getUserRoleList } from "@/utils/role";
 
 import {
-  faBuilding,
+  faClipboard,
   faGear,
   faHome,
   faPlaneDeparture,
   faStore,
   faSuitcase,
   faTicket,
-  faUser,
-  faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { autoIncrement } from "@/utils/utils";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, Ref, ref, watch } from "vue";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import router from "@/utils/router";
 import { MenuItem } from "@/types/types";
@@ -42,99 +34,177 @@ watch(
 
 const user = useUserStore();
 
-const menuItems: MenuItem[] = [
-  {
-    id: 1,
+// watch user.currRole change
+watch(
+  () => user.currentRole,
+  () => {
+    update();
+    // router to home
+    if (router.currentRoute.value.path !== "/home") {
+      router.push("/home");
+    }
+  },
+);
+
+const menuItems: Ref<MenuItem[]> = ref<MenuItem[]>([]);
+
+const update = () => {
+  // push default
+  menuItems.value = [];
+  menuItems.value.push({
+    id: autoIncrement(menuItems.value),
     label: "Home",
     link: "/home",
     icon: faHome,
     children: [],
-  },
-  {
-    id: 2,
-    label: "Ticket",
-    link: "/ticket",
-    icon: faTicket,
-    children: [],
-  },
-  {
-    id: 3,
-    label: "Order",
-    link: "/order",
-    icon: faPlaneDeparture,
-    children: [],
-  },
-  {
-    id: 4,
-    label: "Goods",
-    link: "/goods",
-    icon: faStore,
-    children: [],
-  },
-  {
-    id: 5,
-    label: "Luggage",
-    link: "/luggage",
-    icon: faSuitcase,
-    children: [],
-  },
-];
+  });
+  let managementChildren: MenuItem[] = [];
+  if (user.currentRole === "Passenger") {
+    menuItems.value.push({
+      id: autoIncrement(menuItems.value),
+      label: "Ticket",
+      link: "/home/passenger/ticket",
+      icon: faTicket,
+      children: [],
+    });
+    menuItems.value.push({
+      id: autoIncrement(menuItems.value),
+      label: "Order",
+      link: "/home/passenger/order",
+      icon: faPlaneDeparture,
+      children: [],
+    });
+    menuItems.value.push({
+      id: autoIncrement(menuItems.value),
+      label: "Goods",
+      link: "/home/passenger/goods",
+      icon: faStore,
+      children: [],
+    });
+    menuItems.value.push({
+      id: autoIncrement(menuItems.value),
+      label: "Luggage",
+      link: "/home/passenger/luggage",
+      icon: faSuitcase,
+      children: [],
+    });
+  } else if (user.currentRole === "Merchant") {
+    managementChildren.push({
+      id: autoIncrement(menuItems.value),
+      label: "Goods",
+      link: "/home/merchant/goods",
+      icon: faStore,
+      children: [],
+    });
+  } else if (user.currentRole === "Airline") {
+    managementChildren.push({
+      id: autoIncrement(menuItems.value),
+      label: "Order",
+      link: "/home/airline/order",
+      icon: faClipboard,
+      children: [],
+    });
+    managementChildren.push({
+      id: autoIncrement(menuItems.value),
+      label: "Ticket",
+      link: "/home/airline/ticket",
+      icon: faTicket,
+      children: [],
+    });
+    // flight
+    managementChildren.push({
+      id: autoIncrement(menuItems.value),
+      label: "Flight",
+      link: "/home/airline/flight",
+      icon: faPlaneDeparture,
+      children: [],
+    });
+  } else if (user.currentRole === "Staff") {
+  }
+  if (managementChildren.length > 0) {
+    menuItems.value.push({
+      id: autoIncrement(menuItems.value),
+      label: "Management",
+      link: "",
+      icon: faGear,
+      children: managementChildren,
+    });
+  }
+};
 
-let childrenItem: MenuItem[] = [];
+// let childrenItem: MenuItem[] = [];
 
-if (isPassenger(user.role)) {
-  childrenItem.push({
-    id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Passenger",
-    link: "/home/passenger",
-    icon: faUser,
-    children: [],
-  });
-}
-if (isAirline(user.role)) {
-  childrenItem.push({
-    id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Airline",
-    link: "/home/airline",
-    icon: faPlaneDeparture,
-    children: [],
-  });
-  // ticket
-  childrenItem.push({
-    id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Ticket",
-    link: "/home/ticket",
-    icon: faTicket,
-    children: [],
-  });
-}
-if (isMerchant(user.role)) {
-  childrenItem.push({
-    id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Merchant",
-    link: "/home/merchant",
-    icon: faBuilding,
-    children: [],
-  });
-}
-if (isStaff(user.role)) {
-  childrenItem.push({
-    id: autoIncrement(childrenItem) + menuItems.length + 1,
-    label: "Staff",
-    link: "/home/staff",
-    icon: faUserTie,
-    children: [],
-  });
-}
-if (childrenItem.length > 0) {
-  menuItems.push({
-    id: autoIncrement(menuItems),
-    label: "Management",
-    link: "",
-    icon: faGear,
-    children: childrenItem,
-  });
-}
+// if (isAirline(user.role)) {
+//   childrenItem.push(
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "Order (Airline)",
+//       link: "/home/order",
+//       icon: faPlaneDeparture,
+//       children: [],
+//     },
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "Ticket (Airline)",
+//       link: "/home/ticket",
+//       icon: faTicket,
+//       children: [],
+//     },
+//   );
+// }
+
+// if (isMerchant(user.role)) {
+//   childrenItem.push({
+//     id: autoIncrement(childrenItem) + menuItems.length + 1,
+//     label: "Goods (Merchant)",
+//     link: "/home/goods",
+//     icon: faBuilding,
+//     children: [],
+//   });
+// }
+
+// if (isStaff(user.role)) {
+//   childrenItem.push(
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "User (Staff)",
+//       link: "/home/user",
+//       icon: faUser,
+//       children: [],
+//     },
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "Merchant (Staff)",
+//       link: "/home/merchant",
+//       icon: faUserTie,
+//       children: [],
+//     },
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "Airline (Staff)",
+//       link: "/home/airline",
+//       icon: faPlaneDeparture,
+//       children: [],
+//     },
+//     {
+//       id: autoIncrement(childrenItem) + menuItems.length + 1,
+//       label: "Luggage (Staff)",
+//       link: "/home/luggage",
+//       icon: faSuitcase,
+//       children: [],
+//     },
+//   );
+// }
+
+// if (childrenItem.length > 0) {
+//   menuItems.push({
+//     id: autoIncrement(menuItems),
+//     label: "Management",
+//     link: "",
+//     icon: faGear,
+//     children: childrenItem,
+//   });
+// }
 
 const headerlessHeight = ref(0);
 
@@ -143,6 +213,7 @@ onMounted(async () => {
   window.addEventListener("resize", () => {
     headerlessHeight.value = getHeightWithoutHeader();
   });
+  update();
 });
 </script>
 

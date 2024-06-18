@@ -25,54 +25,72 @@ const routes = [
     ],
   },
   {
-    path: "/home/",
+    path: "/home",
     component: () => import("@/views/index/HomeView.vue"),
     meta: { title: "Home", requiresAuth: true },
     children: [
       {
-        path: "/goods",
-        component: () => import("@/views/home/GoodsView.vue"),
-        meta: { title: "Goods", requiresAuth: true },
-      },
-      {
-        path: "/luggage",
-        component: () => import("@/views/home/LuggageView.vue"),
-        meta: { title: "Luggage", requiresAuth: true },
-      },
-      {
-        path: "/ticket",
-        component: () => import("@/views/home/TicketView.vue"),
-        meta: { title: "Ticket", requiresAuth: true },
-      },
-      {
-        path: "/order",
-        component: () => import("@/views/home/OrderView.vue"),
-        meta: { title: "Order", requiresAuth: true },
-      },
-      {
-        path: "/home/airline",
-        component: () => import("@/views/home/management/AirlineView.vue"),
-        meta: { title: "Airline", requiresAuth: true },
+        path: "/home/passgenger",
+        meta: { title: "Passenger", requiresAuth: true },
+        children: [
+          {
+            path: "/home/passenger/ticket",
+            component: () => import("@/views/home/passenger/TicketView.vue"),
+            meta: { title: "Ticket", requiresAuth: true },
+          },
+          {
+            path: "/home/passenger/order",
+            component: () => import("@/views/home/passenger/OrderView.vue"),
+            meta: { title: "Order", requiresAuth: true },
+          },
+          {
+            path: "/home/passenger/goods",
+            component: () => import("@/views/home/passenger/GoodsView.vue"),
+            meta: { title: "Goods", requiresAuth: true },
+          },
+          {
+            path: "/home/passenger/luggage",
+            component: () => import("@/views/home/passenger/LuggageView.vue"),
+            meta: { title: "Luggage", requiresAuth: true },
+          },
+        ],
       },
       {
         path: "/home/merchant",
-        component: () => import("@/views/home/management/MerchantView.vue"),
         meta: { title: "Merchant", requiresAuth: true },
+        children: [
+          {
+            // goods
+            path: "/home/merchant/goods",
+            component: () => import("@/views/home/merchant/GoodsView.vue"),
+            meta: { title: "Goods", requiresAuth: true },
+          },
+        ],
       },
       {
-        path: "/home/passenger",
-        component: () => import("@/views/home/management/PassengerView.vue"),
-        meta: { title: "Passenger", requiresAuth: true },
+        path: "/home/airline",
+        meta: { title: "Airline", requiresAuth: true },
+        children: [
+          {
+            path: "/home/airline/order",
+            component: () => import("@/views/home/airline/OrderView.vue"),
+            meta: { title: "Order", requiresAuth: true },
+          },
+          {
+            path: "/home/airline/ticket",
+            component: () => import("@/views/home/airline/TicketView.vue"),
+            meta: { title: "Ticket", requiresAuth: true },
+          },
+          {
+            path: "/home/airline/flight",
+            component: () => import("@/views/home/airline/FlightView.vue"),
+            meta: { title: "Flight", requiresAuth: true },
+          },
+        ],
       },
       {
         path: "/home/staff",
-        component: () => import("@/views/home/management/StaffView.vue"),
         meta: { title: "Staff", requiresAuth: true },
-      },
-      {
-        path: "/home/ticket",
-        component: () => import("@/views/home/management/TicketView.vue"),
-        meta: { title: "Ticket", requiresAuth: true },
       },
     ],
   },
@@ -106,10 +124,10 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
   const user = useUserStore();
   const needLogin = to.matched.some((record) => record.meta?.requiresAuth);
-  console.log("needLogin", needLogin);
+  // console.log("needLogin", needLogin);
   if (needLogin) {
     const isLogin = user.isLogin();
-    console.log("isLogin", isLogin);
+    // console.log("isLogin", isLogin);
     if (isLogin) {
       next();
     } else {

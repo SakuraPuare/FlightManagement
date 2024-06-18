@@ -1,5 +1,6 @@
 import { LoginResponse } from "@/types/auth/login";
 import { User } from "@/types/users";
+import { getUserRoleList } from "@/utils/role";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore({
@@ -10,6 +11,7 @@ export const useUserStore = defineStore({
     password: "",
     email: "",
     role: 0,
+    currentRole: "",
     token: {
       token: "",
       expiresTime: "",
@@ -33,6 +35,7 @@ export const useUserStore = defineStore({
       this.username = "";
       this.email = "";
       this.role = 0;
+      this.currentRole = "";
       this.createdAt = "";
       this.updatedAt = "";
       this.clearToken();
@@ -42,6 +45,7 @@ export const useUserStore = defineStore({
       this.username = data.username;
       this.email = data.email;
       this.role = data.role;
+      this.currentRole = getUserRoleList(this.role)[0];
       this.createdAt = data.createdAt;
       this.updatedAt = data.updatedAt;
     },
