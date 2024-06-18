@@ -223,7 +223,7 @@ onMounted(async () => {
         </ul>
       </div>
     </aside>
-    <div v-if="isAtHomePath" class="ml-72 select-none">
+    <div v-if="isAtHomePath" class="ml-0 sm:ml-72 select-none">
       <div
         class="max-w-screen-md mx-auto w-full mt-[18%] flex justify-center place-content-center text-center"
       >

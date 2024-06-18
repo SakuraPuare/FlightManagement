@@ -47,7 +47,42 @@ menuItems.push({
             >{{ TITLE }}</span
           >
         </router-link>
-        <div class="flex lg:order-2 my-auto">
+
+        <div class="flex-grow lg:hidden"></div>
+        <div
+          class="flex-grow hidden justify-between items-center w-full lg:flex lg:w-auto"
+        >
+          <ul
+            class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-4 lg:mt-0"
+          >
+            <li v-for="item in menuItems" :key="item.id">
+              <router-link
+                :to="item.link"
+                class="block font-semibold py-2 pr-4 pl-3 text-gray-800 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-pink-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                {{ item.label }}
+              </router-link>
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="isLogin" class="w-128">
+          <!-- select role -->
+          <el-select
+            v-model="user.currentRole"
+            placeholder="Select role"
+            style="width: 120px"
+          >
+            <el-option
+              v-for="role in getUserRoleList(user.role)"
+              :key="role"
+              :label="role"
+              :value="role"
+            ></el-option>
+          </el-select>
+        </div>
+
+        <div class="flex my-auto">
           <template v-if="!isLogin || user.userId === 0">
             <router-link to="/login">
               <span
@@ -75,40 +110,9 @@ menuItems.push({
             <span
               class="text-white bg-pink-700 hover:bg-pink-800 select-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-pink-600 dark:hover:bg-pink-700 focus:outline-none dark:focus:ring-pink-800"
               @click="logout"
-              >Log out</span
+              >Logout</span
             >
           </template>
-        </div>
-        <div
-          class="flex-grow hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-        >
-          <ul
-            class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
-          >
-            <li v-for="item in menuItems" :key="item.id">
-              <router-link
-                :to="item.link"
-                class="block font-bold py-2 pr-4 pl-3 text-gray-800 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-pink-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                {{ item.label }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
-        <div v-if="isLogin" class="order-1 w-128">
-          <!-- select role -->
-          <el-select
-            v-model="user.currentRole"
-            placeholder="Select role"
-            style="width: 120px"
-          >
-            <el-option
-              v-for="role in getUserRoleList(user.role)"
-              :key="role"
-              :label="role"
-              :value="role"
-            ></el-option>
-          </el-select>
         </div>
       </div>
     </nav>
