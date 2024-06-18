@@ -4,14 +4,21 @@ import com.sakurapuare.flightmanagement.common.Response;
 import com.sakurapuare.flightmanagement.pojo.dto.LuggageDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Luggage;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Staff;
+import com.sakurapuare.flightmanagement.pojo.entity.user.User;
+import com.sakurapuare.flightmanagement.pojo.vo.LuggageVO;
 import com.sakurapuare.flightmanagement.services.LuggageService;
 import com.sakurapuare.flightmanagement.services.OrderService;
+import com.sakurapuare.flightmanagement.services.user.StaffService;
+import com.sakurapuare.flightmanagement.services.user.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,29 +31,62 @@ public class LuggageController {
 
     private final OrderService orderService;
 
-    public LuggageController(LuggageService luggageService, OrderService orderService) {
+    private final StaffService staffService;
+
+    private final UserService userService;
+
+    public LuggageController(LuggageService luggageService, OrderService orderService, StaffService staffService,
+                             UserService userService) {
         this.luggageService = luggageService;
         this.orderService = orderService;
+        this.staffService = staffService;
+        this.userService = userService;
     }
 
     @GetMapping("/my")
-    public Response<List<Luggage>> getMyLuggageList(@RequestParam("page") int page, @RequestParam("count") int count,
-                                                    HttpServletRequest request) {
+    public Response<List<LuggageVO>> getMyLuggageList(@RequestParam("page") int page, @RequestParam("count") int count,
+                                                      HttpServletRequest request) {
 
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
-        return Response.success(luggageService.getLuggageByPaginationAndId(page, count, userId));
+        List<LuggageVO> luggageVOList = new ArrayList<>();
+        for (Luggage luggage : luggageService.getLuggageByPaginationAndId(page, count, userId)) {
+            Staff staff = staffService.getStaffById(luggage.getStaffId());
+            User user = userService.getUserById(staff.getUserId());
+
+            LuggageVO luggageVO = new LuggageVO();
+            BeanUtils.copyProperties(luggage, luggageVO);
+            BeanUtils.copyProperties(staff, luggageVO);
+            BeanUtils.copyProperties(user, luggageVO);
+
+            luggageVOList.add(luggageVO);
+        }
+
+        return Response.success(luggageVOList);
     }
 
     @GetMapping("/list")
-    public Response<List<Luggage>> getLuggageList(@RequestParam("page") int page, @RequestParam("count") int count) {
+    public Response<List<LuggageVO>> getLuggageList(@RequestParam("page") int page, @RequestParam("count") int count) {
 
-        return Response.success(luggageService.getLuggageByPagination(page, count));
+        List<LuggageVO> luggageVOList = new ArrayList<>();
+        for (Luggage luggage : luggageService.getLuggageByPagination(page, count)) {
+            Staff staff = staffService.getStaffById(luggage.getStaffId());
+            User user = userService.getUserById(staff.getUserId());
+
+            LuggageVO luggageVO = new LuggageVO();
+            BeanUtils.copyProperties(luggage, luggageVO);
+            BeanUtils.copyProperties(staff, luggageVO);
+            BeanUtils.copyProperties(user, luggageVO);
+
+            luggageVOList.add(luggageVO);
+        }
+
+        return Response.success(luggageVOList);
     }
 
     @GetMapping("/{id}")
-    public Response<Luggage> getLuggageById(@PathVariable(name = "id") long id,
-                                            HttpServletRequest request) {
+    public Response<LuggageVO> getLuggageById(@PathVariable(name = "id") long id,
+                                              HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -54,7 +94,13 @@ public class LuggageController {
             return Response.error("Luggage not found");
         }
 
-        return Response.success(luggage);
+        Staff staff = staffService.getStaffById(luggage.getStaffId());
+
+        LuggageVO luggageVO = new LuggageVO();
+        BeanUtils.copyProperties(luggage, luggageVO);
+        BeanUtils.copyProperties(staff, luggageVO);
+
+        return Response.success(luggageVO);
     }
 
     @PostMapping("/")

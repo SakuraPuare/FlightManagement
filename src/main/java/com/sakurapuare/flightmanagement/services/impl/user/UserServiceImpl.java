@@ -2,8 +2,12 @@ package com.sakurapuare.flightmanagement.services.impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakurapuare.flightmanagement.mapper.OrderMapper;
+import com.sakurapuare.flightmanagement.mapper.user.PassengerMapper;
 import com.sakurapuare.flightmanagement.mapper.user.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
+import com.sakurapuare.flightmanagement.pojo.entity.Order;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Passenger;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.user.UserService;
 import com.sakurapuare.flightmanagement.utils.RoleUtils;
@@ -17,8 +21,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    private final OrderMapper orderMapper;
+
+    private final PassengerMapper passengerMapper;
+
+    public UserServiceImpl(UserMapper userMapper, OrderMapper orderMapper, PassengerMapper passengerMapper) {
         this.userMapper = userMapper;
+        this.orderMapper = orderMapper;
+        this.passengerMapper = passengerMapper;
     }
 
     @Override
@@ -77,5 +87,21 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserByPagination(int page, int count) {
         Page<User> userPage = new Page<>(page, count);
         return userMapper.selectPage(userPage, null).getRecords();
+    }
+
+    @Override
+    public User getUserByPassengerId(Long id) {
+        return userMapper.selectById(
+                passengerMapper.selectOne(
+                                new QueryWrapper<Passenger>()
+                                        .eq("user_id", id))
+                        .getUserId());
+    }
+
+    @Override
+    public List<Order> getOrdersByUserId(Long id) {
+        return orderMapper.selectList(
+                new QueryWrapper<Order>()
+                        .eq("user_id", id));
     }
 }

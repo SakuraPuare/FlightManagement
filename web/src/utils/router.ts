@@ -58,12 +58,10 @@ const routes = [
       },
       {
         path: "/home/merchant",
-        // return empty component
         component: () => import("@/views/home/merchant/IndexView.vue"),
         meta: { title: "Merchant", requiresAuth: true },
         children: [
           {
-            // goods
             path: "/home/merchant/goods",
             component: () => import("@/views/home/merchant/GoodsView.vue"),
             meta: { title: "Goods", requiresAuth: true },
@@ -96,6 +94,23 @@ const routes = [
         path: "/home/staff",
         meta: { title: "Staff", requiresAuth: true },
         component: () => import("@/views/home/staff/IndexView.vue"),
+        children: [
+          {
+            path: "/home/staff/luggage",
+            component: () => import("@/views/home/staff/LuggageView.vue"),
+            meta: { title: "Luggage", requiresAuth: true },
+          },
+          {
+            path: "/home/staff/request",
+            component: () => import("@/views/home/staff/RequestView.vue"),
+            meta: { title: "Request", requiresAuth: true },
+          },
+          {
+            path: "/home/staff/user",
+            component: () => import("@/views/home/staff/UserView.vue"),
+            meta: { title: "User", requiresAuth: true },
+          },
+        ],
       },
     ],
   },

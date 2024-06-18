@@ -29,7 +29,7 @@ public class FlightServiceImpl implements FlightService {
     private final OrderMapper orderMapper;
 
     public FlightServiceImpl(FlightMapper flightMapper, TicketMapper ticketMapper, OrderMapper orderMapper,
-            TicketService ticketService) {
+                             TicketService ticketService) {
         this.flightMapper = flightMapper;
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;

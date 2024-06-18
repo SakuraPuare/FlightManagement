@@ -7,7 +7,16 @@ export type Luggage = {
   updatedAt: string;
 };
 
-export type getLuggageResponse = Id & Luggage;
+export type getLuggageResponse = Id & {
+  userId: number;
+  username: string;
+  orderId: number;
+  weight: number;
+  staffId: number;
+  staffName: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export type createLuggageRequest = {
   userId: number;

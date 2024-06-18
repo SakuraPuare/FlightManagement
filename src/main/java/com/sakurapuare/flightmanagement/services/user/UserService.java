@@ -1,6 +1,7 @@
 package com.sakurapuare.flightmanagement.services.user;
 
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
+import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 
 import java.util.List;
@@ -20,5 +21,9 @@ public interface UserService {
     long count();
 
     List<User> getUserByPagination(int page, int count);
+
+    User getUserByPassengerId(Long id);
+
+    List<Order> getOrdersByUserId(Long id);
 
 }

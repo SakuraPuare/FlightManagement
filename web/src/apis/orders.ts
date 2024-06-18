@@ -22,6 +22,22 @@ export const getMyOrdersListAPI = async (
     .then((res) => res.data as getOrderResponse[]);
 };
 
+export const getOrdersListByUserIdAPI = async (
+  id: number,
+): Promise<getOrderResponse[]> => {
+  return http
+    .get(`/users/user/${id}/orders`)
+    .then((res) => res.data as getOrderResponse[]);
+};
+
+export const getOrdersListByPassengerIdAPI = async (
+  id: number,
+): Promise<getOrderResponse[]> => {
+  return http
+    .get(`/users/passenger/${id}/orders`)
+    .then((res) => res.data as getOrderResponse[]);
+};
+
 export const createOrderAPI = async (id: number): Promise<null> => {
   return http.post(`/orders/${id}`).then((res) => res.data);
 };
