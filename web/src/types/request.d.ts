@@ -13,4 +13,4 @@ export type createRequestRequest = {
   info: string;
 };
 
-export type updateRequestRequest = Partial<createRequestRequest>;
+export type updateRequestRequest = createRequestRequest;

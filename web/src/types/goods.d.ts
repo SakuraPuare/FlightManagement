@@ -10,4 +10,4 @@ export type getGoodsResponse = Id & Goods;
 
 export type createGoodsRequest = Goods;
 
-export type updateGoodsRequest = Partial<Goods>;
+export type updateGoodsRequest = Goods;

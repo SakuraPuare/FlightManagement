@@ -6,8 +6,7 @@ export type Order = {
   updatedAt: string;
 };
 
-export type getOrderResponse = {
-  id: number;
+export type getOrderResponse = Id & {
   airlineName: string;
   flightNumber: string;
   departureCity: string;
@@ -21,4 +20,4 @@ export type getOrderResponse = {
   updatedAt: string;
 };
 
-export type updateOrderRequest = Partial<Order>;
+export type updateOrderRequest = Order;

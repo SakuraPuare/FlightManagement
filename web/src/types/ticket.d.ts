@@ -7,8 +7,7 @@ export type Ticket = {
   updatedAt: string;
 };
 
-export type getTicketResponse = {
-  id: number;
+export type getTicketResponse = Id & {
   airlineId: number;
   flightId: number;
   airlineName: string;
@@ -31,4 +30,4 @@ export type createTicketRequest = {
   price: string;
 };
 
-export type updateTicketRequest = Partial<createTicketRequest>;
+export type updateTicketRequest = createTicketRequest;

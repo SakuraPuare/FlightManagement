@@ -15,4 +15,4 @@ export type createLuggageRequest = {
   weight: number;
 };
 
-export type updateLuggageRequest = Partial<createLuggageRequest>;
+export type updateLuggageRequest = createLuggageRequest;

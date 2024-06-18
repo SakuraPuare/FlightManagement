@@ -14,4 +14,4 @@ export type getFlightResponse = Id & Flight;
 
 export type createFlightRequest = Flight;
 
-export type updateFlightRequest = Partial<Flight>;
+export type updateFlightRequest = Flight;

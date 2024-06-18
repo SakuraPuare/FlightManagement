@@ -1,6 +1,7 @@
 import {
   createFlightRequest,
   Flight,
+  getFlightResponse,
   updateFlightRequest,
 } from "@/types/flight";
 import { Pagination } from "@/types/types";
@@ -12,10 +13,10 @@ export const getFlightAPI = async (id: number): Promise<Flight> => {
 
 export const getFlightsListAPI = async (
   params: Pagination,
-): Promise<Flight[]> => {
+): Promise<getFlightResponse[]> => {
   return http
     .get("/flights/list", { params })
-    .then((res) => res.data as Flight[]);
+    .then((res) => res.data as getFlightResponse[]);
 };
 
 export const createFlightAPI = async (
