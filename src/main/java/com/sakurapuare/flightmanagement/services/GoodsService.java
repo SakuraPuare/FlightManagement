@@ -26,4 +26,6 @@ public interface GoodsService {
     BigDecimal getTotalPrice();
 
     void buyGood(Goods good);
+
+    List<Goods> getGoodsByPaginationAndUserId(int page, int count, Long userId);
 }

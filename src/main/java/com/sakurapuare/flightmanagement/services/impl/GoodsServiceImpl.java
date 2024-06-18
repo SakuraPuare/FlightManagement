@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.GoodsMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.GoodsDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Goods;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Merchant;
 import com.sakurapuare.flightmanagement.services.GoodsService;
+import com.sakurapuare.flightmanagement.services.user.MerchantService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +22,11 @@ public class GoodsServiceImpl implements GoodsService {
 
     private final GoodsMapper goodMapper;
 
-    public GoodsServiceImpl(GoodsMapper goodMapper) {
+    private final MerchantService merchantService;
+
+    public GoodsServiceImpl(GoodsMapper goodMapper, MerchantService merchantService) {
         this.goodMapper = goodMapper;
+        this.merchantService = merchantService;
     }
 
     @Override
@@ -84,5 +90,12 @@ public class GoodsServiceImpl implements GoodsService {
     public void buyGood(Goods good) {
         good.setStock(good.getStock() - 1);
         goodMapper.updateById(good);
+    }
+
+    @Override
+    public List<Goods> getGoodsByPaginationAndUserId(int page, int count, Long userId) {
+        Merchant merchant = merchantService.getMerchantByUserId(userId);
+        return goodMapper.selectPage(new Page<>(page, count),
+                new QueryWrapper<Goods>().eq("merchant_id", merchant.getMerchantId())).getRecords();
     }
 }

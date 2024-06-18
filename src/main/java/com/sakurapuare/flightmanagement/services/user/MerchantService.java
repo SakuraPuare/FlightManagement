@@ -18,4 +18,6 @@ public interface MerchantService {
 
     List<Merchant> getMerchantsByPagination(int page, int count);
 
+    Merchant getMerchantByUserId(Long userId);
+
 }

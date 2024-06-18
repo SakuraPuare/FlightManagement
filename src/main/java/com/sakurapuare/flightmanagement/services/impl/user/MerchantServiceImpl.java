@@ -58,4 +58,11 @@ public class MerchantServiceImpl implements MerchantService {
         Page<Merchant> merchantPage = new Page<>(page, count);
         return merchantMapper.selectPage(merchantPage, null).getRecords();
     }
+
+    @Override
+    public Merchant getMerchantByUserId(Long userId) {
+        return merchantMapper.selectOne(
+                new QueryWrapper<Merchant>()
+                        .eq("user_id", userId));
+    }
 }

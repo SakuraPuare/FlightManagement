@@ -14,6 +14,9 @@ public class Goods {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @TableField(value = "merchant_id")
+    private Long merchantId;
+
     @TableField(value = "name")
     private String name;
 

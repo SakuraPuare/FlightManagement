@@ -30,6 +30,12 @@ VALUES (
     'airline',
     'airline@example.com',
     4
+  ),
+  (
+    'merchant',
+    'merchant',
+    'merchant@example.com',
+    2
   );
 CREATE TABLE IF NOT EXISTS `airlines` (
   `airline_id` BIGINT NULL AUTO_INCREMENT,
@@ -75,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `merchants` (
   PRIMARY KEY (`merchant_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- admin
 INSERT INTO `merchants` (
     `user_id`,
     `merchant_name`,
@@ -87,6 +92,12 @@ VALUES (
     ' ADMIN MERCHANT ',
     ' Jl.Admin No.1 ',
     ' The best merchant in the world '
+  ),
+  (
+    3,
+    ' MERCHANT 2 ',
+    ' Jl.Merchant No.2 ',
+    ' The second best merchant in the world '
   );
 CREATE TABLE IF NOT EXISTS `passengers` (
   `passenger_id` BIGINT NULL AUTO_INCREMENT,
@@ -119,6 +130,7 @@ INSERT INTO staffs (user_id, staff_name)
 VALUES (1, ' John Doe ');
 CREATE TABLE IF NOT EXISTS `goods` (
   `id` BIGINT NULL AUTO_INCREMENT,
+  `merchant_id` BIGINT NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NULL DEFAULT '',
   `price` decimal(10, 2) NOT NULL DEFAULT 0.00,
@@ -126,9 +138,11 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `category` varchar(100) NOT NULL DEFAULT '',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`merchant_id`) REFERENCES `merchants` (`merchant_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 INSERT INTO `goods` (
+    `merchant_id`,
     `name`,
     `description`,
     `price`,
@@ -136,6 +150,7 @@ INSERT INTO `goods` (
     `category`
   )
 VALUES (
+    1,
     'Laptop',
     'Laptop for work',
     10000000.00,
@@ -143,6 +158,7 @@ VALUES (
     'Electronics'
   ),
   (
+    1,
     'Smartphone',
     'Smartphone for work',
     5000000.00,
@@ -150,6 +166,7 @@ VALUES (
     'Electronics'
   ),
   (
+    2,
     'T-Shirt',
     'T-Shirt for daily use',
     100000.00,

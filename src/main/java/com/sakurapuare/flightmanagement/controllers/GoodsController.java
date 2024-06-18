@@ -5,6 +5,7 @@ import com.sakurapuare.flightmanagement.pojo.dto.GoodsDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Goods;
 import com.sakurapuare.flightmanagement.services.GoodsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,13 @@ public class GoodsController {
     public Response<List<Goods>> getGoodList(@RequestParam("page") int page, @RequestParam("count") int count) {
 
         return Response.success(goodsService.getGoodsByPagination(page, count));
+    }
+
+    @GetMapping("/my")
+    public Response<List<Goods>> getMyGoodList(@RequestParam("page") int page, @RequestParam("count") int count,
+            HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
+        return Response.success(goodsService.getGoodsByPaginationAndUserId(page, count, userId));
     }
 
     @GetMapping("/{id}")
@@ -71,7 +79,7 @@ public class GoodsController {
 
     @PutMapping("/{id}")
     public Response<Void> updateGood(@PathVariable(name = "id") long id,
-                                     @RequestBody GoodsDTO goodDTO) {
+            @RequestBody GoodsDTO goodDTO) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");
