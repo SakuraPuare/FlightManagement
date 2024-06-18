@@ -7,11 +7,10 @@ import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.pojo.entity.user.info.AirlineInfo;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
-
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AirlineServiceImpl implements AirlineService {

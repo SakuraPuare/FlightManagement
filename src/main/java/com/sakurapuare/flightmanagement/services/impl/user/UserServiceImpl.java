@@ -7,11 +7,10 @@ import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterD
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.user.UserService;
 import com.sakurapuare.flightmanagement.utils.RoleUtils;
-
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,9 +1,9 @@
 package com.sakurapuare.flightmanagement.services.user;
 
-import java.util.List;
-
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
+
+import java.util.List;
 
 public interface UserService {
 

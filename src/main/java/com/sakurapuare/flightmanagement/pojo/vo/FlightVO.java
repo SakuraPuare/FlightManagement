@@ -1,8 +1,8 @@
 package com.sakurapuare.flightmanagement.pojo.vo;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class FlightVO {
