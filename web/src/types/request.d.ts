@@ -1,8 +1,10 @@
 export type Request = {
   userId: number;
+  userName: string;
   info: string;
   status: string;
   handlerId: number;
+  handlerName: string;
   createdAt: string;
   updatedAt: string;
 };

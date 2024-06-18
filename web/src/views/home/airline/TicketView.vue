@@ -133,7 +133,7 @@ const columns = [
           }}
         >
           Modify
-        </button>{" "}
+        </button>
         <button
           class={
             "bg-pink-500 rounded-lg py-1 px-2 select-none cursor-pointer text-white hover:font-bold hover:bg-pink-600"

@@ -42,3 +42,11 @@ export const deleteRequestAPI = async (id: number): Promise<null> => {
 export const handleRequestAPI = async (id: number): Promise<null> => {
   return http.post(`/requests/${id}/handle`).then((res) => res.data);
 };
+
+export const resolveRequestAPI = async (id: number): Promise<null> => {
+  return http.post(`/requests/${id}/resolve`).then((res) => res.data);
+};
+
+export const cancelRequestAPI = async (id: number): Promise<null> => {
+  return http.post(`/requests/${id}/cancel`).then((res) => res.data);
+};
