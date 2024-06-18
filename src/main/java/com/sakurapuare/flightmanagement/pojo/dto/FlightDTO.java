@@ -1,6 +1,5 @@
 package com.sakurapuare.flightmanagement.pojo.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;

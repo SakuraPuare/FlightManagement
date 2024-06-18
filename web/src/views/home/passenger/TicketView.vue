@@ -8,6 +8,7 @@ import { DateRender } from "@/utils/date";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, ref, Ref } from "vue";
 import { TableV2FixedDir } from "element-plus";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {
@@ -144,13 +145,13 @@ const getData = async (page: number) => {
 
 const buy = async (id: number) => {
   await createOrderAPI(id);
-  getData(page.value);
+  await getData(page.value);
 };
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("ticket");
 
-  getData(page.value);
+  await getData(page.value);
 });
 
 const headerlessHeight = ref(0);

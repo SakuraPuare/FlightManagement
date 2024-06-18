@@ -20,6 +20,7 @@ import {
   getFlightsListAPI,
   updateFlightAPI,
 } from "@/apis/flights";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {

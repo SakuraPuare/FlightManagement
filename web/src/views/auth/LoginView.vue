@@ -4,6 +4,7 @@ import { loginAPI } from "@/apis/auth";
 import { useUserStore } from "@/stores/user";
 import { LoginParams } from "@/types/auth/login";
 import router from "@/utils/router";
+import TitleComp from "@/components/TitleComp.vue";
 
 const user = useUserStore();
 

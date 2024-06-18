@@ -17,6 +17,7 @@ import {
 } from "@/types/goods";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {
@@ -169,7 +170,7 @@ const clean = () => {
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("goods");
 
-  getData(page.value);
+  await getData(page.value);
 });
 const headerlessHeight = ref(0);
 onMounted(async () => {

@@ -6,6 +6,7 @@ import { onMounted, ref, Ref } from "vue";
 import { TableV2FixedDir } from "element-plus";
 import { buyGoodsAPI, getGoodsListAPI } from "@/apis/goods";
 import { getGoodsResponse } from "@/types/goods";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {
@@ -86,13 +87,13 @@ const getData = async (page: number) => {
 
 const buy = async (id: number) => {
   await buyGoodsAPI(id);
-  getData(page.value);
+  await getData(page.value);
 };
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("goods");
 
-  getData(page.value);
+  await getData(page.value);
 });
 const headerlessHeight = ref(0);
 onMounted(async () => {

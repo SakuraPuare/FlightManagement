@@ -6,6 +6,7 @@ import { onMounted, ref, Ref } from "vue";
 import { getMyLuggagesListAPI } from "@/apis/luggages";
 import { getLuggageResponse } from "@/types/luggage";
 import { DateRender } from "@/utils/date";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {
@@ -72,7 +73,7 @@ const getData = async (page: number) => {
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("luggage");
 
-  getData(page.value);
+  await getData(page.value);
 });
 const headerlessHeight = ref(0);
 onMounted(async () => {

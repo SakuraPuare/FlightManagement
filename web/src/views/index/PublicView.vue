@@ -8,6 +8,8 @@ import {
   faShield,
   faSuitcaseRolling,
 } from "@fortawesome/free-solid-svg-icons";
+import TitleComp from "@/components/TitleComp.vue";
+import HeaderComp from "@/components/HeaderComp.vue";
 </script>
 
 <template>

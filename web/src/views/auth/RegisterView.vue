@@ -13,6 +13,7 @@ import {
   registerPassengerAPI,
   registerStaffAPI,
 } from "@/apis/auth";
+import TitleComp from "@/components/TitleComp.vue";
 
 const items = ["Passenger", "Merchant", "Airline", "Staff"];
 let selectedIndex = ref(0);

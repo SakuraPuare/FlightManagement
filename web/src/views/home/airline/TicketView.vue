@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getFlightResponse } from "@/types/flight";
 import { getFlightsListAPI } from "@/apis/flights";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {

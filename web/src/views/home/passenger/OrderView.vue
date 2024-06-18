@@ -7,6 +7,7 @@ import { getHeightWithoutHeader } from "@/utils/responsive";
 import { onMounted, Ref, ref } from "vue";
 import { getOrderResponse } from "@/types/order";
 import { TableV2FixedDir } from "element-plus";
+import ResizableTableComp from "@/components/ResizableTableComp.vue";
 
 const columns = [
   {
@@ -166,18 +167,18 @@ const getData = async (page: number) => {
 
 const pay = async (id: number) => {
   await payOrderAPI(id);
-  getData(page.value);
+  await getData(page.value);
 };
 
 const cancel = async (id: number) => {
   await cancelOrderAPI(id);
-  getData(page.value);
+  await getData(page.value);
 };
 
 onMounted(async () => {
   allCount.value = await getTypesCountStatistic("order");
 
-  getData(page.value);
+  await getData(page.value);
 });
 
 const headerlessHeight = ref(0);

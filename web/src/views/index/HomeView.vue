@@ -17,6 +17,7 @@ import { onMounted, Ref, ref, watch } from "vue";
 import { getHeightWithoutHeader } from "@/utils/responsive";
 import router from "@/utils/router";
 import { MenuItem } from "@/types/types";
+import HeaderComp from "@/components/HeaderComp.vue";
 
 // if path = /home
 const isAtHomePath = ref(router.currentRoute.value.path === "/home");
