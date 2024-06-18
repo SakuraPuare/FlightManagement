@@ -105,11 +105,6 @@ const routes = [
             component: () => import("@/views/home/staff/RequestView.vue"),
             meta: { title: "Request", requiresAuth: true },
           },
-          {
-            path: "/home/staff/user",
-            component: () => import("@/views/home/staff/UserView.vue"),
-            meta: { title: "User", requiresAuth: true },
-          },
         ],
       },
     ],

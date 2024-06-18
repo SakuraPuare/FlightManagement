@@ -11,7 +11,6 @@ import {
   faStore,
   faSuitcase,
   faTicket,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { autoIncrement } from "@/utils/utils";
@@ -135,13 +134,6 @@ const update = () => {
       label: "Request",
       link: "/home/staff/request",
       icon: faComment,
-      children: [],
-    });
-    managementChildren.push({
-      id: autoIncrement(menuItems.value),
-      label: "User",
-      link: "/home/staff/user",
-      icon: faUser,
       children: [],
     });
   }
