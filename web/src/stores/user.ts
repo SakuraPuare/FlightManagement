@@ -25,7 +25,10 @@ export const useUserStore = defineStore({
       this.token = token;
     },
     clearToken() {
-      this.token = {} as LoginResponse;
+      this.token = {
+        token: "",
+        expiresTime: "",
+      } as LoginResponse;
     },
     isLogin() {
       return this.token.token !== "";
