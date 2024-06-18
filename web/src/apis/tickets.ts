@@ -16,6 +16,14 @@ export const getTicketsListAPI = async (
     .then((res) => res.data as getTicketResponse[]);
 };
 
+export const getMyTicketsListAPI = async (
+  params: Pagination,
+): Promise<getTicketResponse[]> => {
+  return http
+    .get("/tickets/my", { params })
+    .then((res) => res.data as getTicketResponse[]);
+};
+
 export const createTicketAPI = async (
   params: createTicketRequest,
 ): Promise<null> => {

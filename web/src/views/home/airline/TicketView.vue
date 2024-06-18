@@ -3,7 +3,7 @@ import { getTypesCountStatistic } from "@/apis/statistic";
 import {
   createTicketAPI,
   deleteTicketAPI,
-  getTicketsListAPI,
+  getMyTicketsListAPI,
   updateTicketAPI,
 } from "@/apis/tickets";
 import { getTicketResponse, updateTicketRequest } from "@/types/ticket";
@@ -224,7 +224,7 @@ const getTableData = async (page: number) => {
     page: page - 1,
     count: 10,
   };
-  const res = await getTicketsListAPI(pagination);
+  const res = await getMyTicketsListAPI(pagination);
   if (!res || res.length === 0) return;
   tableData.value = res;
 };
