@@ -22,4 +22,6 @@ public interface FlightService {
 
     List<Flight> getFlightsByPaginationAndUserId(int page, int count, Long userId);
 
+    List<Flight> getFlightsListByAirlineId(Long airlineId);
+
 }

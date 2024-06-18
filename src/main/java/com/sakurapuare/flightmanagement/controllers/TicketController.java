@@ -10,6 +10,7 @@ import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +37,30 @@ public class TicketController {
         this.ticketService = ticketService;
         this.airlineService = airlineService;
         this.flightService = flightService;
+    }
+
+    @GetMapping("/my")
+    public Response<List<TicketVO>> getMyTicketList(@RequestParam("page") int page, @RequestParam("count") int count,
+            HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
+
+        List<Ticket> ticketList = ticketService.getTicketsByPaginationAndUserId(page, count, userId);
+        List<TicketVO> ticketVOList = new ArrayList<>();
+        Map<Long, Airline> airlineMap = new HashMap<>();
+        Map<Long, Flight> flightMap = new HashMap<>();
+        for (Ticket ticket : ticketList) {
+            Flight flight = flightMap.computeIfAbsent(ticket.getFlightId(),
+                    id -> flightService.getFlightById(id));
+            Airline airline = airlineMap.computeIfAbsent(flight.getAirlineId(),
+                    id -> airlineService.getAirlineById(id));
+
+            TicketVO ticketVO = new TicketVO();
+            BeanUtils.copyProperties(airline, ticketVO);
+            BeanUtils.copyProperties(flight, ticketVO);
+            BeanUtils.copyProperties(ticket, ticketVO);
+            ticketVOList.add(ticketVO);
+        }
+        return Response.success(ticketVOList);
     }
 
     @GetMapping("/list")

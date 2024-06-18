@@ -29,4 +29,8 @@ public interface TicketService {
 
     List<Ticket> getTicketsByFlightId(long id);
 
+    List<Ticket> getTicketsByPaginationAndUserId(int page, int count, Long userId);
+
+    Ticket getTicketByIdAndUserId(long id, Long userId);
+
 }

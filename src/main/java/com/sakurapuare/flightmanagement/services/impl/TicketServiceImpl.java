@@ -5,9 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.OrderMapper;
 import com.sakurapuare.flightmanagement.mapper.TicketMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.TicketDTO;
+import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
+import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.TicketService;
+import com.sakurapuare.flightmanagement.services.user.AirlineService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +25,16 @@ public class TicketServiceImpl implements TicketService {
 
     private final OrderMapper orderMapper;
 
-    public TicketServiceImpl(TicketMapper ticketMapper, OrderMapper orderMapper) {
+    private AirlineService airlineService;
+
+    private FlightService flightService;
+
+    public TicketServiceImpl(TicketMapper ticketMapper, OrderMapper orderMapper, AirlineService airlineService,
+            FlightService flightService) {
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
+        this.airlineService = airlineService;
+        this.flightService = flightService;
     }
 
     @Override
@@ -102,6 +114,29 @@ public class TicketServiceImpl implements TicketService {
         return ticketMapper.selectList(
                 new QueryWrapper<Ticket>()
                         .eq("flight_id", id));
+    }
+
+    @Override
+    public List<Ticket> getTicketsByPaginationAndUserId(int page, int count, Long userId) {
+        Airline airline = airlineService.getAirlineByUserId(userId);
+        List<Flight> flights = flightService.getFlightsListByAirlineId(airline.getAirlineId());
+        Page<Ticket> pagination = new Page<>(page, count);
+        return ticketMapper.selectPage(pagination,
+                new QueryWrapper<Ticket>()
+                        .in("flight_id", flights.stream().map(
+                                Flight::getId).toArray()))
+                .getRecords();
+    }
+
+    @Override
+    public Ticket getTicketByIdAndUserId(long id, Long userId) {
+        Airline airline = airlineService.getAirlineByUserId(userId);
+        List<Flight> flights = flightService.getFlightsListByAirlineId(airline.getAirlineId());
+        return ticketMapper.selectOne(
+                new QueryWrapper<Ticket>()
+                        .eq("id", id)
+                        .in("flight_id", flights.stream().map(
+                                Flight::getId).toArray()));
     }
 
 }

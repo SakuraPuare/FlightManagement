@@ -11,7 +11,6 @@ import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.services.FlightService;
-import com.sakurapuare.flightmanagement.services.TicketService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
 
 import org.springframework.beans.BeanUtils;
@@ -34,7 +33,7 @@ public class FlightServiceImpl implements FlightService {
     private final AirlineService airlineService;
 
     public FlightServiceImpl(FlightMapper flightMapper, TicketMapper ticketMapper, OrderMapper orderMapper,
-            TicketService ticketService, AirlineService airlineService) {
+            AirlineService airlineService) {
         this.flightMapper = flightMapper;
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
@@ -114,6 +113,11 @@ public class FlightServiceImpl implements FlightService {
                 new QueryWrapper<Flight>()
                         .eq("airline_id", airline.getUserId()))
                 .getRecords();
+    }
+
+    @Override
+    public List<Flight> getFlightsListByAirlineId(Long airlineId) {
+        return flightMapper.selectList(new QueryWrapper<Flight>().eq("airline_id", airlineId));
     }
 
 }

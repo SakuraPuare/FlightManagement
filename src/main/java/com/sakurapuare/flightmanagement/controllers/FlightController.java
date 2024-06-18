@@ -34,7 +34,27 @@ public class FlightController {
     }
 
     @GetMapping("/list")
-    public Response<List<FlightVO>> getFlightList(@RequestParam("page") int page, @RequestParam("count") int count,
+    public Response<List<FlightVO>> getFlightList(@RequestParam("page") int page, @RequestParam("count") int count) {
+
+        List<Flight> flightList = flightService.getFlightsByPagination(page, count);
+        List<FlightVO> flightVOList = new ArrayList<>();
+
+        Map<Long, Airline> airlineMap = new HashMap<>();
+        for (Flight flight : flightList) {
+            Airline airline = airlineMap.computeIfAbsent(flight.getAirlineId(),
+                    id -> airlineService.getAirlineById(id));
+
+            FlightVO flightVO = new FlightVO();
+            BeanUtils.copyProperties(flight, flightVO);
+            BeanUtils.copyProperties(airline, flightVO);
+            flightVOList.add(flightVO);
+        }
+
+        return Response.success(flightVOList);
+    }
+
+    @GetMapping("/my")
+    public Response<List<FlightVO>> getMyFlightList(@RequestParam("page") int page, @RequestParam("count") int count,
             HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
 
