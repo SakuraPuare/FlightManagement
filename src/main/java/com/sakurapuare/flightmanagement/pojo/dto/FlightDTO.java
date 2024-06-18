@@ -25,7 +25,6 @@ public class FlightDTO {
     @NotEmpty(message = "Arrival city cannot be empty")
     private String arrivalCity;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotEmpty(message = "Date of departure cannot be empty")
     private LocalDateTime dateOfDeparture;
 

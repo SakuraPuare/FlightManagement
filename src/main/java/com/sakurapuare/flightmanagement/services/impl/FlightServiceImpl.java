@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightServiceImpl implements FlightService {
@@ -29,7 +31,7 @@ public class FlightServiceImpl implements FlightService {
     private final OrderMapper orderMapper;
 
     public FlightServiceImpl(FlightMapper flightMapper, TicketMapper ticketMapper, OrderMapper orderMapper,
-                             TicketService ticketService) {
+            TicketService ticketService) {
         this.flightMapper = flightMapper;
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
@@ -78,10 +80,10 @@ public class FlightServiceImpl implements FlightService {
             flightIds.add(ticket.getFlightId());
         }
 
-        // find all orders related to this flight
+        // find all orders related to all tickets
         List<Order> orders = new ArrayList<>();
         for (Long flightId : flightIds) {
-            orders.addAll(orderMapper.selectList(new QueryWrapper<Order>().eq("flight_id", flightId)));
+            orders.addAll(orderMapper.selectList(new QueryWrapper<Order>().eq("ticket_id", flightId)));
         }
 
         for (Order order : orders) {
