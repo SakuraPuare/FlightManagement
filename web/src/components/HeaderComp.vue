@@ -12,8 +12,8 @@ const isLogin = ref(user.isLogin() && user.userId !== 0);
 
 const logout = () => {
   user.logout();
-  console.log("router to /public");
-  router.push("/public");
+  console.log("router to /");
+  router.push("/");
 };
 
 const menuItems = [
@@ -47,8 +47,8 @@ menuItems.push({
             >{{ TITLE }}</span
           >
         </router-link>
-        <div class="flex lg:order-2">
-          <template v-if="!isLogin">
+        <div class="flex lg:order-2 my-auto">
+          <template v-if="!isLogin || user.userId === 0">
             <router-link to="/login">
               <span
                 class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
