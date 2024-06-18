@@ -32,7 +32,7 @@ const routes = [
       {
         path: "/home/passgenger",
         meta: { title: "Passenger", requiresAuth: true },
-        component: { render: () => null },
+        component: () => import("@/views/home/passenger/IndexView.vue"),
         children: [
           {
             path: "/home/passenger/ticket",
@@ -59,7 +59,7 @@ const routes = [
       {
         path: "/home/merchant",
         // return empty component
-        component: { render: () => null },
+        component: () => import("@/views/home/merchant/IndexView.vue"),
         meta: { title: "Merchant", requiresAuth: true },
         children: [
           {
@@ -73,7 +73,7 @@ const routes = [
       {
         path: "/home/airline",
         meta: { title: "Airline", requiresAuth: true },
-        component: { render: () => null },
+        component: () => import("@/views/home/airline/IndexView.vue"),
         children: [
           {
             path: "/home/airline/order",
@@ -95,7 +95,7 @@ const routes = [
       {
         path: "/home/staff",
         meta: { title: "Staff", requiresAuth: true },
-        component: { render: () => null },
+        component: () => import("@/views/home/staff/IndexView.vue"),
       },
     ],
   },
