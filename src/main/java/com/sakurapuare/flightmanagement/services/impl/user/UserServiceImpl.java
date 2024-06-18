@@ -1,11 +1,15 @@
 package com.sakurapuare.flightmanagement.services.impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.user.UserMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.BaseUserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.User;
 import com.sakurapuare.flightmanagement.services.user.UserService;
 import com.sakurapuare.flightmanagement.utils.RoleUtils;
+
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -68,5 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public long count() {
         return userMapper.selectCount(null);
+    }
+
+    @Override
+    public List<User> getUserByPagination(int page, int count) {
+        Page<User> userPage = new Page<>(page, count);
+        return userMapper.selectPage(userPage, null).getRecords();
     }
 }

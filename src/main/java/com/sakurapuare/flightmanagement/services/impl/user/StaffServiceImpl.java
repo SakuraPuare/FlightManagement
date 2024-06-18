@@ -1,11 +1,15 @@
 package com.sakurapuare.flightmanagement.services.impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakurapuare.flightmanagement.mapper.user.StaffMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Staff;
 import com.sakurapuare.flightmanagement.pojo.entity.user.info.StaffInfo;
 import com.sakurapuare.flightmanagement.services.user.StaffService;
+
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +53,11 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Staff getStaffById(Long id) {
         return staffMapper.selectById(id);
+    }
+
+    @Override
+    public List<Staff> getStaffByPagination(int page, int count) {
+        Page<Staff> staffPage = new Page<>(page, count);
+        return staffMapper.selectPage(staffPage, null).getRecords();
     }
 }
