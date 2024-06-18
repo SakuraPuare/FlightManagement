@@ -33,8 +33,8 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByPaginationAndUserId(int page, int count, long userId) {
         Page<Order> pagination = new Page<>(page, count);
         return orderMapper.selectPage(pagination,
-                new QueryWrapper<Order>()
-                        .eq("user_id", userId))
+                        new QueryWrapper<Order>()
+                                .eq("user_id", userId))
                 .getRecords();
     }
 

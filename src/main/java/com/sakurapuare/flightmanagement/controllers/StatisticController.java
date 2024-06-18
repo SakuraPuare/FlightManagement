@@ -41,9 +41,9 @@ public class StatisticController {
     private final TicketService ticketService;
 
     public StatisticController(AirlineService airlineService, MerchantService merchantService,
-            PassengerService passengerService, StaffService staffService, UserService userService,
-            FlightService flightService, GoodsService goodsService, LuggageService luggageService,
-            OrderService orderService, RequestService requestService, TicketService ticketService) {
+                               PassengerService passengerService, StaffService staffService, UserService userService,
+                               FlightService flightService, GoodsService goodsService, LuggageService luggageService,
+                               OrderService orderService, RequestService requestService, TicketService ticketService) {
         this.airlineService = airlineService;
         this.merchantService = merchantService;
         this.passengerService = passengerService;

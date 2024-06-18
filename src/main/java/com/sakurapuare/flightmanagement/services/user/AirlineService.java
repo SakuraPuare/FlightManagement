@@ -4,6 +4,8 @@ import com.sakurapuare.flightmanagement.pojo.dto.auth.register.UserRegisterDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.pojo.entity.user.info.AirlineInfo;
 
+import java.util.List;
+
 public interface AirlineService {
 
     Airline getAirlineByAirlineCode(String airlineCode);
@@ -13,5 +15,7 @@ public interface AirlineService {
     Airline getAirlineById(long airlineId);
 
     long count();
+
+    List<Airline> getAirlinesByPagination(int page, int count);
 
 }

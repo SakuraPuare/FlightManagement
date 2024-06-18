@@ -31,7 +31,7 @@ public class LuggageController {
 
     @GetMapping("/my")
     public Response<List<Luggage>> getMyLuggageList(@RequestParam("page") int page, @RequestParam("count") int count,
-            HttpServletRequest request) {
+                                                    HttpServletRequest request) {
 
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
@@ -46,7 +46,7 @@ public class LuggageController {
 
     @GetMapping("/{id}")
     public Response<Luggage> getLuggageById(@PathVariable(name = "id") long id,
-            HttpServletRequest request) {
+                                            HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -59,7 +59,7 @@ public class LuggageController {
 
     @PostMapping("/")
     public Response<Void> addLuggage(@Valid @RequestBody LuggageDTO luggageDTO,
-            HttpServletRequest request) {
+                                     HttpServletRequest request) {
         long staffId = Long.parseLong(request.getAttribute("userId").toString());
         long userId = luggageDTO.getUserId();
         Order order = orderService.getOrderByIdAndUserId(luggageDTO.getOrderId(), userId);
@@ -76,7 +76,7 @@ public class LuggageController {
 
     @PutMapping("/{id}")
     public Response<Void> updateLuggage(@PathVariable(name = "id") long id, @RequestBody LuggageDTO luggageDTO,
-            HttpServletRequest request) {
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -90,7 +90,7 @@ public class LuggageController {
 
     @DeleteMapping("/{id}")
     public Response<Void> deleteLuggage(@PathVariable(name = "id") long id,
-            HttpServletRequest request) {
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);

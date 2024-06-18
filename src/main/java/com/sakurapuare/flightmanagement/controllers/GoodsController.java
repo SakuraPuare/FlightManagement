@@ -7,7 +7,6 @@ import com.sakurapuare.flightmanagement.services.GoodsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,7 +71,7 @@ public class GoodsController {
 
     @PutMapping("/{id}")
     public Response<Void> updateGood(@PathVariable(name = "id") long id,
-            @RequestBody GoodsDTO goodDTO) {
+                                     @RequestBody GoodsDTO goodDTO) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");

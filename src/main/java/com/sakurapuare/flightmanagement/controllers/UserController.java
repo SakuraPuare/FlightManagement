@@ -5,10 +5,9 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.*;
 import com.sakurapuare.flightmanagement.services.user.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -27,7 +26,7 @@ public class UserController {
     private final StaffService staffService;
 
     public UserController(UserService userService, AirlineService airlineService,
-            MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
+                          MerchantService merchantService, PassengerService passengerService, StaffService staffService) {
         this.userService = userService;
         this.airlineService = airlineService;
         this.merchantService = merchantService;
@@ -44,6 +43,11 @@ public class UserController {
         return Response.success(user);
     }
 
+    @GetMapping("/user/list")
+    public Response<List<User>> listUsers(@RequestParam("page") int page, @RequestParam("count") int count) {
+        return Response.success(userService.getUserByPagination(page, count));
+    }
+
     @GetMapping("/airline/{id}")
     public Response<Airline> getAirline(@PathVariable Long id) {
         Airline airline = airlineService.getAirlineById(id);
@@ -51,6 +55,11 @@ public class UserController {
             return Response.error("Airline not found");
         }
         return Response.success(airline);
+    }
+
+    @GetMapping("/airline/list")
+    public Response<List<Airline>> listAirlines(@RequestParam("page") int page, @RequestParam("count") int count) {
+        return Response.success(airlineService.getAirlinesByPagination(page, count));
     }
 
     @GetMapping("/merchant/{id}")
@@ -62,6 +71,11 @@ public class UserController {
         return Response.success(merchant);
     }
 
+    @GetMapping("/merchant/list")
+    public Response<List<Merchant>> listMerchants(@RequestParam("page") int page, @RequestParam("count") int count) {
+        return Response.success(merchantService.getMerchantsByPagination(page, count));
+    }
+
     @GetMapping("/passenger/{id}")
     public Response<Passenger> getPassenger(@PathVariable Long id) {
         Passenger passenger = passengerService.getPassengerById(id);
@@ -69,6 +83,11 @@ public class UserController {
             return Response.error("Passenger not found");
         }
         return Response.success(passenger);
+    }
+
+    @GetMapping("/passenger/list")
+    public Response<List<Passenger>> listPassengers(@RequestParam("page") int page, @RequestParam("count") int count) {
+        return Response.success(passengerService.getPassengersByPagination(page, count));
     }
 
     @GetMapping("/staff/{id}")
@@ -80,4 +99,8 @@ public class UserController {
         return Response.success(staff);
     }
 
+    @GetMapping("/staff/list")
+    public Response<List<Staff>> listStaff(@RequestParam("page") int page, @RequestParam("count") int count) {
+        return Response.success(staffService.getStaffByPagination(page, count));
+    }
 }
