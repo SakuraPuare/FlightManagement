@@ -9,6 +9,8 @@ export type Ticket = {
 
 export type getTicketResponse = {
   id: number;
+  airlineId: number;
+  flightId: number;
   airlineName: string;
   airlineCountry: string;
   flightNumber: string;

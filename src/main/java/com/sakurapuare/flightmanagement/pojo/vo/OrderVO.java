@@ -11,6 +11,10 @@ public class OrderVO {
 
     private Long id;
 
+    private Long airlineId;
+
+    private Long flightId;
+
     private String airlineName;
 
     private String flightNumber;
