@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         for (Order order : orders) {
             Ticket ticket1 = ticketService.getTicketById(order.getTicketId());
             Flight flight1 = flightService.getFlightById(ticket1.getFlightId());
-            if (flight.getId() == flight1.getId()) {
+            if (flight.getId().equals(flight1.getId())) {
                 return true;
             }
         }
