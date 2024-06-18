@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 public class TicketVO {
     private Long id;
 
+    private Long airlineId;
+
+    private Long flightId;
+
     private String airlineName;
 
     private String airlineCountry;
