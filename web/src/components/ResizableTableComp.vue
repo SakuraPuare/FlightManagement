@@ -24,7 +24,7 @@
       background
       class="mx-auto"
       layout="prev, pager, next"
-      @current-change="paginationChangeHandler"
+      @current-change="$emit('paginationChange', $event)"
     />
   </div>
 </template>
@@ -44,10 +44,4 @@ defineProps({
     required: true,
   },
 });
-
-const emit = defineEmits(["paginationChange"]);
-
-const paginationChangeHandler = (page: number) => {
-  emit("paginationChange", page);
-};
 </script>

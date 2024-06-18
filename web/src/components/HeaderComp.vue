@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { TITLE } from "@/config";
 import { useUserStore } from "@/stores/user.ts";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import Avatar from "vue-boring-avatars";
 import router from "@/utils/router";
 import { autoIncrement } from "@/utils/utils";
@@ -9,6 +9,18 @@ import { getUserRoleList } from "@/utils/role";
 
 const user = useUserStore();
 const isLogin = ref(user.isLogin() && user.userId !== 0);
+const isAtHomePath = ref(router.currentRoute.value.path === "/home");
+
+watch(
+  () => router.currentRoute.value.path,
+  () => {
+    if (router.currentRoute.value.path === "/home") {
+      isAtHomePath.value = true;
+    } else {
+      isAtHomePath.value = false;
+    }
+  },
+);
 
 const logout = () => {
   user.logout();
@@ -36,17 +48,22 @@ menuItems.push({
     <nav
       class="z-50 fixed w-full bg-pink-400 border-gray-200 px-4 lg:px-6 py-2.5 h-14 dark:bg-gray-800"
     >
-      <div class="flex space-x-16 mx-auto max-w-screen-xl">
-        <router-link
+      <div class="flex lg:space-x-16 mx-auto max-w-screen-xl">
+        <div
           class="flex items-center text-xl font-semibold whitespace-nowrap dark:text-white"
           to="/"
         >
-          <img alt="{{ TITLE }} Logo" class="mr-3 h-6 sm:h-9" src="/logo.svg" />
-          <span
-            class="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden lg:block"
-            >{{ TITLE }}</span
-          >
-        </router-link>
+          <button class="pr-4" @click="$emit('clickOnLogo')">
+            <img alt="{{ TITLE }} Logo" class="h-9 w-9" src="/logo.svg" />
+          </button>
+
+          <router-link to="/">
+            <span
+              class="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden lg:block"
+              >{{ TITLE }}</span
+            >
+          </router-link>
+        </div>
 
         <div class="flex-grow lg:hidden"></div>
         <div
@@ -66,7 +83,7 @@ menuItems.push({
           </ul>
         </div>
 
-        <div v-if="isLogin" class="w-128">
+        <div v-if="isLogin && isAtHomePath" class="w-128">
           <!-- select role -->
           <el-select
             v-model="user.currentRole"

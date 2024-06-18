@@ -6,7 +6,7 @@
         fontSize
       "
     >
-      <img alt="logo" :class="'mr-4 ' + logoSize" src="/logo.svg" />
+      <img :class="'mr-4 ' + logoSize" alt="logo" src="/logo.svg" />
       {{ TITLE }}
     </span>
   </router-link>

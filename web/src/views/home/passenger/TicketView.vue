@@ -170,7 +170,7 @@ const paginationChange = (v: number) => {
 </script>
 
 <template>
-  <div :style="'height:' + headerlessHeight + 'px'" class="ml-0 sm:ml-72 p-8">
+  <div :style="'height:' + headerlessHeight + 'px'" class="ml-0 lg:ml-72 p-8">
     <div
       class="mx-auto p-8 max-w-screen-xl w-full h-full shadow-lg rounded-lg flex flex-col space-y-4"
     >

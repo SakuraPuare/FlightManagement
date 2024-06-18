@@ -154,20 +154,81 @@ onMounted(async () => {
   headerlessHeight.value = getHeightWithoutHeader();
   window.addEventListener("resize", () => {
     headerlessHeight.value = getHeightWithoutHeader();
+    isLarge.value = window.innerWidth < 1024;
   });
   update();
 });
+
+const drawer = ref(false);
+// check screen size is medium
+const isLarge = ref(window.innerWidth < 1024);
 </script>
 
 <template>
-  <HeaderComp />
+  <HeaderComp @clickOnLogo="drawer = true" />
 
   <div
     :style="'height:' + headerlessHeight + 'px'"
     class="pt-[56px] flex flex-col w-full"
   >
+    <el-drawer
+      v-if="isLarge"
+      v-model="drawer"
+      :with-header="false"
+      direction="ltr"
+      size="50%"
+    >
+      <ul class="space-y-2">
+        <li v-for="item in menuItems" :key="item.id">
+          <template v-if="!item.children.length">
+            <router-link
+              :to="item.link"
+              class="flex items-center p-2 font-normal hover:font-bold text-gray-900 rounded-lg dark:text-white hover:bg-pink-100 dark:hover:bg-pink-700 group"
+            >
+              <font-awesome-icon
+                :icon="item.icon"
+                class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              />
+              <span class="ml-3 font-normal hover:font-bold">{{
+                item.label
+              }}</span>
+            </router-link>
+          </template>
+
+          <template v-else>
+            <li
+              class="flex items-center p-2 pb-4 font-normal text-gray-900 rounded-lg dark:text-white group"
+            >
+              <font-awesome-icon
+                :icon="item.icon"
+                class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              />
+              <span class="ml-3">{{ item.label }}</span>
+            </li>
+
+            <ul class="space-y-2 pl-[1em]">
+              <li
+                v-for="child in item.children"
+                :key="child.id"
+                class="flex items-center p-2 font-normal text-gray-900 rounded-lg dark:text-white group"
+              >
+                <font-awesome-icon
+                  :icon="child.icon"
+                  class="w-4 h-4 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                />
+                <router-link :to="child.link">
+                  <span class="ml-3 font-normal hover:font-bold">{{
+                    child.label
+                  }}</span>
+                </router-link>
+              </li>
+            </ul>
+          </template>
+        </li>
+      </ul>
+    </el-drawer>
     <aside
-      id="default-sidebar"
+      v-else
       class="select-none fixed top-[56px] left-0 z-40 w-72 shadow-lg h-screen transition-transform -translate-x-full sm:translate-x-0"
     >
       <div
@@ -223,7 +284,8 @@ onMounted(async () => {
         </ul>
       </div>
     </aside>
-    <div v-if="isAtHomePath" class="ml-0 sm:ml-72 select-none">
+
+    <div v-if="isAtHomePath" class="ml-0 lg:ml-72 select-none">
       <div
         class="max-w-screen-md mx-auto w-full mt-[18%] flex justify-center place-content-center text-center"
       >
