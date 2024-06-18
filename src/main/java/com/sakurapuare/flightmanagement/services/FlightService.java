@@ -20,4 +20,6 @@ public interface FlightService {
 
     long count();
 
+    List<Flight> getFlightsByPaginationAndUserId(int page, int count, Long userId);
+
 }

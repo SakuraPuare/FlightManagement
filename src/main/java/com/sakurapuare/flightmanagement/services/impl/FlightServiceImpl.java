@@ -9,8 +9,11 @@ import com.sakurapuare.flightmanagement.pojo.dto.FlightDTO;
 import com.sakurapuare.flightmanagement.pojo.entity.Flight;
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
+import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.TicketService;
+import com.sakurapuare.flightmanagement.services.user.AirlineService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +31,14 @@ public class FlightServiceImpl implements FlightService {
 
     private final OrderMapper orderMapper;
 
+    private final AirlineService airlineService;
+
     public FlightServiceImpl(FlightMapper flightMapper, TicketMapper ticketMapper, OrderMapper orderMapper,
-                             TicketService ticketService) {
+            TicketService ticketService, AirlineService airlineService) {
         this.flightMapper = flightMapper;
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
+        this.airlineService = airlineService;
     }
 
     @Override
@@ -98,6 +104,16 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public long count() {
         return flightMapper.selectCount(null);
+    }
+
+    @Override
+    public List<Flight> getFlightsByPaginationAndUserId(int page, int count, Long userId) {
+        Airline airline = airlineService.getAirlineByUserId(userId);
+        Page<Flight> pagination = new Page<>(page, count);
+        return flightMapper.selectPage(pagination,
+                new QueryWrapper<Flight>()
+                        .eq("airline_id", airline.getUserId()))
+                .getRecords();
     }
 
 }

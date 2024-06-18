@@ -34,8 +34,11 @@ public class FlightController {
     }
 
     @GetMapping("/list")
-    public Response<List<FlightVO>> getFlightList(@RequestParam("page") int page, @RequestParam("count") int count) {
-        List<Flight> flightList = flightService.getFlightsByPagination(page, count);
+    public Response<List<FlightVO>> getFlightList(@RequestParam("page") int page, @RequestParam("count") int count,
+            HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
+
+        List<Flight> flightList = flightService.getFlightsByPaginationAndUserId(page, count, userId);
         List<FlightVO> flightVOList = new ArrayList<>();
 
         Map<Long, Airline> airlineMap = new HashMap<>();
@@ -53,9 +56,10 @@ public class FlightController {
     }
 
     @GetMapping("/{id}")
-    public Response<FlightVO> getFlightById(@PathVariable(name = "id") long id) {
+    public Response<FlightVO> getFlightById(@PathVariable(name = "id") long id, HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
         Flight flight = flightService.getFlightById(id);
-        if (flight == null) {
+        if (flight == null || !flight.getAirlineId().equals(userId)) {
             return Response.error("Flight not found");
         }
 
@@ -65,25 +69,6 @@ public class FlightController {
         BeanUtils.copyProperties(airline, flightVO);
 
         return Response.success(flightVO);
-    }
-
-    @GetMapping("/search")
-    public Response<List<FlightVO>> searchFlight(@Valid @RequestBody String query) {
-        List<Flight> flightList = flightService.search(query);
-        List<FlightVO> flightVOList = new ArrayList<>();
-
-        Map<Long, Airline> airlineMap = new HashMap<>();
-        for (Flight flight : flightList) {
-            Airline airline = airlineMap.computeIfAbsent(flight.getAirlineId(),
-                    id -> airlineService.getAirlineById(id));
-
-            FlightVO flightVO = new FlightVO();
-            BeanUtils.copyProperties(flight, flightVO);
-            BeanUtils.copyProperties(airline, flightVO);
-            flightVOList.add(flightVO);
-        }
-
-        return Response.success(flightVOList);
     }
 
     @PostMapping("/")

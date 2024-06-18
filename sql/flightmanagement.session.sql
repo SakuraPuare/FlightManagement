@@ -14,18 +14,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 INSERT INTO `users` (
-    `user_id`,
     `username`,
     `password`,
     `email`,
     `role`
   )
 VALUES (
-    1,
     'admin',
     'admin',
     'sakurapuare@sakurapuare.com',
     15
+  ),
+  (
+    'airline',
+    'airline',
+    'airline@example.com',
+    4
   );
 CREATE TABLE IF NOT EXISTS `airlines` (
   `airline_id` BIGINT NULL AUTO_INCREMENT,
@@ -54,18 +58,11 @@ VALUES (
     'Garuda Indonesia is the flag carrier of Indonesia.'
   ),
   (
-    1,
+    2,
     'Lion Air',
     'Indonesia',
     'JT',
     'Lion Air is an Indonesian low-cost airline.'
-  ),
-  (
-    1,
-    'Citi link',
-    'Indonesia',
-    'QG',
-    'Citi link is a low-cost airline headquartered in Jakarta, Indonesia.'
   );
 CREATE TABLE IF NOT EXISTS `merchants` (
   `merchant_id` BIGINT NULL AUTO_INCREMENT,
