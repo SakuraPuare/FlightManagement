@@ -25,4 +25,6 @@ public interface OrderService {
     void cancelOrder(Order order);
 
     List<Order> getOrdersByFlightId(Long flightId);
+
+    List<Order> getOrdersByPagination(int page, int count);
 }
