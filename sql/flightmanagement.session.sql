@@ -36,6 +36,13 @@ VALUES (
     'merchant',
     'merchant@example.com',
     2
+  ),
+  ('staff', 'staff', 'staff@example.com', 8),
+  (
+    'passenger',
+    'passenger',
+    'passenger@example.com',
+    1
   );
 CREATE TABLE IF NOT EXISTS `airlines` (
   `airline_id` BIGINT NULL AUTO_INCREMENT,
@@ -116,7 +123,8 @@ INSERT INTO passengers (
     passenger_phone,
     identity_number
   )
-VALUES (1, ' John Doe ', ' 1234567890 ', ' ABC123XYZ ');
+VALUES (1, ' John Doe ', ' 1234567890 ', ' ABC123XYZ '),
+  (4, ' Jane Doe ', ' 0987654321 ', ' XYZ123ABC ');
 CREATE TABLE IF NOT EXISTS `staffs` (
   `staff_id` BIGINT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
