@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { cancelOrderAPI, getOrdersListAPI, payOrderAPI } from "@/apis/orders";
+import { cancelOrderAPI, getMyOrdersListAPI, payOrderAPI } from "@/apis/orders";
 import { getTypesCountStatistic } from "@/apis/statistic";
 import { Pagination } from "@/types/types";
 import { DateRender } from "@/utils/date";
@@ -160,7 +160,7 @@ const getData = async (page: number) => {
     page: page - 1,
     count: 10,
   };
-  const res = await getOrdersListAPI(pagination);
+  const res = await getMyOrdersListAPI(pagination);
   if (!res || res.length === 0) return;
   data.value = res;
 };

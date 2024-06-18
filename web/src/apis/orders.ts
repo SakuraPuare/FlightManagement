@@ -14,6 +14,14 @@ export const getOrdersListAPI = async (
     .then((res) => res.data as getOrderResponse[]);
 };
 
+export const getMyOrdersListAPI = async (
+  params: Pagination,
+): Promise<getOrderResponse[]> => {
+  return http
+    .get("/orders/list", { params })
+    .then((res) => res.data as getOrderResponse[]);
+};
+
 export const createOrderAPI = async (id: number): Promise<null> => {
   return http.post(`/orders/${id}`).then((res) => res.data);
 };
