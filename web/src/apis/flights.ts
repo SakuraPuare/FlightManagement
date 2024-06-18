@@ -19,6 +19,14 @@ export const getFlightsListAPI = async (
     .then((res) => res.data as getFlightResponse[]);
 };
 
+export const getMyFlightsListAPI = async (
+  params: Pagination,
+): Promise<getFlightResponse[]> => {
+  return http
+    .get("/flights/my", { params })
+    .then((res) => res.data as getFlightResponse[]);
+};
+
 export const createFlightAPI = async (
   params: createFlightRequest,
 ): Promise<null> => {

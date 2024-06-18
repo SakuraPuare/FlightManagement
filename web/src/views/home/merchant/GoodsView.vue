@@ -7,7 +7,7 @@ import { TableV2FixedDir } from "element-plus";
 import {
   createGoodsAPI,
   deleteGoodsAPI,
-  getGoodsListAPI,
+  getMyGoodsListAPI,
   updateGoodsAPI,
 } from "@/apis/goods";
 import {
@@ -108,7 +108,7 @@ const getData = async (page: number) => {
     page: page - 1,
     count: 10,
   };
-  const res = await getGoodsListAPI(pagination);
+  const res = await getMyGoodsListAPI(pagination);
   if (!res || res.length === 0) return;
   data.value = res;
 };

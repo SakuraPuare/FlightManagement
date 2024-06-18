@@ -1,7 +1,6 @@
 import { Id } from "./types";
 
 export type Flight = {
-  airlineId: number;
   flightNumber: string;
   capacity: number;
   departureCity: string;

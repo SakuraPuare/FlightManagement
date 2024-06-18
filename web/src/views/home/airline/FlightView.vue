@@ -17,7 +17,7 @@ import { Airline } from "@/types/users";
 import {
   createFlightAPI,
   deleteFlightAPI,
-  getFlightsListAPI,
+  getMyFlightsListAPI,
   updateFlightAPI,
 } from "@/apis/flights";
 import ResizableTableComp from "@/components/ResizableTableComp.vue";
@@ -176,7 +176,6 @@ const modifyDialog = ref(false);
 
 const flightData = ref({
   id: 0,
-  airlineId: 0,
   flightNumber: "",
   capacity: 0,
   departureCity: "",
@@ -189,7 +188,6 @@ const add = async () => {
   // sanity check
   console.log(flightData.value);
   if (
-    flightData.value.airlineId === 0 ||
     flightData.value.flightNumber === "" ||
     flightData.value.capacity === 0 ||
     flightData.value.departureCity === "" ||
@@ -242,7 +240,7 @@ const getTableData = async (page: number) => {
     page: page - 1,
     count: 10,
   };
-  const res = await getFlightsListAPI(pagination);
+  const res = await getMyFlightsListAPI(pagination);
   if (!res || res.length === 0) return;
   tableData.value = res;
 };
@@ -316,16 +314,6 @@ const tablePaginationChange = (v: number) => {
     width="500"
   >
     <el-form :model="flightData" label-width="200px">
-      <el-form-item label="Airline ID">
-        <el-select v-model="flightData.airlineId" placeholder="Select Airline">
-          <el-option
-            v-for="airline in airlineList"
-            :key="airline.airlineId"
-            :label="airline.airlineName"
-            :value="airline.airlineId"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="Flight Number">
         <el-input
           v-model="flightData.flightNumber"
@@ -390,16 +378,6 @@ const tablePaginationChange = (v: number) => {
     width="500"
   >
     <el-form :model="flightData" label-width="200px">
-      <el-form-item label="Airline ID">
-        <el-select v-model="flightData.airlineId" placeholder="Select Airline">
-          <el-option
-            v-for="airline in airlineList"
-            :key="airline.airlineId"
-            :label="airline.airlineName"
-            :value="airline.airlineId"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="Flight Number">
         <el-input
           v-model="flightData.flightNumber"

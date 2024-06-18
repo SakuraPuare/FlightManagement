@@ -18,6 +18,14 @@ export const getGoodsListAPI = async (
     .then((res) => res.data as getGoodsResponse[]);
 };
 
+export const getMyGoodsListAPI = async (
+  params: Pagination,
+): Promise<getGoodsResponse[]> => {
+  return http
+    .get("/goods/my", { params })
+    .then((res) => res.data as getGoodsResponse[]);
+};
+
 export const createGoodsAPI = async (
   params: createGoodsRequest,
 ): Promise<null> => {
