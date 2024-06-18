@@ -139,4 +139,11 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectCount(null);
     }
 
+    @Override
+    public List<Order> getOrdersByFlightId(Long flightId) {
+        return orderMapper.selectList(
+                new QueryWrapper<Order>()
+                        .eq("flight_id", flightId));
+    }
+
 }

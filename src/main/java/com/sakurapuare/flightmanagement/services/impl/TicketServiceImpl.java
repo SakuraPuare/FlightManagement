@@ -2,8 +2,10 @@ package com.sakurapuare.flightmanagement.services.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakurapuare.flightmanagement.mapper.OrderMapper;
 import com.sakurapuare.flightmanagement.mapper.TicketMapper;
 import com.sakurapuare.flightmanagement.pojo.dto.TicketDTO;
+import com.sakurapuare.flightmanagement.pojo.entity.Order;
 import com.sakurapuare.flightmanagement.pojo.entity.Ticket;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import org.springframework.beans.BeanUtils;
@@ -16,8 +18,11 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketMapper ticketMapper;
 
-    public TicketServiceImpl(TicketMapper ticketMapper) {
+    private final OrderMapper orderMapper;
+
+    public TicketServiceImpl(TicketMapper ticketMapper, OrderMapper orderMapper) {
         this.ticketMapper = ticketMapper;
+        this.orderMapper = orderMapper;
     }
 
     @Override
@@ -63,6 +68,15 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void deleteTicket(long id) {
+        // find all orders related to this ticket
+        List<Order> orders = orderMapper.selectList(
+                new QueryWrapper<Order>()
+                        .eq("ticket_id", id));
+
+        for (Order order : orders) {
+            orderMapper.deleteById(order.getId());
+        }
+
         ticketMapper.deleteById(id);
     }
 
@@ -81,6 +95,13 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public long count() {
         return ticketMapper.selectCount(null);
+    }
+
+    @Override
+    public List<Ticket> getTicketsByFlightId(long id) {
+        return ticketMapper.selectList(
+                new QueryWrapper<Ticket>()
+                        .eq("flight_id", id));
     }
 
 }

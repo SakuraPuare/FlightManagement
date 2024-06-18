@@ -2,6 +2,7 @@ package com.sakurapuare.flightmanagement.services;
 
 import com.sakurapuare.flightmanagement.pojo.entity.Order;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface OrderService {
@@ -23,4 +24,6 @@ public interface OrderService {
     long count();
 
     void cancelOrder(Order order);
+
+    List<Order> getOrdersByFlightId(Long flightId);
 }
