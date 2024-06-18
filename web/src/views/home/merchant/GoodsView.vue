@@ -214,6 +214,7 @@ const paginationChange = (v: number) => {
 
   <el-dialog
     v-model="createDialog"
+    :draggable="true"
     align-center
     title="Create a Goods"
     width="500"
@@ -255,6 +256,7 @@ const paginationChange = (v: number) => {
 
   <el-dialog
     v-model="modifyDialog"
+    :draggable="true"
     align-center
     title="Modify Ticket"
     width="500"
@@ -296,6 +298,7 @@ const paginationChange = (v: number) => {
 
   <el-dialog
     v-model="deleteDialog"
+    :draggable="true"
     align-center
     title="Delete Ticket"
     width="500"

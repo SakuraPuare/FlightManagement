@@ -10,7 +10,22 @@ export type Flight = {
   estimatedTravelTime: number;
 };
 
-export type getFlightResponse = Id & Flight;
+export type getFlightResponse = Id & {
+  userId: number;
+  airlineId: number;
+  airlineName: string;
+  airlineCountry: string;
+  airlineCode: string;
+  airlineDescription: string;
+  flightNumber: string;
+  capacity: number;
+  departureCity: string;
+  arrivalCity: string;
+  dateOfDeparture: string;
+  estimatedTravelTime: number;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export type createFlightRequest = Flight;
 
