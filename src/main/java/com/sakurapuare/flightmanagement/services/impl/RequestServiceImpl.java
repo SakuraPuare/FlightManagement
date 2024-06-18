@@ -61,4 +61,18 @@ public class RequestServiceImpl implements RequestService {
         return requestMapper.selectCount(null);
     }
 
+    @Override
+    public void resolveRequest(Request requests, long userId) {
+        requests.setHandlerId(userId);
+        requests.setStatus("resolved");
+        requestMapper.updateById(requests);
+    }
+
+    @Override
+    public void cancelRequest(Request requests, long userId) {
+        requests.setHandlerId(userId);
+        requests.setStatus("canceled");
+        requestMapper.updateById(requests);
+    }
+
 }

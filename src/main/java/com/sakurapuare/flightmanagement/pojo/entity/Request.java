@@ -22,7 +22,7 @@ public class Request {
     private String status = "unhandled";
 
     @TableField(value = "handler_id")
-    private Long handlerId;
+    private Long handlerId = null;
 
     @TableField(value = "created_at")
     private String createdAt;
