@@ -91,10 +91,6 @@ public class TicketController {
             return Response.error("Ticket not found");
         }
 
-        if (ticketService.getTicketByFlightIdAndSeatClass(ticketDTO.getFlightId(), ticketDTO.getSeatClass()) != null) {
-            return Response.error("Ticket already exists");
-        }
-
         ticketService.updateTicket(id, ticketDTO);
 
         return Response.success("Ticket updated successfully");
