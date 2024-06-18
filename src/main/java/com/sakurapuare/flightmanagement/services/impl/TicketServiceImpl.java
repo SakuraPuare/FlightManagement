@@ -12,7 +12,6 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.TicketService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
     private FlightService flightService;
 
     public TicketServiceImpl(TicketMapper ticketMapper, OrderMapper orderMapper, AirlineService airlineService,
-            FlightService flightService) {
+                             FlightService flightService) {
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
         this.airlineService = airlineService;
@@ -122,9 +121,9 @@ public class TicketServiceImpl implements TicketService {
         List<Flight> flights = flightService.getFlightsListByAirlineId(airline.getAirlineId());
         Page<Ticket> pagination = new Page<>(page, count);
         return ticketMapper.selectPage(pagination,
-                new QueryWrapper<Ticket>()
-                        .in("flight_id", flights.stream().map(
-                                Flight::getId).toArray()))
+                        new QueryWrapper<Ticket>()
+                                .in("flight_id", flights.stream().map(
+                                        Flight::getId).toArray()))
                 .getRecords();
     }
 

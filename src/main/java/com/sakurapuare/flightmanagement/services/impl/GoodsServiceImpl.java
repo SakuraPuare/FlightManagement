@@ -8,7 +8,6 @@ import com.sakurapuare.flightmanagement.pojo.entity.Goods;
 import com.sakurapuare.flightmanagement.pojo.entity.user.Merchant;
 import com.sakurapuare.flightmanagement.services.GoodsService;
 import com.sakurapuare.flightmanagement.services.user.MerchantService;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

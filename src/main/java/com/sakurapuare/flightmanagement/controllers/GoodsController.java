@@ -33,7 +33,7 @@ public class GoodsController {
 
     @GetMapping("/my")
     public Response<List<Goods>> getMyGoodList(@RequestParam("page") int page, @RequestParam("count") int count,
-            HttpServletRequest request) {
+                                               HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
         return Response.success(goodsService.getGoodsByPaginationAndUserId(page, count, userId));
     }
@@ -79,7 +79,7 @@ public class GoodsController {
 
     @PutMapping("/{id}")
     public Response<Void> updateGood(@PathVariable(name = "id") long id,
-            @RequestBody GoodsDTO goodDTO) {
+                                     @RequestBody GoodsDTO goodDTO) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");

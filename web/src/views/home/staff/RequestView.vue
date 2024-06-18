@@ -8,32 +8,15 @@ import { TableV2FixedDir } from "element-plus";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ResizableTableComp from "@/components/ResizableTableComp.vue";
-import {
-  createRequestRequest,
-  getRequestResponse,
-  updateRequestRequest,
-} from "@/types/request";
+import { createRequestRequest, getRequestResponse } from "@/types/request";
 import {
   cancelRequestAPI,
   createRequestAPI,
-  deleteRequestAPI,
   getRequestsListAPI,
   handleRequestAPI,
   resolveRequestAPI,
-  updateRequestAPI,
 } from "@/apis/requests";
 import { DateRender } from "@/utils/date";
-
-// export type Request = {
-//   userId: number;
-//   userName: string;
-//   info: string;
-//   status: string;
-//   handlerId: number;
-//   handlerName: string;
-//   createdAt: string;
-//   updatedAt: string;
-// };
 
 const columns = [
   {

@@ -7,7 +7,6 @@ import com.sakurapuare.flightmanagement.pojo.entity.user.Airline;
 import com.sakurapuare.flightmanagement.pojo.vo.FlightVO;
 import com.sakurapuare.flightmanagement.services.FlightService;
 import com.sakurapuare.flightmanagement.services.user.AirlineService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +54,7 @@ public class FlightController {
 
     @GetMapping("/my")
     public Response<List<FlightVO>> getMyFlightList(@RequestParam("page") int page, @RequestParam("count") int count,
-            HttpServletRequest request) {
+                                                    HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         List<Flight> flightList = flightService.getFlightsByPaginationAndUserId(page, count, userId);
@@ -106,7 +105,7 @@ public class FlightController {
 
     @PutMapping("/{id}")
     public Response<Void> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO,
-            HttpServletRequest request) {
+                                       HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
         Airline airline = airlineService.getAirlineByUserId(userId);
         // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());

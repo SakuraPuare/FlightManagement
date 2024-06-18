@@ -41,7 +41,7 @@ public class TicketController {
 
     @GetMapping("/my")
     public Response<List<TicketVO>> getMyTicketList(@RequestParam("page") int page, @RequestParam("count") int count,
-            HttpServletRequest request) {
+                                                    HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         List<Ticket> ticketList = ticketService.getTicketsByPaginationAndUserId(page, count, userId);
