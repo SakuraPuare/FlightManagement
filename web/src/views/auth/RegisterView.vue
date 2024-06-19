@@ -99,7 +99,10 @@ const register = async () => {
     { api: registerStaffAPI, info: staffInfo },
   ];
 
-  await registerAPI(registerFunctions[selectedIndex.value]);
+  const res = await registerAPI(registerFunctions[selectedIndex.value]);
+  if (res != null) {
+    await router.push("/login");
+  }
 };
 
 const selectItem = (index: number) => {
