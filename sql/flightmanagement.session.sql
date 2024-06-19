@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `luggages` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`)
+  FOREIGN KEY (`staff_id`) REFERENCES `users` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 CREATE TABLE IF NOT EXISTS `requests` (
   `id` BIGINT AUTO_INCREMENT,
