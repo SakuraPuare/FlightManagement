@@ -54,7 +54,7 @@ public class FlightController {
 
     @GetMapping("/my")
     public Response<List<FlightVO>> getMyFlightList(@RequestParam("page") int page, @RequestParam("count") int count,
-                                                    HttpServletRequest request) {
+            HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         List<Flight> flightList = flightService.getFlightsByPaginationAndUserId(page, count, userId);
@@ -98,14 +98,14 @@ public class FlightController {
         if (airline == null) {
             return Response.error("Airline not found");
         }
-
+        flightDTO.setAirlineId(airline.getAirlineId());
         flightService.addFlight(flightDTO);
         return Response.success("Flight added successfully");
     }
 
     @PutMapping("/{id}")
     public Response<String> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO,
-                                         HttpServletRequest request) {
+            HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
         Airline airline = airlineService.getAirlineByUserId(userId);
         // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
