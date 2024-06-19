@@ -13,13 +13,12 @@ public class MybatisConfig implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject);
-        this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
+        this.setFieldValByName("createdAt", LocalDateTime.now().toString(), metaObject);
+        this.setFieldValByName("updatedAt", LocalDateTime.now().toString(), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
-
     }
 }
