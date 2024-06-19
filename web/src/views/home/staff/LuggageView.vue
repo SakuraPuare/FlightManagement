@@ -199,7 +199,8 @@ watch(
     if (v != 0) {
       const res = await getOrdersListByUserIdAPI(v);
       if (!res || res.length === 0) return;
-      orderList.value = res;
+      // filter out the orders that canceled
+      orderList.value = res.filter((order) => order.status !== "canceled");
     } else {
       orderList.value = [];
     }
