@@ -9,7 +9,7 @@ public interface LuggageService {
 
     List<Luggage> getLuggageByPagination(int page, int count);
 
-    List<Luggage> getLuggageByPaginationAndId(int page, int count, long userId);
+    List<Luggage> getLuggageByPaginationAndUserId(int page, int count, long userId);
 
     Luggage getLuggageByIdAndUserId(long id, long userId);
 

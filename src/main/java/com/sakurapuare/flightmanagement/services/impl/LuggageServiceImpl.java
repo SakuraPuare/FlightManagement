@@ -27,7 +27,7 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
-    public List<Luggage> getLuggageByPaginationAndId(int page, int count, long userId) {
+    public List<Luggage> getLuggageByPaginationAndUserId(int page, int count, long userId) {
         Page<Luggage> pagination = new Page<>(page, count);
         return luggageMapper.selectPage(pagination, new QueryWrapper<Luggage>()
                 .eq("user_id", userId)).getRecords();
