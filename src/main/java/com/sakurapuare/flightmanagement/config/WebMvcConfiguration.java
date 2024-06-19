@@ -1,6 +1,6 @@
 package com.sakurapuare.flightmanagement.config;
 
-import com.sakurapuare.flightmanagement.interceptor.LoginCheckInterceptor;
+import com.sakurapuare.flightmanagement.controllers.interceptor.LoginCheckInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
