@@ -2,7 +2,7 @@ drop database flightmanagement;
 create database flightmanagement;
 USE `flightmanagement`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` BIGINT NULL AUTO_INCREMENT,
+  `user_id` BIGINT AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NULL,
@@ -45,7 +45,7 @@ VALUES (
     1
   );
 CREATE TABLE IF NOT EXISTS `airlines` (
-  `airline_id` BIGINT NULL AUTO_INCREMENT,
+  `airline_id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `airline_name` varchar(100) NOT NULL,
   `airline_country` varchar(100) NOT NULL,
@@ -78,7 +78,7 @@ VALUES (
     'Lion Air is an Indonesian low-cost airline.'
   );
 CREATE TABLE IF NOT EXISTS `merchants` (
-  `merchant_id` BIGINT NULL AUTO_INCREMENT,
+  `merchant_id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `merchant_name` varchar(100) NOT NULL,
   `merchant_address` varchar(255) NOT NULL,
@@ -107,7 +107,7 @@ VALUES (
     ' The second best merchant in the world '
   );
 CREATE TABLE IF NOT EXISTS `passengers` (
-  `passenger_id` BIGINT NULL AUTO_INCREMENT,
+  `passenger_id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `passenger_name` varchar(100) NOT NULL,
   `passenger_phone` varchar(20) NOT NULL,
@@ -126,7 +126,7 @@ INSERT INTO passengers (
 VALUES (1, ' John Doe ', ' 1234567890 ', ' ABC123XYZ '),
   (4, ' Jane Doe ', ' 0987654321 ', ' XYZ123ABC ');
 CREATE TABLE IF NOT EXISTS `staffs` (
-  `staff_id` BIGINT NULL AUTO_INCREMENT,
+  `staff_id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `staff_name` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
 INSERT INTO staffs (user_id, staff_name)
 VALUES (1, ' John Doe ');
 CREATE TABLE IF NOT EXISTS `goods` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `merchant_id` BIGINT NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NULL DEFAULT '',
@@ -182,7 +182,7 @@ VALUES (
     'Fashion'
   );
 CREATE TABLE IF NOT EXISTS `flights` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `airline_id` BIGINT NOT NULL,
   `flight_number` varchar(50) NOT NULL,
   `capacity` int NOT NULL,
@@ -223,7 +223,7 @@ VALUES (
     90
   );
 CREATE TABLE IF NOT EXISTS `tickets` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `flight_id` BIGINT NOT NULL,
   `seat_class` varchar(50) NOT NULL,
   `quota` BIGINT NOT NULL DEFAULT 0,
@@ -259,7 +259,7 @@ VALUES (
     1500000.00
   );
 CREATE TABLE IF NOT EXISTS `orders` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `ticket_id` BIGINT NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT ' unpaid ',
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 CREATE TABLE IF NOT EXISTS `luggages` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `order_id` BIGINT NOT NULL,
   `weight` decimal(10, 2) NOT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `luggages` (
   FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 CREATE TABLE IF NOT EXISTS `requests` (
-  `id` BIGINT NULL AUTO_INCREMENT,
+  `id` BIGINT AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `info` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'unhandled',
