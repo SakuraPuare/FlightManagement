@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, Ref } from "vue";
+import { onMounted, ref, Ref } from "vue";
 import {
   AirlineInfo,
   MerchantInfo,
@@ -105,6 +105,14 @@ const register = async () => {
 const selectItem = (index: number) => {
   selectedIndex.value = index;
 };
+
+const isLargeScreen = ref(window.innerWidth > 1024);
+
+onMounted(() => {
+  window.addEventListener("resize", () => {
+    isLargeScreen.value = window.innerWidth > 1024;
+  });
+});
 </script>
 
 <template>
@@ -114,6 +122,7 @@ const selectItem = (index: number) => {
     >
       <TitleComp />
       <div
+        v-if="isLargeScreen"
         class="flex flex-col bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-6xl xl:p-0 dark:bg-gray-800 dark:border-gray-700"
       >
         <div class="w-full pt-6 px-8">
@@ -372,6 +381,266 @@ const selectItem = (index: number) => {
                 />
               </div>
             </template>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else
+        class="flex flex-col bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-6xl xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+      >
+        <div class="w-full pt-6 px-8">
+          <h1
+            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+          >
+            Create an account
+          </h1>
+        </div>
+        <div class="w-full p-6 flex flex-col space-y-4">
+          <div class="space-y-3 md:space-y-6 w-full">
+            <div>
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                for="email"
+                >Your email</label
+              >
+              <input
+                id="username"
+                v-model="user.username"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="username"
+                required
+                type="text"
+              />
+            </div>
+            <div>
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                for="email"
+                >Your email</label
+              >
+              <input
+                id="email"
+                v-model="user.email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="email"
+                placeholder="name@company.com"
+                required
+                type="email"
+              />
+            </div>
+            <div>
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                for="password"
+                >Password</label
+              >
+              <input
+                id="password"
+                v-model="user.password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="password"
+                placeholder="••••••••"
+                required
+                type="password"
+              />
+            </div>
+            <!-- <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="terms"
+                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-pink-600 dark:ring-offset-gray-800"
+                  required type="checkbox" />
+              </div>
+              <div class="ml-3 text-sm">
+                <label class="font-light text-gray-500 dark:text-gray-300" for="terms">I accept the
+                  <a class="font-medium text-pink-600 hover:underline dark:text-pink-500" href="#">Terms and
+                    Conditions</a></label>
+              </div>
+            </div> -->
+          </div>
+          <div class="w-full space-y-4">
+            <div>
+              <label
+                class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                >Register as</label
+              >
+              <ul
+                class="flex text-sm font-medium text-center text-gray-500 rounded-md shadow dark:divide-gray-700 dark:text-gray-400"
+              >
+                <li
+                  v-for="(item, index) in items"
+                  :key="index"
+                  class="w-full focus-within:z-10"
+                >
+                  <span
+                    :class="[
+                      'inline-block w-full px-4 py-2 border-r border-gray-200 dark:border-gray-700 focus:ring-4 focus:ring-blue-300 focus:outline-none',
+                      selectedIndex === index
+                        ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                        : 'bg-white hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700',
+                      index === 0
+                        ? 'rounded-s-lg'
+                        : index === items.length - 1
+                          ? 'rounded-e-lg border-s-0'
+                          : '',
+                    ]"
+                    @click="selectItem(index)"
+                  >
+                    {{ item }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <template v-if="selectedIndex === 0">
+              <!-- Passenger 表单 -->
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Passenger Name</label
+                >
+                <input
+                  v-model="passengerInfo.passengerName"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Passenger Phone</label
+                >
+                <input
+                  v-model="passengerInfo.passengerPhone"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="tel"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Identity Number</label
+                >
+                <input
+                  v-model="passengerInfo.identityNumber"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+            </template>
+            <template v-if="selectedIndex === 1">
+              <!-- Merchant 表单 -->
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Merchant Name</label
+                >
+                <input
+                  v-model="merchantInfo.merchantName"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Merchant Address</label
+                >
+                <input
+                  v-model="merchantInfo.merchantAddress"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Merchant Description</label
+                >
+                <input
+                  v-model="merchantInfo.merchantDescription"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+            </template>
+            <template v-if="selectedIndex === 2">
+              <!-- Airline 表单 -->
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Airline Name</label
+                >
+                <input
+                  v-model="airlineInfo.airlineName"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Airline Code</label
+                >
+                <input
+                  v-model="airlineInfo.airlineCode"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Airline Country</label
+                >
+                <input
+                  v-model="airlineInfo.airlineCountry"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Airline Description</label
+                >
+                <input
+                  v-model="airlineInfo.airlineDescription"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+            </template>
+            <template v-if="selectedIndex === 3">
+              <!-- Staff 表单 -->
+              <div>
+                <label
+                  class="block text-sm mb-2 font-medium text-gray-900 dark:text-white"
+                  >Staff Name</label
+                >
+                <input
+                  v-model="staffInfo.staffName"
+                  class="w-full px-4 py-2 border rounded-md dark:text-gray-900"
+                  type="text"
+                />
+              </div>
+            </template>
+          </div>
+          <div class="py-4 space-y-4">
+            <button
+              class="w-full text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+              @click="register"
+            >
+              Create an account
+            </button>
+            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+              Already have an account?
+              <router-link to="/login">
+                <span
+                  class="font-medium text-pink-600 hover:underline dark:text-pink-500"
+                  >Login here</span
+                >
+              </router-link>
+            </p>
           </div>
         </div>
       </div>

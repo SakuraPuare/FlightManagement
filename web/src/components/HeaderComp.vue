@@ -9,15 +9,15 @@ import { getUserRoleList } from "@/utils/role";
 
 const user = useUserStore();
 const isLogin = ref(user.isLogin() && user.userId !== 0);
-const isAtHomePath = ref(router.currentRoute.value.path === "/home");
+const isPublic = ref(router.currentRoute.value.meta.title === "Public");
 
 watch(
-  () => router.currentRoute.value.path,
+  () => router.currentRoute.value.meta.title,
   () => {
-    if (router.currentRoute.value.path === "/home") {
-      isAtHomePath.value = true;
+    if (router.currentRoute.value.meta.title === "Public") {
+      isPublic.value = true;
     } else {
-      isAtHomePath.value = false;
+      isPublic.value = false;
     }
   },
 );
@@ -83,7 +83,7 @@ menuItems.push({
           </ul>
         </div>
 
-        <div v-if="isLogin && isAtHomePath" class="w-128">
+        <div v-if="isLogin && !isPublic" class="w-128">
           <!-- select role -->
           <el-select
             v-model="user.currentRole"
