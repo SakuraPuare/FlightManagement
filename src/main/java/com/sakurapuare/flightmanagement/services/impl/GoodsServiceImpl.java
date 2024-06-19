@@ -19,38 +19,38 @@ import java.util.Set;
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
-    private final GoodsMapper goodMapper;
+    private final GoodsMapper goodsMapper;
 
     private final MerchantService merchantService;
 
     public GoodsServiceImpl(GoodsMapper goodMapper, MerchantService merchantService) {
-        this.goodMapper = goodMapper;
+        this.goodsMapper = goodMapper;
         this.merchantService = merchantService;
     }
 
     @Override
     public List<Goods> getGoodsByPagination(int page, int count) {
         Page<Goods> pagination = new Page<>(page, count);
-        return goodMapper.selectPage(pagination, null).getRecords();
+        return goodsMapper.selectPage(pagination, null).getRecords();
     }
 
     @Override
     public List<Goods> search(String query) {
         Set<Goods> goods = new HashSet<>();
-        goods.addAll(goodMapper.selectList(new QueryWrapper<Goods>().like("name", query)));
-        goods.addAll(goodMapper.selectList(new QueryWrapper<Goods>().like("description", query)));
-        goods.addAll(goodMapper.selectList(new QueryWrapper<Goods>().like("category", query)));
+        goods.addAll(goodsMapper.selectList(new QueryWrapper<Goods>().like("name", query)));
+        goods.addAll(goodsMapper.selectList(new QueryWrapper<Goods>().like("description", query)));
+        goods.addAll(goodsMapper.selectList(new QueryWrapper<Goods>().like("category", query)));
         return List.copyOf(goods);
     }
 
     @Override
     public Goods getGoodByName(String name) {
-        return goodMapper.selectOne(new QueryWrapper<Goods>().eq("name", name));
+        return goodsMapper.selectOne(new QueryWrapper<Goods>().eq("name", name));
     }
 
     @Override
     public Goods getGoodById(long id) {
-        return goodMapper.selectById(id);
+        return goodsMapper.selectById(id);
     }
 
     @Override
@@ -58,29 +58,29 @@ public class GoodsServiceImpl implements GoodsService {
         Goods good = new Goods();
         BeanUtils.copyProperties(goodDTO, good);
         good.setMerchantId(merchantService.getMerchantByUserId(userId).getMerchantId());
-        goodMapper.insert(good);
+        goodsMapper.insert(good);
     }
 
     @Override
     public void updateGood(Goods good, GoodsDTO goodDTO) {
         BeanUtils.copyProperties(goodDTO, good);
-        goodMapper.updateById(good);
+        goodsMapper.updateById(good);
 
     }
 
     @Override
     public void deleteGood(long id) {
-        goodMapper.deleteById(id);
+        goodsMapper.deleteById(id);
     }
 
     @Override
     public long count() {
-        return goodMapper.selectCount(null);
+        return goodsMapper.selectCount(null);
     }
 
     @Override
     public BigDecimal getTotalPrice() {
-        return goodMapper.selectList(null)
+        return goodsMapper.selectList(null)
                 .stream()
                 .map(Goods::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -89,13 +89,13 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void buyGood(Goods good) {
         good.setStock(good.getStock() - 1);
-        goodMapper.updateById(good);
+        goodsMapper.updateById(good);
     }
 
     @Override
     public List<Goods> getGoodsByPaginationAndUserId(int page, int count, Long userId) {
         Merchant merchant = merchantService.getMerchantByUserId(userId);
-        return goodMapper.selectPage(new Page<>(page, count),
+        return goodsMapper.selectPage(new Page<>(page, count),
                 new QueryWrapper<Goods>().eq("merchant_id", merchant.getMerchantId())).getRecords();
     }
 }

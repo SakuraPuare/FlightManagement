@@ -17,6 +17,7 @@ import com.sakurapuare.flightmanagement.utils.RoleUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -96,6 +97,12 @@ public class AuthController {
             userService.updateRole(user.getUserId(), Role.AIRLINE);
             return Response.success("Airline Register success");
         }
+        UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO = new UserRegisterDTO<>();
+        BeanUtils.copyProperties(airlineInfoUserRegisterDTO, passengerInfoUserRegisterDTO);
+        PassengerInfo passengerInfo = new PassengerInfo();
+        passengerInfo.setPassengerName(airlineInfoUserRegisterDTO.getData().getAirlineCode());
+        passengerInfoUserRegisterDTO.setData(passengerInfo);
+        register_passenger(passengerInfoUserRegisterDTO);
         return Response.error("User already exists");
     }
 
@@ -129,7 +136,12 @@ public class AuthController {
             userService.updateRole(user.getUserId(), Role.MERCHANT);
             return Response.success("Merchant Register success");
         }
-
+        UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO = new UserRegisterDTO<>();
+        BeanUtils.copyProperties(merchantInfoUserRegisterDTO, passengerInfoUserRegisterDTO);
+        PassengerInfo passengerInfo = new PassengerInfo();
+        passengerInfo.setPassengerName(merchantInfoUserRegisterDTO.getData().getMerchantName());
+        passengerInfoUserRegisterDTO.setData(passengerInfo);
+        register_passenger(passengerInfoUserRegisterDTO);
         return Response.error("User already exists");
     }
 
@@ -168,9 +180,9 @@ public class AuthController {
     }
 
     @PostMapping("/register/staff")
-    public Response<String> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
-        User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
-        Staff staff = staffService.getStaffByStaffName(baseUserRegisterDTO.getData().getStaffName());
+    public Response<String> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> staffInfoRegisterDTO) {
+        User user = userService.getUserByUsername(staffInfoRegisterDTO.getUsername());
+        Staff staff = staffService.getStaffByStaffName(staffInfoRegisterDTO.getData().getStaffName());
 
         if (user != null && staff != null) {
             return Response.error("Staff already exists");
@@ -178,7 +190,7 @@ public class AuthController {
 
         // check password
         if (user != null) {
-            if (!baseUserRegisterDTO.getPassword().equals(user.getPassword())) {
+            if (!staffInfoRegisterDTO.getPassword().equals(user.getPassword())) {
                 return Response.error("Password not match");
             }
 
@@ -187,15 +199,20 @@ public class AuthController {
         }
 
         if (user == null) {
-            user = userService.register(baseUserRegisterDTO);
+            user = userService.register(staffInfoRegisterDTO);
         }
 
         if (staff == null) {
-            staffService.register(user.getUserId(), baseUserRegisterDTO);
+            staffService.register(user.getUserId(), staffInfoRegisterDTO);
             userService.updateRole(user.getUserId(), Role.STAFF);
             return Response.success("Staff Register success");
         }
-
+        UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO = new UserRegisterDTO<>();
+        BeanUtils.copyProperties(staffInfoRegisterDTO, passengerInfoUserRegisterDTO);
+        PassengerInfo passengerInfo = new PassengerInfo();
+        passengerInfo.setPassengerName(staffInfoRegisterDTO.getData().getStaffName());
+        passengerInfoUserRegisterDTO.setData(passengerInfo);
+        register_passenger(passengerInfoUserRegisterDTO);
         return Response.error("User already exists");
     }
 

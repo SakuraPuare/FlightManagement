@@ -1,11 +1,8 @@
 package com.sakurapuare.flightmanagement.pojo.vo;
 
-import java.time.LocalDateTime;
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class RequestVO {

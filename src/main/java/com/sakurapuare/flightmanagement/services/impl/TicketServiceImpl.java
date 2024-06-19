@@ -15,8 +15,8 @@ import com.sakurapuare.flightmanagement.services.user.AirlineService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -30,7 +30,7 @@ public class TicketServiceImpl implements TicketService {
     private FlightService flightService;
 
     public TicketServiceImpl(TicketMapper ticketMapper, OrderMapper orderMapper, AirlineService airlineService,
-            FlightService flightService) {
+                             FlightService flightService) {
         this.ticketMapper = ticketMapper;
         this.orderMapper = orderMapper;
         this.airlineService = airlineService;
@@ -125,9 +125,9 @@ public class TicketServiceImpl implements TicketService {
         }
         Page<Ticket> pagination = new Page<>(page, count);
         return ticketMapper.selectPage(pagination,
-                new QueryWrapper<Ticket>()
-                        .in("flight_id", flights.stream().map(
-                                Flight::getId).toArray()))
+                        new QueryWrapper<Ticket>()
+                                .in("flight_id", flights.stream().map(
+                                        Flight::getId).toArray()))
                 .getRecords();
     }
 
