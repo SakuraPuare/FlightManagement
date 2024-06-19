@@ -26,17 +26,17 @@ export const getMyTicketsListAPI = async (
 
 export const createTicketAPI = async (
   params: createTicketRequest,
-): Promise<null> => {
+): Promise<string> => {
   return http.post("/tickets/", params).then((res) => res.data);
 };
 
 export const updateTicketAPI = async (
   id: number,
   params: createTicketRequest,
-): Promise<null> => {
+): Promise<string> => {
   return http.put(`/tickets/${id}`, params).then((res) => res.data);
 };
 
-export const deleteTicketAPI = async (id: number): Promise<null> => {
+export const deleteTicketAPI = async (id: number): Promise<string> => {
   return http.delete(`/tickets/${id}`).then((res) => res.data);
 };

@@ -38,18 +38,18 @@ export const getOrdersListByPassengerIdAPI = async (
     .then((res) => res.data as getOrderResponse[]);
 };
 
-export const createOrderAPI = async (id: number): Promise<null> => {
+export const createOrderAPI = async (id: number): Promise<string> => {
   return http.post(`/orders/${id}`).then((res) => res.data);
 };
 
-export const deleteOrderAPI = async (id: number): Promise<null> => {
+export const deleteOrderAPI = async (id: number): Promise<string> => {
   return http.delete(`/orders/${id}`).then((res) => res.data);
 };
 
-export const payOrderAPI = async (id: number): Promise<null> => {
+export const payOrderAPI = async (id: number): Promise<string> => {
   return http.post(`/orders/${id}/pay`).then((res) => res.data);
 };
 
-export const cancelOrderAPI = async (id: number): Promise<null> => {
+export const cancelOrderAPI = async (id: number): Promise<string> => {
   return http.post(`/orders/${id}/cancel`).then((res) => res.data);
 };

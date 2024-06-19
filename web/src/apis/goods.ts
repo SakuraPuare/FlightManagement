@@ -28,18 +28,18 @@ export const getMyGoodsListAPI = async (
 
 export const createGoodsAPI = async (
   params: createGoodsRequest,
-): Promise<null> => {
+): Promise<string> => {
   return http.post("/goods/", params).then((res) => res.data);
 };
 
 export const updateGoodsAPI = async (
   id: number,
   params: updateGoodsRequest,
-): Promise<null> => {
+): Promise<string> => {
   return http.put(`/goods/${id}`, params).then((res) => res.data);
 };
 
-export const deleteGoodsAPI = async (id: number): Promise<null> => {
+export const deleteGoodsAPI = async (id: number): Promise<string> => {
   return http.delete(`/goods/${id}`).then((res) => res.data);
 };
 
@@ -51,6 +51,6 @@ export const searchGoodsAPI = async (
     .then((res) => res.data as getGoodsResponse[]);
 };
 
-export const buyGoodsAPI = async (id: number): Promise<null> => {
+export const buyGoodsAPI = async (id: number): Promise<string> => {
   return http.post(`/goods/${id}/buy`).then((res) => res.data);
 };

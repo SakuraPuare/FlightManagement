@@ -14,6 +14,7 @@ import {
   registerStaffAPI,
 } from "@/apis/auth";
 import TitleComp from "@/components/TitleComp.vue";
+import router from "@/utils/router.ts";
 
 const items = ["Passenger", "Merchant", "Airline", "Staff"];
 let selectedIndex = ref(0);
@@ -100,7 +101,7 @@ const register = async () => {
   ];
 
   const res = await registerAPI(registerFunctions[selectedIndex.value]);
-  if (res != null) {
+  if (res !== null) {
     await router.push("/login");
   }
 };
