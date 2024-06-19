@@ -87,10 +87,13 @@ const register = async () => {
   }
 
   const registerAPI = async (data: any) => {
-    await data.api({
+    const res = await data.api({
       ...user.value,
       data: data.info.value,
     } as RegisterParams<any>);
+    if (res !== null) {
+      await router.push("/login");
+    }
   };
 
   const registerFunctions = [
@@ -100,10 +103,7 @@ const register = async () => {
     { api: registerStaffAPI, info: staffInfo },
   ];
 
-  const res = await registerAPI(registerFunctions[selectedIndex.value]);
-  if (res !== null) {
-    await router.push("/login");
-  }
+  await registerAPI(registerFunctions[selectedIndex.value]);
 };
 
 const selectItem = (index: number) => {
