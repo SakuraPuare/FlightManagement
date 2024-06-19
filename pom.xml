@@ -14,7 +14,7 @@
     <name>FlightManagement</name>
     <description>FlightManagement</description>
     <properties>
-        <java.version>22</java.version>
+        <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
