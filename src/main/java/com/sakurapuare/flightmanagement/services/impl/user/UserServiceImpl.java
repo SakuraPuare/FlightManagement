@@ -14,6 +14,7 @@ import com.sakurapuare.flightmanagement.utils.RoleUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -61,6 +62,7 @@ public class UserServiceImpl implements UserService {
 
         user = new User();
         BeanUtils.copyProperties(baseUserRegisterDTO, user);
+        user.setCreatedAt(LocalDateTime.now());
         userMapper.insert(user);
 
         return user;
@@ -93,8 +95,8 @@ public class UserServiceImpl implements UserService {
     public User getUserByPassengerId(Long id) {
         return userMapper.selectById(
                 passengerMapper.selectOne(
-                                new QueryWrapper<Passenger>()
-                                        .eq("user_id", id))
+                        new QueryWrapper<Passenger>()
+                                .eq("user_id", id))
                         .getUserId());
     }
 
