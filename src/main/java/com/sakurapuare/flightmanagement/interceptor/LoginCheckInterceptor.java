@@ -22,7 +22,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         Response<Void> res = Response.error(401, "Unauthorized");
         if (token == null) {
-            log.info("token is null");
+            log.info("token is null {}", request.getRequestURI());
             response.setStatus(401);
             response.setContentType("application/json");
             response.getWriter().write(JSONObject.toJSONString(res));
