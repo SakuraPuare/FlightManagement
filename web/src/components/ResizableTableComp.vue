@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2024. All right reserved by SakuraPuare.
+  -->
+
 <template>
   <div class="flex flex-col h-full w-full">
     <el-auto-resizer class="flex-grow">

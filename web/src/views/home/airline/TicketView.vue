@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2024. All right reserved by SakuraPuare.
+  -->
+
 <script lang="tsx" setup>
 import { getTypesCountStatistic } from "@/apis/statistic";
 import {

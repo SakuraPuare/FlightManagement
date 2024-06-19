@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "./style.css";

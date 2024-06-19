@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { createTicketRequest, getTicketResponse } from "@/types/ticket";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";

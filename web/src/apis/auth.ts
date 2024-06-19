@@ -1,12 +1,11 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { LoginParams, LoginResponse } from "@/types/auth/login";
 import http from "../utils/http";
 import { BaseRegisterParams, RegisterParams } from "@/types/auth/register";
-import {
-  AirlineInfo,
-  MerchantInfo,
-  PassengerInfo,
-  StaffInfo,
-} from "@/types/auth/info";
+import { AirlineInfo, MerchantInfo, PassengerInfo, StaffInfo } from "@/types/auth/info";
 
 export const loginAPI = async (params: LoginParams): Promise<LoginResponse> => {
   return http.post("/login", params).then((res) => res.data as LoginResponse);

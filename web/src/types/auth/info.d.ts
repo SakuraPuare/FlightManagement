@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 export type UserInfo = {
   userId: number;
   username: string;

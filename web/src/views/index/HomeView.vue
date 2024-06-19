@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2024. All right reserved by SakuraPuare.
+  -->
+
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/user";
 import { getUserRoleList } from "@/utils/role";

@@ -1,9 +1,8 @@
-import {
-  createFlightRequest,
-  Flight,
-  getFlightResponse,
-  updateFlightRequest,
-} from "@/types/flight";
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
+import { createFlightRequest, Flight, getFlightResponse, updateFlightRequest } from "@/types/flight";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 

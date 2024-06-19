@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { Role } from "@/constant/role";
 
 export const getUserRoleList = (role: number): string[] => {

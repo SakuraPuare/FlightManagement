@@ -1,8 +1,8 @@
-import {
-  createRequestRequest,
-  getRequestResponse,
-  updateRequestRequest,
-} from "@/types/request";
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
+import { createRequestRequest, getRequestResponse, updateRequestRequest } from "@/types/request";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 

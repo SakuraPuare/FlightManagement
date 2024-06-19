@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export type Pagination = {

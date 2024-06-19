@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { LoginResponse } from "@/types/auth/login";
 import { User } from "@/types/users";
 import { getUserRoleList } from "@/utils/role";

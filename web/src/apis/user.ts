@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { Pagination } from "@/types/types";
 import { Airline, Merchant, Passenger, Staff, User } from "@/types/users";
 import http from "@/utils/http";

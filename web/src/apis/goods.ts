@@ -1,8 +1,8 @@
-import {
-  createGoodsRequest,
-  getGoodsResponse,
-  updateGoodsRequest,
-} from "@/types/goods";
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
+import { createGoodsRequest, getGoodsResponse, updateGoodsRequest } from "@/types/goods";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 

@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2024. All right reserved by SakuraPuare.
+  -->
+
 <template>
   <section class="bg-gray-200 dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl h-screen lg:py-16 lg:px-6">

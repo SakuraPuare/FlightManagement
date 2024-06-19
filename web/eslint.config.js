@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 // @ts-check
 import globals from "globals";
 import pluginJs from "@eslint/js";

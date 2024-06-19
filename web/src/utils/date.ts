@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 // parse 2024-06-13T10:23:09
 export const parseDate = (date: string): Date => {
   return new Date(date);

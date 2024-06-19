@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { getOrderResponse } from "@/types/order";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";

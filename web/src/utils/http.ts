@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { BASE_URL } from "@/config";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";

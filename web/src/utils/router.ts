@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { useUserStore } from "@/stores/user";
 
 import { createRouter, createWebHashHistory } from "vue-router";

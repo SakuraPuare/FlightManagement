@@ -1,8 +1,8 @@
-import {
-  createLuggageRequest,
-  getLuggageResponse,
-  updateLuggageRequest,
-} from "@/types/luggage";
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
+import { createLuggageRequest, getLuggageResponse, updateLuggageRequest } from "@/types/luggage";
 import { Pagination } from "@/types/types";
 import http from "@/utils/http";
 

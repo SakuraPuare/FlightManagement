@@ -1,3 +1,7 @@
+<!--
+  - Copyright (c) 2024. All right reserved by SakuraPuare.
+  -->
+
 <script lang="ts" setup>
 import { onMounted, ref, Ref } from "vue";
 import {

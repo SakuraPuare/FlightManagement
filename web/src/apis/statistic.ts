@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. All right reserved by SakuraPuare.
+ */
+
 import { AllCountStatisticResponse, TypesStatistic } from "@/types/statistic";
 import http from "@/utils/http";
 
