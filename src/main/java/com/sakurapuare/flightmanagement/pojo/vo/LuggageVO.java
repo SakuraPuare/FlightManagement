@@ -1,5 +1,7 @@
 package com.sakurapuare.flightmanagement.pojo.vo;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -19,7 +21,7 @@ public class LuggageVO {
 
     private String staffName;
 
-    private String createdAt;
+    private LocalDateTime createdAt;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 }

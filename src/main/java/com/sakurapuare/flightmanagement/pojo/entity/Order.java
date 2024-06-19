@@ -1,5 +1,7 @@
 package com.sakurapuare.flightmanagement.pojo.entity;
 
+import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
@@ -19,8 +21,8 @@ public class Order {
     private String status = "unpaid";
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @TableField(value = "updated_at", fill = FieldFill.INSERT_UPDATE)
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 }

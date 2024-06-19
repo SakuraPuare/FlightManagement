@@ -1,5 +1,10 @@
 package com.sakurapuare.flightmanagement.pojo.vo;
 
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import lombok.Data;
 
 @Data
@@ -19,7 +24,7 @@ public class RequestVO {
 
     private String handlerName;
 
-    private String createdAt;
+    private LocalDateTime createdAt;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 }
