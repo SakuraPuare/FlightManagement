@@ -68,12 +68,13 @@ public class GoodsController {
     }
 
     @PostMapping("/")
-    public Response<String> addGood(@Valid @RequestBody GoodsDTO goodDTO) {
+    public Response<String> addGood(@Valid @RequestBody GoodsDTO goodDTO, HttpServletRequest request) {
+        Long userId = Long.parseLong(request.getAttribute("userId").toString());
         if (goodsService.getGoodByName(goodDTO.getName()) != null) {
             return Response.error("Good already exists");
         }
 
-        goodsService.addGood(goodDTO);
+        goodsService.addGood(goodDTO, userId);
         return Response.success("Good added successfully");
     }
 

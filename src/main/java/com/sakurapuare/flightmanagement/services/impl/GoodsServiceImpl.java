@@ -54,9 +54,10 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public void addGood(GoodsDTO goodDTO) {
+    public void addGood(GoodsDTO goodDTO, long userId) {
         Goods good = new Goods();
         BeanUtils.copyProperties(goodDTO, good);
+        good.setMerchantId(merchantService.getMerchantByUserId(userId).getMerchantId());
         goodMapper.insert(good);
     }
 

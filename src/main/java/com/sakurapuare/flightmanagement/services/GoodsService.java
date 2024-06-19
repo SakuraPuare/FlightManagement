@@ -15,7 +15,7 @@ public interface GoodsService {
 
     Goods getGoodById(long id);
 
-    void addGood(GoodsDTO goodDTO);
+    void addGood(GoodsDTO goodDTO, long userId);
 
     void updateGood(Goods good, GoodsDTO goodDTO);
 
