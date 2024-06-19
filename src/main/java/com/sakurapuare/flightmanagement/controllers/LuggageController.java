@@ -104,8 +104,8 @@ public class LuggageController {
     }
 
     @PostMapping("/")
-    public Response<Void> addLuggage(@Valid @RequestBody LuggageDTO luggageDTO,
-                                     HttpServletRequest request) {
+    public Response<String> addLuggage(@Valid @RequestBody LuggageDTO luggageDTO,
+                                       HttpServletRequest request) {
         long staffId = Long.parseLong(request.getAttribute("userId").toString());
         long userId = luggageDTO.getUserId();
         Order order = orderService.getOrderByIdAndUserId(luggageDTO.getOrderId(), userId);
@@ -121,8 +121,8 @@ public class LuggageController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateLuggage(@PathVariable(name = "id") long id, @RequestBody LuggageDTO luggageDTO,
-                                        HttpServletRequest request) {
+    public Response<String> updateLuggage(@PathVariable(name = "id") long id, @RequestBody LuggageDTO luggageDTO,
+                                          HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);
@@ -135,8 +135,8 @@ public class LuggageController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteLuggage(@PathVariable(name = "id") long id,
-                                        HttpServletRequest request) {
+    public Response<String> deleteLuggage(@PathVariable(name = "id") long id,
+                                          HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Luggage luggage = luggageService.getLuggageByIdAndUserId(id, userId);

@@ -54,7 +54,7 @@ public class GoodsController {
 
     @Transactional
     @PostMapping("/{id}/buy")
-    public Response<Void> buyGood(@PathVariable(name = "id") long id) {
+    public Response<String> buyGood(@PathVariable(name = "id") long id) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");
@@ -68,7 +68,7 @@ public class GoodsController {
     }
 
     @PostMapping("/")
-    public Response<Void> addGood(@Valid @RequestBody GoodsDTO goodDTO) {
+    public Response<String> addGood(@Valid @RequestBody GoodsDTO goodDTO) {
         if (goodsService.getGoodByName(goodDTO.getName()) != null) {
             return Response.error("Good already exists");
         }
@@ -78,8 +78,8 @@ public class GoodsController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateGood(@PathVariable(name = "id") long id,
-                                     @RequestBody GoodsDTO goodDTO) {
+    public Response<String> updateGood(@PathVariable(name = "id") long id,
+                                       @RequestBody GoodsDTO goodDTO) {
         Goods good = goodsService.getGoodById(id);
         if (good == null) {
             return Response.error("Good not found");
@@ -89,7 +89,7 @@ public class GoodsController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteGood(@PathVariable(name = "id") long id) {
+    public Response<String> deleteGood(@PathVariable(name = "id") long id) {
         goodsService.deleteGood(id);
         return Response.success("Good deleted successfully");
     }

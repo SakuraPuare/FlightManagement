@@ -13,7 +13,7 @@ class ResponseTest {
         Response<String> response = Response.success("Success message");
         assertEquals(ResponseCode.SUCCESS, response.getCode());
         assertEquals("Success message", response.getMessage());
-        assertNull(response.getData());
+        assertEquals(response.getData(), "");
     }
 
     @Test
@@ -22,7 +22,7 @@ class ResponseTest {
         Response<String> response = Response.success(data);
         assertEquals(ResponseCode.SUCCESS, response.getCode());
         assertEquals(data, response.getMessage());
-        assertNull(response.getData());
+        assertEquals(response.getData(), "");
     }
 
     @Test

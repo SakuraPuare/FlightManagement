@@ -67,7 +67,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/airline")
-    public Response<Void> register_airline(
+    public Response<String> register_airline(
             @Valid @RequestBody UserRegisterDTO<AirlineInfo> airlineInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(airlineInfoUserRegisterDTO.getUsername());
         Airline airline = airlineService
@@ -100,7 +100,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/merchant")
-    public Response<Void> register_merchant(
+    public Response<String> register_merchant(
             @Valid @RequestBody UserRegisterDTO<MerchantInfo> merchantInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(merchantInfoUserRegisterDTO.getUsername());
         Merchant merchant = merchantService
@@ -134,7 +134,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/passenger")
-    public Response<Void> register_passenger(
+    public Response<String> register_passenger(
             @Valid @RequestBody UserRegisterDTO<PassengerInfo> passengerInfoUserRegisterDTO) {
         User user = userService.getUserByUsername(passengerInfoUserRegisterDTO.getUsername());
         Passenger passenger = passengerService
@@ -168,7 +168,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/staff")
-    public Response<Void> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
+    public Response<String> register_staff(@Valid @RequestBody UserRegisterDTO<StaffInfo> baseUserRegisterDTO) {
         User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
         Staff staff = staffService.getStaffByStaffName(baseUserRegisterDTO.getData().getStaffName());
 
@@ -200,7 +200,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public Response<Void> register_user(@Valid @RequestBody BaseUserRegisterDTO baseUserRegisterDTO) {
+    public Response<String> register_user(@Valid @RequestBody BaseUserRegisterDTO baseUserRegisterDTO) {
         User user = userService.getUserByUsername(baseUserRegisterDTO.getUsername());
         if (user == null) {
             userService.register(baseUserRegisterDTO);

@@ -133,8 +133,8 @@ public class OrderController {
     // Add order
     @Transactional
     @PostMapping("/{id}")
-    public Response<Void> addOrder(@PathVariable("id") long id,
-                                   HttpServletRequest request) {
+    public Response<String> addOrder(@PathVariable("id") long id,
+                                     HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Ticket ticket = ticketService.getTicketById(id);
@@ -157,8 +157,8 @@ public class OrderController {
 
     @Transactional
     @PostMapping("/{id}/pay")
-    public Response<Void> payOrder(@PathVariable("id") long id,
-                                   HttpServletRequest request) {
+    public Response<String> payOrder(@PathVariable("id") long id,
+                                     HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);
@@ -176,8 +176,8 @@ public class OrderController {
 
     @Transactional
     @PostMapping("/{id}/cancel")
-    public Response<Void> cancelOrder(@PathVariable("id") long id,
-                                      HttpServletRequest request) {
+    public Response<String> cancelOrder(@PathVariable("id") long id,
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);
@@ -195,8 +195,8 @@ public class OrderController {
 
     @Transactional
     @DeleteMapping("/{id}")
-    public Response<Void> deleteOrder(@PathVariable("id") long id,
-                                      HttpServletRequest request) {
+    public Response<String> deleteOrder(@PathVariable("id") long id,
+                                        HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
 
         Order order = orderService.getOrderByIdAndUserId(id, userId);

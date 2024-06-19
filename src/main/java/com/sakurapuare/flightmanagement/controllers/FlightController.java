@@ -91,7 +91,7 @@ public class FlightController {
     }
 
     @PostMapping("/")
-    public Response<Void> addFlight(@Valid @RequestBody FlightDTO flightDTO, HttpServletRequest request) {
+    public Response<String> addFlight(@Valid @RequestBody FlightDTO flightDTO, HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
         Airline airline = airlineService.getAirlineByUserId(userId);
         // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
@@ -104,8 +104,8 @@ public class FlightController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO,
-                                       HttpServletRequest request) {
+    public Response<String> updateFlight(@PathVariable(name = "id") long id, @RequestBody FlightDTO flightDTO,
+                                         HttpServletRequest request) {
         Long userId = Long.parseLong(request.getAttribute("userId").toString());
         Airline airline = airlineService.getAirlineByUserId(userId);
         // Airline airline = airlineService.getAirlineById(flightDTO.getAirlineId());
@@ -124,7 +124,7 @@ public class FlightController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteFlight(@PathVariable(name = "id") long id) {
+    public Response<String> deleteFlight(@PathVariable(name = "id") long id) {
         Flight flight = flightService.getFlightById(id);
         if (flight == null) {
             return Response.error("Flight not found");

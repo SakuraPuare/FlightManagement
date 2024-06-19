@@ -84,14 +84,14 @@ public class RequestController {
     }
 
     @PostMapping("/")
-    public Response<Void> addRequest(@Valid @RequestBody RequestDTO requestDTO, HttpServletRequest request) {
+    public Response<String> addRequest(@Valid @RequestBody RequestDTO requestDTO, HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
         requestService.addRequest(requestDTO, userId);
         return Response.success("Request added");
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateRequest(@PathVariable(name = "id") long id, @RequestBody RequestDTO requestDTO) {
+    public Response<String> updateRequest(@PathVariable(name = "id") long id, @RequestBody RequestDTO requestDTO) {
         Request requests = requestService.getRequestById(id);
         if (requests == null) {
             return Response.error("Request not found");
@@ -102,7 +102,7 @@ public class RequestController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteRequest(@PathVariable(name = "id") long id) {
+    public Response<String> deleteRequest(@PathVariable(name = "id") long id) {
         Request request = requestService.getRequestById(id);
         if (request == null) {
             return Response.error("Request not found");
@@ -113,7 +113,7 @@ public class RequestController {
     }
 
     @PostMapping("/{id}/handle")
-    public Response<Void> handleRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
+    public Response<String> handleRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
         Request requests = requestService.getRequestById(id);
         if (requests == null) {
@@ -125,7 +125,7 @@ public class RequestController {
     }
 
     @PostMapping("/{id}/resolve")
-    public Response<Void> resolveRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
+    public Response<String> resolveRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
         Request requests = requestService.getRequestById(id);
         if (requests == null) {
@@ -137,7 +137,7 @@ public class RequestController {
     }
 
     @PostMapping("/{id}/cancel")
-    public Response<Void> cancelRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
+    public Response<String> cancelRequest(@PathVariable(name = "id") long id, HttpServletRequest request) {
         long userId = Long.parseLong(request.getAttribute("userId").toString());
         Request requests = requestService.getRequestById(id);
         if (requests == null) {

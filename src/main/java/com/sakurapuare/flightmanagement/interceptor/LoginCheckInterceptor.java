@@ -20,7 +20,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler)
             throws Exception {
         String token = request.getHeader("Authorization");
-        Response<Void> res = Response.error(401, "Unauthorized");
+        Response<String> res = Response.error(401, "Unauthorized");
         if (token == null) {
             log.info("token is null {}", request.getRequestURI());
             response.setStatus(401);

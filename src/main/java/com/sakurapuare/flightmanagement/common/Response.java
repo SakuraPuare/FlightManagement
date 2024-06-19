@@ -16,10 +16,11 @@ public class Response<T> implements Serializable {
         this.time = (int) (System.currentTimeMillis() / 1000);
     }
 
-    public static <T> Response<T> success(String message) {
-        Response<T> response = new Response<>();
+    public static Response<String> success(String message) {
+        Response<String> response = new Response<>();
         response.setCode(ResponseCode.SUCCESS);
         response.setMessage(message);
+        response.setData("");
         return response;
     }
 

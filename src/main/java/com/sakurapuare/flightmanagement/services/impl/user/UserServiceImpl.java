@@ -95,8 +95,8 @@ public class UserServiceImpl implements UserService {
     public User getUserByPassengerId(Long id) {
         return userMapper.selectById(
                 passengerMapper.selectOne(
-                        new QueryWrapper<Passenger>()
-                                .eq("user_id", id))
+                                new QueryWrapper<Passenger>()
+                                        .eq("user_id", id))
                         .getUserId());
     }
 

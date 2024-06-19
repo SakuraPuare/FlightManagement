@@ -98,7 +98,7 @@ public class TicketController {
     }
 
     @PostMapping("/")
-    public Response<Void> addTicket(@Valid @RequestBody TicketDTO ticketDTO) {
+    public Response<String> addTicket(@Valid @RequestBody TicketDTO ticketDTO) {
         Ticket ticket = ticketService.getTicketByFlightIdAndSeatClass(ticketDTO.getFlightId(),
                 ticketDTO.getSeatClass());
         if (ticket != null) {
@@ -110,7 +110,7 @@ public class TicketController {
     }
 
     @PutMapping("/{id}")
-    public Response<Void> updateTicket(@PathVariable("id") long id, @Valid @RequestBody TicketDTO ticketDTO) {
+    public Response<String> updateTicket(@PathVariable("id") long id, @Valid @RequestBody TicketDTO ticketDTO) {
         Ticket ticket = ticketService.getTicketById(id);
         if (ticket == null) {
             return Response.error("Ticket not found");
@@ -122,7 +122,7 @@ public class TicketController {
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteTicket(@PathVariable("id") long id) {
+    public Response<String> deleteTicket(@PathVariable("id") long id) {
         ticketService.deleteTicket(id);
 
         return Response.success("Ticket deleted successfully");
