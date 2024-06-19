@@ -130,3 +130,96 @@ CREATE TABLE IF NOT EXISTS `requests` (
   FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   FOREIGN KEY (`handler_id`) REFERENCES `staffs` (`staff_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+INSERT INTO `users`
+VALUES (
+    1,
+    'admin',
+    'admin',
+    'admin',
+    15,
+    '2024-06-19 02:44:17',
+    '2024-06-19 02:44:41'
+  ),
+  (
+    2,
+    'jiahow',
+    'jiahow',
+    'jiahow',
+    15,
+    '2024-06-19 02:44:52',
+    '2024-06-19 02:45:08'
+  );
+INSERT INTO `airlines`
+VALUES (
+    1,
+    1,
+    'admin',
+    'admin',
+    'admin',
+    'admin',
+    '2024-06-19 02:44:34',
+    '2024-06-19 02:44:34'
+  ),
+  (
+    2,
+    2,
+    'jiahow',
+    'jiahow',
+    'jiahow',
+    'jiahow',
+    '2024-06-19 02:45:03',
+    '2024-06-19 02:45:03'
+  );
+INSERT INTO `merchants`
+VALUES (
+    1,
+    1,
+    'admin',
+    'admin',
+    'admin',
+    '2024-06-19 02:44:26',
+    '2024-06-19 02:44:26'
+  ),
+  (
+    2,
+    2,
+    'jiahow',
+    'jiahow',
+    'jiahow',
+    '2024-06-19 02:44:57',
+    '2024-06-19 02:44:57'
+  );
+INSERT INTO `passengers`
+VALUES (
+    1,
+    1,
+    'admin',
+    'admin',
+    'admin',
+    '2024-06-19 02:44:17',
+    '2024-06-19 02:44:17'
+  ),
+  (
+    2,
+    2,
+    'jiahow',
+    'jiahow',
+    'jiahow',
+    '2024-06-19 02:44:52',
+    '2024-06-19 02:44:52'
+  );
+INSERT INTO `staffs`
+VALUES (
+    1,
+    1,
+    'admin',
+    '2024-06-19 02:44:41',
+    '2024-06-19 02:44:41'
+  ),
+  (
+    2,
+    2,
+    'jiahow',
+    '2024-06-19 02:45:08',
+    '2024-06-19 02:45:08'
+  );

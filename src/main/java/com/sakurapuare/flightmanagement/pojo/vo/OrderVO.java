@@ -2,6 +2,7 @@ package com.sakurapuare.flightmanagement.pojo.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -27,7 +28,7 @@ public class OrderVO {
 
     private String seatClass;
 
-    private String price;
+    private BigDecimal price;
 
     private String status = "unpaid";
 

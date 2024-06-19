@@ -2,6 +2,7 @@ package com.sakurapuare.flightmanagement.pojo.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -32,5 +33,5 @@ public class TicketVO {
 
     private Long quota;
 
-    private String price;
+    private BigDecimal price;
 }

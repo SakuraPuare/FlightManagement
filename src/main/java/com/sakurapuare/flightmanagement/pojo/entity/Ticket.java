@@ -3,6 +3,7 @@ package com.sakurapuare.flightmanagement.pojo.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,7 +23,7 @@ public class Ticket {
     private Long quota;
 
     @TableField(value = "price")
-    private String price;
+    private BigDecimal price;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
