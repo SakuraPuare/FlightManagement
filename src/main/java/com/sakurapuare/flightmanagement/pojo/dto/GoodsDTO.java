@@ -18,5 +18,5 @@ public class GoodsDTO {
     private BigDecimal price;
 
     @NotBlank(message = "Stock cannot be empty")
-    private Integer stock;
+    private Long stock;
 }
